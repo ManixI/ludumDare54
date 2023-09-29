@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Platform extends Sprite {
-
-    float x;
-    float y;
-
+    
     // left and right extreams as well as height of top
     float leftmost;
     float rightmost;
@@ -22,9 +19,7 @@ public class Platform extends Sprite {
         //scale(length);
         setSize(length*10, 10);
 
-        x = startX + getWidth()/2;
-        y = height - getHeight()/2;
-        setCenter(x, y);
+        setCenter(startX + getWidth()/2, height - getHeight()/2);
 
         rightmost = startX;
         leftmost = startX+length;
