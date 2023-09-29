@@ -141,7 +141,7 @@ public class PlayScreen extends ScreenAdapter {
         player.update();
 
         // always update the ball, but ignore bounces unless we're in PLAY state
-        if (ball.update() && state == SubState.PLAYING) {
+        /*if (ball.update() && state == SubState.PLAYING) {
             bounces++;
             // fast explosions off walls
             explosions.add(new Bang(baf, true, ball.getX() + ball.getOriginX(), ball.getY() + ball.getOriginY()));
@@ -152,7 +152,7 @@ public class PlayScreen extends ScreenAdapter {
                 state = SubState.GAME_OVER;
                 timer = 0; // restart the timer.
             }
-        }
+        }*/
         if (state == SubState.READY && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             state = SubState.PLAYING;
             bounceGame.music.setVolume(bounceGame.music.getVolume() / 2);
@@ -164,16 +164,16 @@ public class PlayScreen extends ScreenAdapter {
         // ignore key presses when console is open...
         if (!hud.isOpen()) {
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                ball.yVelocity += 2;
+                player.yVelocity += 15;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                ball.yVelocity -= 2;
+                player.yVelocity -= 2;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                ball.xVelocity -= 2;
+                player.xVelocity -= 2;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                ball.xVelocity += 2;
+                player.xVelocity += 2;
             }
         }
     }

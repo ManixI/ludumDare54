@@ -26,13 +26,25 @@ public class Avatar extends Sprite {
     public void update() {
         float x = getX();
         float y = getY();
+        float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
 
         // set edges of camera as collision bounds for now
-        if (x < 0 || (x + getWidth()) > Gdx.graphics.getWidth()) {
-            xVelocity *= -1;
+        if (x < 0 || (x + getWidth()) > screenWidth) {
+            xVelocity = 0;
+            if (x < screenWidth / 2) {
+                xVelocity = 5;
+            } else {
+                xVelocity = -5;
+            }
         }
-        if (y < 0 || (y + getHeight()) > Gdx.graphics.getHeight()) {
-            yVelocity *= -1;
+        if (y < 0 || (y + getHeight()) > screenHeight) {
+            yVelocity = 0;
+            if (y < screenHeight / 2) {
+                yVelocity = 2;
+            } else {
+                yVelocity = -2;
+            }
         }
 
         // set speed caps
