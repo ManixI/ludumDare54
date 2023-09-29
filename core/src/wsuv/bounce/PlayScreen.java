@@ -23,6 +23,7 @@ public class PlayScreen extends ScreenAdapter {
     BangAnimationFrames baf;
 
     Platform plat;
+    Avatar player;
 
     public PlayScreen(BounceGame game) {
         timer = 0;
@@ -34,6 +35,7 @@ public class PlayScreen extends ScreenAdapter {
         boomSfx = bounceGame.am.get(BounceGame.RSC_EXPLOSION_SFX);
 
         plat = new Platform(game, 100, 200, 10);
+        player = new Avatar(game, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 
         // we've loaded textures, but the explosion texture isn't quite ready to go--
         // we need to carve it up into frames.  All that work really
@@ -94,6 +96,14 @@ public class PlayScreen extends ScreenAdapter {
             }
         });
 
+        hud.registerView("player @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
+            @Override
+            public String execute(boolean consoleIsOpen) {
+                return String.format("%.0f %.0f [%.0f %.0f]",
+                        player.getX(), player.getY(), player.xVelocity, player.yVelocity);
+            }
+        });
+
         // we're adding an input processor AFTER the HUD has been created,
         // so we need to be a bit careful here and make sure not to clobber
         // the HUD's input controls. Do that by using an InputMultiplexer
@@ -127,7 +137,9 @@ public class PlayScreen extends ScreenAdapter {
     public void update(float delta) {
         timer += delta;
 
-        plat.checkCollision(ball);
+        plat.checkCollision(player);
+        player.update();
+
         // always update the ball, but ignore bounces unless we're in PLAY state
         if (ball.update() && state == SubState.PLAYING) {
             bounces++;
@@ -179,6 +191,7 @@ public class PlayScreen extends ScreenAdapter {
         }
         ball.draw(bounceGame.batch);
         plat.draw(bounceGame.batch);
+        player.draw(bounceGame.batch);
         // this logic could also be pushed into a method on SubState enum
         switch (state) {
             case GAME_OVER:

@@ -50,6 +50,10 @@ public class Avatar extends Sprite {
         }
 
         float time = Gdx.graphics.getDeltaTime();
+        setX(x + time * xVelocity);
+        setY(y + time * yVelocity);
+
+        yVelocity -= gravity;
     }
 
     public void jump() {

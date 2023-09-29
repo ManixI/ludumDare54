@@ -26,7 +26,7 @@ public class Platform extends Sprite {
         top = height;
     }
 
-    public boolean checkCollision(Ball ball) {
+    public boolean checkCollision(Avatar ball) {
         // if ball in line with platform
         //System.out.println(ball.getX()+" "+ball.getY()+" "+ball.yVelocity);
         //System.out.println(leftmost+" "+rightmost+" "+top);
