@@ -13,3 +13,22 @@
 
 ## Open Issues ##
 
+ - [11] Add platforms with collision
+ - [12] add player avatar
+ - [13] add jump physics
+ - [14] add rng platforms
+ - [15] add scrolling camera
+ - [16] add death plane
+ - [17] add life counter
+ - [18] add score tracker
+ - [19] add 1up
+ - [20] add points collectable
+ - [21] add spike enemy
+ - [22] add missile enemy
+ - [23] add sfx
+ - [24] add music
+ - [25] add custom sprites
+ - [26] add scrolling background
+ - [27] add vertical scrolling
+ - [28] add speed pads
+ - [29] add multiple platform paths
