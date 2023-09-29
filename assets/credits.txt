@@ -1,0 +1,24 @@
+  Kenny (kenney.nl) [Game Graphics]
+  Ball Image (ball.png)
+  https://kenney.nl/assets/planets
+  CC0
+
+  Sinestesia  [Game Graphics]
+  Explosion Animation (explosion8x8.png)
+  https://opengameart.org/content/2d-explosion-animations-frame-by-frame
+  CC0
+
+  Axel Lundstrom [Background Music]
+  Sad Shark (sadshark.mp3)
+  https://freemusicarchive.org/music/axel-lundstrom/single/sad-shark/
+  CC BY 4.0
+
+  Logicogonist [Explosion Sfx]
+  low mid afar explosion 1.wav (explosion7s.wav)
+  https://freesound.org/people/Logicogonist/sounds/264031/
+  CC0
+
+  JetBrains [This Font!]
+  JetBrainsMono*.ttf fonts
+  https://www.jetbrains.com/lp/mono/
+  free/opensource no credit required
