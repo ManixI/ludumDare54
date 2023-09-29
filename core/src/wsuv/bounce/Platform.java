@@ -14,6 +14,8 @@ public class Platform extends Sprite {
     float rightmost;
     float top;
 
+    boolean passthough = false;
+
 
     public Platform(BounceGame game, float startX, float height, float length ) {
         super(game.am.get("platform.png", Texture.class));
@@ -35,24 +37,15 @@ public class Platform extends Sprite {
         //System.out.println(leftmost+" "+rightmost+" "+top);
         if (getBoundingRectangle().overlaps(ball.getBoundingRectangle())) {
             System.out.println("overlap");
-            if (ball.yVelocity <= 0) {
+            if (ball.yVelocity <= 0 && passthough == false) {
                 ball.setY(top);
                 ball.yVelocity = 0;
+            } else {
+                // started below platform, don't warp up if jump falls short
+                passthough = true;
             }
-        }
-        if (ball.getX() > leftmost && ball.getX() < rightmost) {
-            System.out.println("within bounds");
-            // and if ball is above and falling
-            if (ball.yVelocity <= 0 && ball.getY() > top) {
-                System.out.println("Above");
-                // and if next update would put ball into or below top of platform
-                if ((ball.getY() + ball.yVelocity * Gdx.graphics.getDeltaTime()) < top) {
-                    System.out.println("Will Collide");
-                    ball.setY(top);
-                    ball.yVelocity = 0;
-                    return true;
-                }
-            }
+        } else {
+            passthough = false;
         }
         return false;
     }
