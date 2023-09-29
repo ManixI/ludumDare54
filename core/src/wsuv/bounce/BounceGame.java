@@ -26,6 +26,7 @@ public class BounceGame extends Game {
     public static final String RSC_MONO_FONT_FILE = "JetBrainsMono-Regular.ttf";
     public static final String RSC_MONO_FONT = "JBM.ttf";
     public static final String RSC_EXPLOSION_SFX = "explosion7s.wav";
+    public static final String PLATFORM_IMG = "platform.png";
 
     AssetManager am;  // AssetManager provides a single source for loaded resources
     SpriteBatch batch;
@@ -54,6 +55,7 @@ public class BounceGame extends Game {
         am.load(RSC_GAMEOVER_IMG, Texture.class);
         am.load(RSC_PRESSAKEY_IMG, Texture.class);
         am.load(RSC_EXPLOSION_FRAMES, Texture.class);
+        am.load(PLATFORM_IMG, Texture.class);
 
         // Load Sounds
         am.load(RSC_EXPLOSION_SFX, Sound.class);
