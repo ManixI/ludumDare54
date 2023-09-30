@@ -37,3 +37,4 @@
  - [32] add game over screen
  - [33] associate powerups with platform to guarantee at reachable height
  - [34] procedurally generate platforms as player moves
+ - [35] more interesting platform patterns
