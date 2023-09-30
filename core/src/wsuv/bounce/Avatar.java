@@ -15,12 +15,14 @@ public class Avatar extends Sprite {
     float gravity = 5;
     float jumpVelocity = 100;
 
+    public float scaleFactor = -0.5f;
+
 
     public Avatar(BounceGame game, float startX, float startY) {
         super(game.am.get("ball.png", Texture.class));
 
         setCenter(startX, startY);
-        scale(-0.5f);
+        //scale(scaleFactor);
     }
 
     public void update() {
