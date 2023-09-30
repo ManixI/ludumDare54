@@ -94,4 +94,45 @@ public class Platform extends Sprite {
                 Enemie.SPIKES
         );
     }
+
+    public Powerup spawnPowerup() {
+        if (game.random.nextInt(0, 5) == 0) {
+            String type;
+            switch (game.random.nextInt(0, 10)) {
+                case 0:
+                    // 1up
+                    type = Powerup.ONE_UP;
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                default:
+                    // points
+                    type = Powerup.POINTS;
+                    break;
+            }
+            return placePowerup(type);
+        } else {
+            return null;
+        }
+    }
+
+    private Powerup placePowerup(String type) {
+        float powerupMargin = 100;
+        float heightFloor = getY() + getHeight()*2 + 50;
+        float heightCealing = heightFloor + maxHeight;
+        return new Powerup(
+                game,
+                game.random.nextFloat(this.getX()-powerupMargin, this.getX()+this.getWidth()+powerupMargin),
+                game.random.nextFloat(heightFloor, heightCealing),
+                type
+
+        );
+    }
 }

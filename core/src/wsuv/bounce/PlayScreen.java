@@ -53,7 +53,7 @@ public class PlayScreen extends ScreenAdapter {
         platformList = new ArrayList<Platform>();
         platformList.add(new Platform(game, 100, 200, 10));
 
-        for (int i=0; i<20;i++) {
+        for (int i=0; i<5;i++) {
             platformList.add(platformList.get(i).generateNext());
         }
 
@@ -245,6 +245,10 @@ public class PlayScreen extends ScreenAdapter {
         if (lastPlat.getX() < cam.position.x + 2500) {
             for (int i=0; i<10; i++) {
                 platformList.add(platformList.get(platformList.size()-1).generateNext());
+                Powerup p = platformList.get(platformList.size()-1).spawnPowerup();
+                if (p != null) {
+                    powerupList.add(p);
+                }
             }
         }
 
