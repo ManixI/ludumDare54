@@ -1,6 +1,7 @@
 package wsuv.bounce;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -25,7 +26,7 @@ public class Avatar extends Sprite {
         //scale(scaleFactor);
     }
 
-    public boolean update() {
+    public boolean update(OrthographicCamera cam) {
         float x = getX();
         float y = getY();
         float screenWidth = Gdx.graphics.getWidth();
@@ -35,19 +36,11 @@ public class Avatar extends Sprite {
         boolean collided = false;
 
         // set edges of camera as collision bounds for now
-        /*if (x < 0 || (x + getWidth()) > screenWidth) {
+        if (x < cam.position.x - 500) {
             xVelocity = 0;
             setY(y + time * yVelocity);
-            if (x < screenWidth / 2) {
-                setX(0);
-                xVelocity = 0;
-                collided = true;
-            } else {
-                setX(screenWidth-getWidth());
-                xVelocity = 0;
-                collided = true;
-            }
-        } else*/ if (y < 0 || (y + getHeight()) > screenHeight) {
+            setX(cam.position.x - 499);
+        } else if (y < 0 || (y + getHeight()) > screenHeight) {
             yVelocity = 0;
             setX(x + time * xVelocity);
             if (y < (screenHeight / 2)) {

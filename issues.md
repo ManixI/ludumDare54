@@ -12,12 +12,12 @@
 - **[10]** Add sounds and music
  - [11] Add platforms with collision
  - [12] add player avatar
-
-## Open Issues ##
-
  - [13] add jump physics
  - [14] add rng platforms
  - [15] add scrolling camera
+
+## Open Issues ##
+
  - [16] add death plane
  - [17] add life counter
  - [18] add score tracker
@@ -32,3 +32,4 @@
  - [27] add vertical scrolling
  - [28] add speed pads
  - [29] add multiple platform paths
+ - [30] fix speed of player so constantly in motion

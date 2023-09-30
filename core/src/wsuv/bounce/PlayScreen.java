@@ -147,17 +147,17 @@ public class PlayScreen extends ScreenAdapter {
     public void update(float delta) {
         timer += delta;
 
-        if (player.getX() > (cam.position.x + 100)) {
-            cam.position.x = player.getX() - 100;
-        } else if (player.getX() < cam.position.x - 100) {
-            cam.position.x = player.getX() + 100;
-        }
+        if (player.getX() > (cam.position.x)) {
+            cam.position.x = player.getX();
+        } /*else if (player.getX() < cam.position.x - 300) {
+            cam.position.x = player.getX() + 300;
+        }*/
         cam.update();
 
         if (platformList.checkCollision(player)) {
             canJump = true;
         }
-        if (player.update()) {
+        if (player.update(cam)) {
             canJump = true;
         }
 
