@@ -21,6 +21,7 @@
  - [19] add 1up
  - [20] add points collectable
  - [21] add spike enemy
+ - [27] add vertical scrolling
  - [29] add multiple platform paths
  - [30] fix speed of player so constantly in motion
  - [31] swap platforms to ArrayList from linked list
@@ -36,7 +37,6 @@
  - [24] add music
  - [25] add custom sprites
  - [26] add scrolling background
- - [27] add vertical scrolling
  - [28] add speed pads
  - [32] add game over screen
  - [36] fix warping up when colliding with side of platform, should stop movement instead
@@ -44,8 +44,20 @@
  - [38] variable jump height, hold space to reduce gravity
  - [39] increase speed over time
  - [40] zoom out as speed increases
+ - [43] increase sense of speed
+ - [47] revert issues 27 and 29
+ - [48] add ceiling
+ - [49] change from platforms to floor
+ 
+ ## Old ##
  - [41] add graphic for death plane
  - [42] different platform paths lean towards different directions
- - [43] increase sense of speed
  - [45] spawn enemies as function of spawning platform
  - [46] set minimum height separation between platforms
+
+
+## general ideas ##
+In keeping with idea of limited space, have ceiling and floor. floor is RNG pits and floor
+Ceiling has enemy spawns
+floor has enemy and powerup spawns
+player has double jump, but max jump easily hits ceiling
