@@ -16,12 +16,24 @@ public class Platform extends Sprite {
 
     Platform next = null;
 
+    static float lengthFloor = 10;
+
 
     public Platform(BounceGame g, float startX, float height, float length ) {
         super(g.am.get("platform.png", Texture.class));
         game = g;
-        //scale(length);
-        setSize(length*10, 10);
+        length *= 10;
+        if (length < lengthFloor) {
+            length = 10;
+        }
+
+        if (height < 10) {
+            height = 10;
+        }
+        if (height > Gdx.graphics.getHeight()-100) {
+            height = Gdx.graphics.getHeight() - 100;
+        }
+        setSize(length, 10);
 
         setCenter(startX + getWidth()/2, height - getHeight()/2);
 
@@ -58,7 +70,11 @@ public class Platform extends Sprite {
     }
 
     public void generateNext() {
-        next = new Platform(game, rightmost+getWidth()+50, game.random.nextFloat(top - 30, top+30), 10);
+        next = new Platform(
+                game,
+                rightmost+getWidth()+50,
+                game.random.nextFloat(top - 100, top+100),
+                game.random.nextFloat(1, 30));
     }
     public void generateNextN(int n) {
         Platform cursor = this;
