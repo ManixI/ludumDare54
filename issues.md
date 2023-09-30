@@ -18,11 +18,11 @@
  - [16] add death plane
  - [17] add life counter
  - [19] add 1up
+ - [20] add points collectable
 
 ## Open Issues ##
 
  - [18] add score tracker
- - [20] add points collectable
  - [21] add spike enemy
  - [22] add missile enemy
  - [23] add sfx
