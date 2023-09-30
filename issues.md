@@ -26,6 +26,7 @@
  - [33] associate powerups with platform to guarantee at reachable height
  - [34] procedurally generate platforms as player moves
  - **[35]** more interesting platform patterns
+ - [44] define play area with camera instead of gdx.graphics
 
 ## Open Issues ##
 
@@ -46,4 +47,3 @@
  - [41] add graphic for death plane
  - [42] different platform paths lean towards different directions
  - [43] increase sense of speed
- - [44] define play area with camera instead of gdx.graphics
