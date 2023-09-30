@@ -187,6 +187,10 @@ public class PlayScreen extends ScreenAdapter {
             cam.position.x = player.getX();
         }*/
         cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2);
+        cam.position.y = player.getY();
+        if (cam.position.y < 300) {
+            cam.position.y = 300;
+        }
         cam.update();
         hud.updatePosCam();
 
@@ -241,11 +245,12 @@ public class PlayScreen extends ScreenAdapter {
             canJump = true;
         }
 
-        // have camera track player
+        // death plane
         if (player.getY() <= cam.position.y - 650) {
             lives--;
             player.respawn(cam.position.x, cam.position.y+300);
         }
+
 
         // generate more platforms if player gets close enough to end
         for (int j=0; j< platformList.size(); j++) {
@@ -291,7 +296,7 @@ public class PlayScreen extends ScreenAdapter {
         // ignore key presses when console is open...
         if (!hud.isOpen()) {
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                player.yVelocity += 15;
+                player.yVelocity += 30;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
                 player.yVelocity -= 10;
