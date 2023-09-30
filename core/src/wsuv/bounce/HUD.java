@@ -200,7 +200,7 @@ public class HUD {
 
     public void updatePosCam() {
         rColumn = (int) (cam.position.x + 250);
-        yMargin = (int) cam.position.y - (250 + 10);
+        yMargin = (int) cam.position.y - (480);
         xMargin = (int) cam.position.x - (450);
     }
 
