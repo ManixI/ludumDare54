@@ -208,6 +208,19 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
+        for (Enemie e : enemies) {
+            if (e.checkColision(player)) {
+                switch (e.getType()) {
+                    case Enemie.SPIKES:
+                        lives--;
+                        player.respawn(cam.position.x, cam.position.y+300);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         if (player.update(cam)) {
             canJump = true;
         }
