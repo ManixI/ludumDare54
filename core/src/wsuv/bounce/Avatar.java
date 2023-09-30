@@ -10,7 +10,7 @@ public class Avatar extends Sprite {
     public float xVelocity = MAX_X_VELOCITY/2;
     public float yVelocity = 0;
 
-    public static final float MIN_X_VELOCITY = 300;
+    public static final float MIN_X_VELOCITY = 50;
     public static final float MAX_X_VELOCITY = 600;
     public static final float MAX_Y_VELOCITY = 1000;
 

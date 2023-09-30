@@ -182,7 +182,7 @@ public class PlayScreen extends ScreenAdapter {
         /*if (player.getX() > (cam.position.x)) {
             cam.position.x = player.getX();
         }*/
-        cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY-Avatar.MIN_X_VELOCITY);
+        cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2);
         cam.update();
         hud.updatePosCam();
 
@@ -283,10 +283,11 @@ public class PlayScreen extends ScreenAdapter {
                 player.yVelocity -= 10;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                player.xVelocity -= 10;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                player.xVelocity += 2;
+                player.xVelocity = Avatar.MIN_X_VELOCITY;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                player.xVelocity = Avatar.MAX_X_VELOCITY;
+            } else {
+                player.xVelocity = Avatar.MAX_X_VELOCITY/2;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && canJump) {
                 // TODO: set timer to end jump if it doesn't get released
