@@ -69,7 +69,7 @@ public class Platform extends Sprite {
         float distX = game.random.nextFloat(getX()+getWidth(), getX()+getWidth()+maxDistance);
         int direction;
         // if platform is near bottom, weight generation upwards
-        if (getY() < Gdx.graphics.getHeight()/2) {
+        if (getY() < cam.position.y - 300) {
             direction = game.random.nextInt(0,4);
         } else {
             direction = game.random.nextInt(0,2);

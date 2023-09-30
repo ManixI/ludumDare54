@@ -30,8 +30,6 @@ public class Avatar extends Sprite {
     public boolean update(OrthographicCamera cam) {
         float x = getX();
         float y = getY();
-        float screenWidth = Gdx.graphics.getWidth();
-        float screenHeight = Gdx.graphics.getHeight();
         float time = Gdx.graphics.getDeltaTime();
 
         boolean collided = false;
