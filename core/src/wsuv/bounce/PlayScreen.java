@@ -264,7 +264,7 @@ public class PlayScreen extends ScreenAdapter {
 
         // cleanup stuff that leaves the screen
         cleanupEnemies(enemies);
-        //cleanupPlatforms(platformList);
+        cleanupPlatforms();
         cleanupPowerups(powerupList);
 
         // always update the ball, but ignore bounces unless we're in PLAY state
@@ -327,15 +327,14 @@ public class PlayScreen extends ScreenAdapter {
         }
     }
 
-    private void cleanupPlatforms(ArrayList<ArrayList<Platform>> sprites) {
-        // TODO: cleanup names here
+    private void cleanupPlatforms() {
         // TODO: fix this
-        for (int j=0; j<sprites.size(); j++) {
-            ArrayList<Platform> platlist = sprites.get(j);
-            for (int i=0; i<sprites.size(); i++) {
-                Sprite sprite = platlist.get(i);
-                if (sprite.getX()+sprite.getWidth() < cam.position.x - 500) {
-                    sprites.remove(i);
+        for (int j=0; j<platformList.size(); j++) {
+            ArrayList<Platform> platlist = platformList.get(j);
+            for (int i=0; i<platlist.size(); i++) {
+                Platform plat = platlist.get(i);
+                if (plat.getX()+plat.getWidth() < cam.position.x - 500) {
+                    platlist.remove(i);
                     // return early rather than fixing index error
                     return;
                 }
