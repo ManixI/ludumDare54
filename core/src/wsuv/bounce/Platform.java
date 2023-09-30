@@ -13,6 +13,8 @@ public class Platform extends Sprite {
 
     boolean passthough = false;
 
+    Platform next = null;
+
 
     public Platform(BounceGame game, float startX, float height, float length ) {
         super(game.am.get("platform.png", Texture.class));
@@ -43,7 +45,22 @@ public class Platform extends Sprite {
         } else {
             passthough = false;
         }
+        if (next != null) {
+            return next.checkCollision(ball);
+        }
         return false;
+    }
+
+    public void setNext (Platform platform) {
+        next = platform;
+    }
+
+    public void generateNext() {
+
+    }
+
+    public Platform getNext() {
+        return next;
     }
 
 }

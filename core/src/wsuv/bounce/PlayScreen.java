@@ -23,6 +23,7 @@ public class PlayScreen extends ScreenAdapter {
     BangAnimationFrames baf;
 
     Platform plat;
+    Platform platformList;
     Avatar player;
 
     boolean canJump = true;
@@ -36,8 +37,8 @@ public class PlayScreen extends ScreenAdapter {
         explosions = new ArrayList<>(10);
         boomSfx = bounceGame.am.get(BounceGame.RSC_EXPLOSION_SFX);
 
-        plat = new Platform(game, 100, 200, 10);
-        player = new Avatar(game, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        platformList = new Platform(game, 100, 200, 10);
+        player = new Avatar(game, 100, 220);
 
         // we've loaded textures, but the explosion texture isn't quite ready to go--
         // we need to carve it up into frames.  All that work really
@@ -94,7 +95,7 @@ public class PlayScreen extends ScreenAdapter {
             @Override
             public String execute(boolean consoleIsOpen) {
                 return String.format("%.0f %.0f %.0f [%.0f %.0f]",
-                        plat.leftmost, plat.rightmost, plat.top, plat.getX(), plat.getY());
+                        platformList.leftmost, platformList.rightmost, platformList.top, platformList.getX(), platformList.getY());
             }
         });
 
@@ -139,7 +140,7 @@ public class PlayScreen extends ScreenAdapter {
     public void update(float delta) {
         timer += delta;
 
-        if (plat.checkCollision(player)) {
+        if (platformList.checkCollision(player)) {
             canJump = true;
         }
         if (player.update()) {
@@ -201,7 +202,11 @@ public class PlayScreen extends ScreenAdapter {
             else { b.draw(bounceGame.batch); }
         }
         //ball.draw(bounceGame.batch);
-        plat.draw(bounceGame.batch);
+        Platform platPointer = platformList;
+        while (platPointer != null) {
+            platPointer.draw(bounceGame.batch);
+            platPointer = platPointer.getNext();
+        }
         player.draw(bounceGame.batch);
         // this logic could also be pushed into a method on SubState enum
         switch (state) {
