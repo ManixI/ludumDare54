@@ -32,7 +32,9 @@ public class PlayScreen extends ScreenAdapter {
     ArrayList<Powerup> powerupList;
 
     boolean canJump = true;
-    public int points = 0;
+    public float points = 0;
+    private float staticPoints = 0;
+    private float distance = 100;
 
     public PlayScreen(BounceGame game) {
         timer = 0;
@@ -94,7 +96,7 @@ public class PlayScreen extends ScreenAdapter {
         hud.registerView("Points:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
             @Override
             public String execute(boolean consoleIsOpen) {
-                return Integer.toString(points);
+                return Integer.toString((int) points);
             }
         });hud.registerView("Lives:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
             @Override
@@ -175,13 +177,19 @@ public class PlayScreen extends ScreenAdapter {
                         lives++;
                         break;
                     case Powerup.POINTS:
-                        points += 1000;
+                        staticPoints += 1000;
                         break;
                     default:
                 }
                 powerupList.remove(i);
             }
         }
+
+        // points are combination of the furthest distance traveled and static pickup
+        if (player.getX() > distance) {
+            distance = player.getX();
+        }
+        points = staticPoints + distance;
 
         if (platformList.checkCollision(player)) {
             canJump = true;
