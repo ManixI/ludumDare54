@@ -40,7 +40,7 @@ public class Avatar extends Sprite {
             xVelocity = 0;
             setY(y + time * yVelocity);
             setX(cam.position.x - 499);
-        } else if (y < 0 || (y + getHeight()) > screenHeight) {
+        /*} else if (y < 0 || (y + getHeight()) > screenHeight) {
             yVelocity = 0;
             setX(x + time * xVelocity);
             if (y < (screenHeight / 2)) {
@@ -51,7 +51,7 @@ public class Avatar extends Sprite {
                 setY(screenHeight - getHeight());
                 yVelocity = 0;
                 collided = true;
-            }
+            }*/
         } else {
             setX(x + time * xVelocity);
             setY(y + time * yVelocity);
@@ -75,6 +75,10 @@ public class Avatar extends Sprite {
         yVelocity -= gravity;
 
         return collided;
+    }
+
+    public void respawn(float x, float y) {
+        setCenter(x, y);
     }
 
     public void jump() {

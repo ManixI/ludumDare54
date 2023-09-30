@@ -43,8 +43,6 @@ public class PlayScreen extends ScreenAdapter {
         cam.update();
         hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT_BIG), cam);
 
-
-
         platformList = new Platform(game, 100, 200, 10);
         platformList.generateNextN(50);;
         player = new Avatar(game, 100, 220);
@@ -162,6 +160,11 @@ public class PlayScreen extends ScreenAdapter {
         }
         if (player.update(cam)) {
             canJump = true;
+        }
+
+        if (player.getY() <= cam.position.y - 650) {
+            lives--;
+            player.respawn(cam.position.x, cam.position.y+300);
         }
 
         // always update the ball, but ignore bounces unless we're in PLAY state
