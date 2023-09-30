@@ -35,7 +35,7 @@ public class Avatar extends Sprite {
         boolean collided = false;
 
         // set edges of camera as collision bounds for now
-        if (x < 0 || (x + getWidth()) > screenWidth) {
+        /*if (x < 0 || (x + getWidth()) > screenWidth) {
             xVelocity = 0;
             setY(y + time * yVelocity);
             if (x < screenWidth / 2) {
@@ -47,7 +47,7 @@ public class Avatar extends Sprite {
                 xVelocity = 0;
                 collided = true;
             }
-        } else if (y < 0 || (y + getHeight()) > screenHeight) {
+        } else*/ if (y < 0 || (y + getHeight()) > screenHeight) {
             yVelocity = 0;
             setX(x + time * xVelocity);
             if (y < (screenHeight / 2)) {

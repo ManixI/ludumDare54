@@ -41,7 +41,7 @@ public class PlayScreen extends ScreenAdapter {
         cam = new OrthographicCamera(1000, 1000);
         cam.translate(500,300);
         cam.update();
-        
+
 
         platformList = new Platform(game, 100, 200, 10);
         platformList.generateNextN(50);;
@@ -146,6 +146,9 @@ public class PlayScreen extends ScreenAdapter {
 
     public void update(float delta) {
         timer += delta;
+
+        cam.position.x = player.getX();
+        cam.update();
 
         if (platformList.checkCollision(player)) {
             canJump = true;
