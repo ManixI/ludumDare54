@@ -204,6 +204,10 @@ public class HUD {
         xMargin = (int) cam.position.x - (450);
     }
 
+    public void updateCam(OrthographicCamera camera) {
+        cam = camera;
+    }
+
     /**
      * @return true iff the HUD console is open (and accepting input)
      */
@@ -239,7 +243,7 @@ public class HUD {
             } else {
                 console = console + '\n' + PROMPT + currentLine.toString();
             }
-            font.draw(batch, console, xMargin, Gdx.graphics.getHeight() - yMargin);
+            font.draw(batch, console, xMargin, cam.position.y + 500 - yMargin);
         }
         // refresh HUD Data every second....
         if (TimeUtils.millis() - lastDataRefresh > DATA_REFRESH_INTERVAL) {
@@ -257,7 +261,7 @@ public class HUD {
             }
         }
         // draw HUD Data every frame...
-        font.draw(batch, hudDataBuffer.toString(), xlocation, Gdx.graphics.getHeight() - yMargin);
+        font.draw(batch, hudDataBuffer.toString(), xlocation, cam.position.y + 250 - yMargin);
     }
 
     /**
