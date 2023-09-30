@@ -188,9 +188,9 @@ public class PlayScreen extends ScreenAdapter {
         }*/
         cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2);
         //cam.position.y = player.getY();
-        if (cam.position.y < 300) {
+        /*if (cam.position.y < 300) {
             cam.position.y = 300;
-        }
+        }*/
         cam.update();
         hud.updateCam(cam);
         hud.updatePosCam();
