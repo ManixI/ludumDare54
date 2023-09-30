@@ -283,7 +283,12 @@ public class PlayScreen extends ScreenAdapter {
                 player.yVelocity -= 10;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                player.xVelocity = Avatar.MIN_X_VELOCITY;
+                // so player can move off left side of screen
+                if (player.getX() <= cam.position.x - 500) {
+                    player.xVelocity = Avatar.MAX_X_VELOCITY/2;
+                } else {
+                    player.xVelocity = Avatar.MIN_X_VELOCITY;
+                }
             } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
                 player.xVelocity = Avatar.MAX_X_VELOCITY;
             } else {

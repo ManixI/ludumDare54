@@ -36,27 +36,10 @@ public class Avatar extends Sprite {
 
         boolean collided = false;
 
-        // set edges of camera as collision bounds for now
-        if (x < cam.position.x - 500) {
-            xVelocity = MIN_X_VELOCITY;
-            setY(y + time * yVelocity);
-            setX(cam.position.x - 499);
-        /*} else if (y < 0 || (y + getHeight()) > screenHeight) {
-            yVelocity = 0;
-            setX(x + time * xVelocity);
-            if (y < (screenHeight / 2)) {
-                setY(0);
-                yVelocity = 0;
-                collided = true;
-            } else {
-                setY(screenHeight - getHeight());
-                yVelocity = 0;
-                collided = true;
-            }*/
-        } else {
-            setX(x + time * xVelocity);
-            setY(y + time * yVelocity);
-        }
+
+        setX(x + time * xVelocity);
+        setY(y + time * yVelocity);
+
 
         // set speed caps
         if (xVelocity > MAX_X_VELOCITY) {
