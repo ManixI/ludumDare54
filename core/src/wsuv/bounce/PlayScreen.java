@@ -25,7 +25,7 @@ public class PlayScreen extends ScreenAdapter {
     BangAnimationFrames baf;
 
     Platform plat;
-    Platform platformList;
+    ArrayList<Platform> platformList;
     Avatar player;
     OrthographicCamera cam;
 
@@ -49,6 +49,13 @@ public class PlayScreen extends ScreenAdapter {
         cam.update();
         hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT_BIG), cam);
 
+        platformList = new ArrayList<Platform>();
+        platformList.add(new Platform(game, 100, 200, 10));
+
+        for (int i=0; i<20;i++) {
+            platformList.add(platformList.get(i).generateNext());
+        }
+
         powerupList = new ArrayList<Powerup>();
         powerupList.add(new Powerup(game, cam.position.x, cam.position.y, Powerup.ONE_UP));
         powerupList.add(new Powerup(game, cam.position.x + 500, cam.position.y + 100, Powerup.POINTS));
@@ -56,8 +63,6 @@ public class PlayScreen extends ScreenAdapter {
         enemies = new ArrayList<Enemie>();
         enemies.add(new Enemie(game, 500, 0, Enemie.SPIKES, platformList));
 
-        platformList = new Platform(game, 100, 200, 10);
-        platformList.generateNextN(20);;
         player = new Avatar(game, 100, 220);
 
         // we've loaded textures, but the explosion texture isn't quite ready to go--
@@ -116,13 +121,13 @@ public class PlayScreen extends ScreenAdapter {
             }
         });
 
-        hud.registerView("plat @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
+        /*hud.registerView("plat @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
             @Override
             public String execute(boolean consoleIsOpen) {
                 return String.format("%.0f %.0f %.0f [%.0f %.0f]",
                         platformList.leftmost, platformList.rightmost, platformList.top, platformList.getX(), platformList.getY());
             }
-        });
+        });*/
 
         hud.registerView("player @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
             @Override
@@ -195,9 +200,14 @@ public class PlayScreen extends ScreenAdapter {
         }
         points = staticPoints + distance;
 
-        if (platformList.checkCollision(player)) {
-            canJump = true;
+        // check collision on each platform to re-set jump
+        for (Platform p : platformList) {
+            if (p.checkCollision(player)) {
+                canJump = true;
+                break;
+            }
         }
+
         if (player.update(cam)) {
             canJump = true;
         }
@@ -263,10 +273,8 @@ public class PlayScreen extends ScreenAdapter {
             else { b.draw(bounceGame.batch); }
         }
         //ball.draw(bounceGame.batch);
-        Platform platPointer = platformList;
-        while (platPointer != null) {
-            platPointer.draw(bounceGame.batch);
-            platPointer = platPointer.getNext();
+        for (Platform p : platformList) {
+            p.draw(bounceGame.batch);
         }
 
         for (Powerup p : powerupList) {

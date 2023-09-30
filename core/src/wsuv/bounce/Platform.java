@@ -14,8 +14,6 @@ public class Platform extends Sprite {
 
     boolean passthough = false;
 
-    Platform next = null;
-
     static float lengthFloor = 10;
 
 
@@ -59,46 +57,15 @@ public class Platform extends Sprite {
         } else {
             passthough = false;
         }
-        if (next != null) {
-            return next.checkCollision(ball);
-        }
         return false;
     }
 
-    public void setNext (Platform platform) {
-        next = platform;
-    }
 
     public Platform generateNext() {
-        if (next == null) {
-            next = new Platform(
-                    game,
-                    rightmost + getWidth() + 50,
-                    game.random.nextFloat(top - 100, top + 100),
-                    game.random.nextFloat(1, 30));
-        } else {
-            Platform cursor = next;
-            while (cursor.next != null) {
-                cursor = cursor.next;
-            }
-            cursor.next = new Platform(
-                    game,
-                    rightmost + getWidth() + 50,
-                    game.random.nextFloat(top - 100, top + 100),
-                    game.random.nextFloat(1, 30));
-        }
-        return next;
+        return new Platform(
+            game,
+            rightmost + getWidth() + 50,
+            game.random.nextFloat(top - 100, top + 100),
+            game.random.nextFloat(1, 30));
     }
-    public void generateNextN(int n) {
-        Platform cursor = this;
-        for (int i=0; i<n; i++) {
-            cursor.generateNext();
-            cursor = cursor.next;
-        }
-    }
-
-    public Platform getNext() {
-        return next;
-    }
-
 }

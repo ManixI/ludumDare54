@@ -3,6 +3,8 @@ package wsuv.bounce;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import java.util.ArrayList;
+
 public class Enemie extends Sprite {
     public final static String MISSILE = "missile.png";
     public final static String SPIKES = "spikes.png";
@@ -11,12 +13,12 @@ public class Enemie extends Sprite {
     private Platform spot;
     float scaleFactor = 1.2f;
 
-    public Enemie(BounceGame game, float x, float y, String t, Platform platform) {
+    public Enemie(BounceGame game, float x, float y, String t, ArrayList<Platform> platformlist) {
         super(game.am.get(t, Texture.class));
 
         scale(scaleFactor);
 
-        place(x, platform);
+        place(x, platformlist);
         type = t;
     }
 
@@ -41,13 +43,12 @@ public class Enemie extends Sprite {
         return type;
     }
 
-    private void place(float x, Platform platform) {
-        Platform cursor = platform;
-        while (cursor != null) {
-            if (x > cursor.leftmost && x < cursor.rightmost) {
+    private void place(float x, ArrayList<Platform> platformlist) {
+        for (Platform p : platformlist) {
+            if (x > p.leftmost && x < p.rightmost) {
                 setX(x);
-                setY(cursor.top);
-                spot = cursor;
+                setY(p.top);
+                spot = p;
                 return;
             }
         }
