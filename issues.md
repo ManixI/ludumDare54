@@ -47,3 +47,4 @@
  - [41] add graphic for death plane
  - [42] different platform paths lean towards different directions
  - [43] increase sense of speed
+ - [45] spawn enemies as function of spawning platform

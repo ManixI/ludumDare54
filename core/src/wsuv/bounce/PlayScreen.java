@@ -26,7 +26,7 @@ public class PlayScreen extends ScreenAdapter {
     BangAnimationFrames baf;
 
     Platform plat;
-    ArrayList<Platform> platformList;
+    ArrayList<ArrayList<Platform>> platformList;
     Avatar player;
     OrthographicCamera cam;
 
@@ -50,11 +50,15 @@ public class PlayScreen extends ScreenAdapter {
         cam.update();
         hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT_BIG), cam);
 
-        platformList = new ArrayList<Platform>();
-        platformList.add(new Platform(game, 100, 200, 10, cam));
-
-        for (int i=0; i<10;i++) {
-            platformList.add(platformList.get(i).generateNext(cam));
+        platformList = new ArrayList<ArrayList<Platform>>();
+        for (int i = 0; i < 3; i++) {
+            platformList.add(new ArrayList<Platform>());
+        }
+        for(int i=0; i<platformList.size(); i++) {
+            platformList.get(i).add(new Platform(game, 100, 200, 10, cam));
+            for (int j=0; j<10;j++) {
+                platformList.get(i).add(platformList.get(i).get(j).generateNext(cam));
+            }
         }
 
         powerupList = new ArrayList<Powerup>();
@@ -63,7 +67,7 @@ public class PlayScreen extends ScreenAdapter {
 
         enemies = new ArrayList<Enemie>();
         //enemies.add(new Enemie(game, 500, 0, Enemie.SPIKES));
-        enemies.add(platformList.get(3).spawnEnemy());
+        //enemies.add(platformList.get(3).spawnEnemy());
 
         player = new Avatar(game, 100, 220);
 
@@ -209,12 +213,15 @@ public class PlayScreen extends ScreenAdapter {
         points = staticPoints + distance;
 
         // check collision on each platform to re-set jump
-        for (Platform p : platformList) {
-            if (p.checkCollision(player)) {
-                canJump = true;
-                break;
+        for (int i=0; i<platformList.size(); i++) {
+            for (Platform p : platformList.get(i)) {
+                if (p.checkCollision(player)) {
+                    canJump = true;
+                    break;
+                }
             }
         }
+
 
         // check collision with enemies
         for (Enemie e : enemies) {
@@ -241,20 +248,23 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         // generate more platforms if player gets close enough to end
-        Platform lastPlat = platformList.get(platformList.size()-1);
-        if (lastPlat.getX() < cam.position.x + 2500) {
-            for (int i=0; i<10; i++) {
-                platformList.add(platformList.get(platformList.size()-1).generateNext(cam));
-                Powerup p = platformList.get(platformList.size()-1).spawnPowerup();
-                if (p != null) {
-                    powerupList.add(p);
+        for (int j=0; j< platformList.size(); j++) {
+            Platform lastPlat = platformList.get(j).get(platformList.size()-1);
+            ArrayList<Platform> platlist = platformList.get(j);
+            if (lastPlat.getX() < cam.position.x + 2500) {
+                for (int i=0; i<10; i++) {
+                    platlist.add(platlist.get(platlist.size()-1).generateNext(cam));
+                    Powerup p = platlist.get(platlist.size()-1).spawnPowerup();
+                    if (p != null) {
+                        powerupList.add(p);
+                    }
                 }
             }
         }
 
         // cleanup stuff that leaves the screen
         cleanupEnemies(enemies);
-        cleanupPlatforms(platformList);
+        //cleanupPlatforms(platformList);
         cleanupPowerups(powerupList);
 
         // always update the ball, but ignore bounces unless we're in PLAY state
@@ -317,15 +327,20 @@ public class PlayScreen extends ScreenAdapter {
         }
     }
 
-    private void cleanupPlatforms(ArrayList<Platform> sprites) {
-        for (int i=0; i<sprites.size(); i++) {
-            Sprite sprite = sprites.get(i);
-            if (sprite.getX()+sprite.getWidth() < cam.position.x - 500) {
-                sprites.remove(i);
-                // return early rather than fixing index error
-                return;
+    private void cleanupPlatforms(ArrayList<ArrayList<Platform>> sprites) {
+        // TODO: cleanup names here
+        for (int j=0; j<sprites.size(); j++) {
+            ArrayList<Platform> platlist = sprites.get(j);
+            for (int i=0; i<sprites.size(); i++) {
+                Sprite sprite = platlist.get(i);
+                if (sprite.getX()+sprite.getWidth() < cam.position.x - 500) {
+                    sprites.remove(i);
+                    // return early rather than fixing index error
+                    return;
+                }
             }
         }
+
     }
 
     private void cleanupPowerups(ArrayList<Powerup> sprites) {
@@ -352,8 +367,11 @@ public class PlayScreen extends ScreenAdapter {
             else { b.draw(bounceGame.batch); }
         }
         //ball.draw(bounceGame.batch);
-        for (Platform p : platformList) {
-            p.draw(bounceGame.batch);
+        for (int i=0; i<platformList.size(); i++) {
+            for (Platform p : platformList.get(i)) {
+                p.draw(bounceGame.batch);
+                // TODO: only draw ones on screen
+            }
         }
 
         for (Powerup p : powerupList) {
