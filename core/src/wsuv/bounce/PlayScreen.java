@@ -38,7 +38,10 @@ public class PlayScreen extends ScreenAdapter {
         bounces = 0;
         explosions = new ArrayList<>(10);
         boomSfx = bounceGame.am.get(BounceGame.RSC_EXPLOSION_SFX);
-        cam = new OrthographicCamera(50, 50);
+        cam = new OrthographicCamera(1000, 1000);
+        cam.translate(500,300);
+        cam.update();
+        
 
         platformList = new Platform(game, 100, 200, 10);
         platformList.generateNextN(50);;
@@ -199,6 +202,7 @@ public class PlayScreen extends ScreenAdapter {
         update(delta);
 
         ScreenUtils.clear(0, 0, 0, 1);
+        bounceGame.batch.setProjectionMatrix(cam.combined);
         bounceGame.batch.begin();
         for(Iterator<Bang> bi = explosions.iterator(); bi.hasNext(); ) {
             Bang b = bi.next();
