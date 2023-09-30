@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -209,6 +210,7 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
+        // check collision with enemies
         for (Enemie e : enemies) {
             if (e.checkColision(player)) {
                 switch (e.getType()) {
@@ -226,10 +228,15 @@ public class PlayScreen extends ScreenAdapter {
             canJump = true;
         }
 
+        // have camera track player
         if (player.getY() <= cam.position.y - 650) {
             lives--;
             player.respawn(cam.position.x, cam.position.y+300);
         }
+
+        cleanupEnemies(enemies);
+        cleanupPlatforms(platformList);
+        cleanupPowerups(powerupList);
 
         // always update the ball, but ignore bounces unless we're in PLAY state
         /*if (ball.update() && state == SubState.PLAYING) {
@@ -270,6 +277,39 @@ public class PlayScreen extends ScreenAdapter {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 canJump = false;
+            }
+        }
+    }
+
+    private void cleanupEnemies(ArrayList<Enemie> sprites) {
+        for (int i=0; i<sprites.size(); i++) {
+            Sprite sprite = sprites.get(i);
+            if (sprite.getX()+sprite.getWidth() < cam.position.x - 500) {
+                sprites.remove(i);
+                // return early rather than fixing index error
+                return;
+            }
+        }
+    }
+
+    private void cleanupPlatforms(ArrayList<Platform> sprites) {
+        for (int i=0; i<sprites.size(); i++) {
+            Sprite sprite = sprites.get(i);
+            if (sprite.getX()+sprite.getWidth() < cam.position.x - 500) {
+                sprites.remove(i);
+                // return early rather than fixing index error
+                return;
+            }
+        }
+    }
+
+    private void cleanupPowerups(ArrayList<Powerup> sprites) {
+        for (int i=0; i<sprites.size(); i++) {
+            Sprite sprite = sprites.get(i);
+            if (sprite.getX()+sprite.getWidth() < cam.position.x - 500) {
+                sprites.remove(i);
+                // return early rather than fixing index error
+                return;
             }
         }
     }
