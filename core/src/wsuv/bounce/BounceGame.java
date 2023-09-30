@@ -25,6 +25,7 @@ public class BounceGame extends Game {
     public static final String RSC_BALL_IMG = "ball.png";
     public static final String RSC_MONO_FONT_FILE = "JetBrainsMono-Regular.ttf";
     public static final String RSC_MONO_FONT = "JBM.ttf";
+    public static final String RSC_MONO_FONT_BIG = "JBMB.ttf";
     public static final String RSC_EXPLOSION_SFX = "explosion7s.wav";
     public static final String PLATFORM_IMG = "platform.png";
 
@@ -47,8 +48,13 @@ public class BounceGame extends Game {
         am.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
         FreetypeFontLoader.FreeTypeFontLoaderParameter myFont = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         myFont.fontFileName = RSC_MONO_FONT_FILE;
-        myFont.fontParameters.size = 28;
+        myFont.fontParameters.size = 14;
         am.load(RSC_MONO_FONT, BitmapFont.class, myFont);
+
+        FreetypeFontLoader.FreeTypeFontLoaderParameter playFont = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        playFont.fontFileName = RSC_MONO_FONT_FILE;
+        playFont.fontParameters.size = 28;
+        am.load(RSC_MONO_FONT_BIG, BitmapFont.class, playFont);
 
         // Load Textures after the font...
         am.load(RSC_BALL_IMG, Texture.class);

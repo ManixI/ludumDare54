@@ -41,7 +41,7 @@ public class PlayScreen extends ScreenAdapter {
         cam = new OrthographicCamera(1000, 1000);
         cam.translate(500,300);
         cam.update();
-        hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT), cam);
+        hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT_BIG), cam);
 
 
 
