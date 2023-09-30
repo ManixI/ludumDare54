@@ -37,6 +37,6 @@
  - [30] fix speed of player so constantly in motion
  - [32] add game over screen
  - [33] associate powerups with platform to guarantee at reachable height
- - [35] more interesting platform patterns
+ - **[35]** more interesting platform patterns
  - [36] fix warping up when colliding with side of platform, should stop movement instead
  - [37] better points sprite
