@@ -76,7 +76,7 @@ public class Avatar extends Sprite {
         yVelocity -= GRAVITY;
 
         return collided;
-    } 
+    }
 
     public void respawn(float x, float y) {
         setCenter(x, y);

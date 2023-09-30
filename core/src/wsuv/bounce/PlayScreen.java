@@ -179,11 +179,10 @@ public class PlayScreen extends ScreenAdapter {
     public void update(float delta) {
         timer += delta;
 
-        if (player.getX() > (cam.position.x)) {
+        /*if (player.getX() > (cam.position.x)) {
             cam.position.x = player.getX();
-        } /*else if (player.getX() < cam.position.x - 300) {
-            cam.position.x = player.getX() + 300;
         }*/
+        cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY-Avatar.MIN_X_VELOCITY);
         cam.update();
         hud.updatePosCam();
 
