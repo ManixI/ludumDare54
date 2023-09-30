@@ -2,6 +2,7 @@ package wsuv.bounce;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -25,6 +26,7 @@ public class PlayScreen extends ScreenAdapter {
     Platform plat;
     Platform platformList;
     Avatar player;
+    OrthographicCamera cam;
 
     boolean canJump = true;
 
@@ -36,6 +38,7 @@ public class PlayScreen extends ScreenAdapter {
         bounces = 0;
         explosions = new ArrayList<>(10);
         boomSfx = bounceGame.am.get(BounceGame.RSC_EXPLOSION_SFX);
+        cam = new OrthographicCamera(50, 50);
 
         platformList = new Platform(game, 100, 200, 10);
         platformList.generateNextN(50);;
