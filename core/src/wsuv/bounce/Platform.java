@@ -58,7 +58,14 @@ public class Platform extends Sprite {
     }
 
     public void generateNext() {
-        next = new Platform(game, rightmost+getWidth()+50, top, 10);
+        next = new Platform(game, rightmost+getWidth()+50, game.random.nextFloat(top - 30, top+30), 10);
+    }
+    public void generateNextN(int n) {
+        Platform cursor = this;
+        for (int i=0; i<n; i++) {
+            cursor.generateNext();
+            cursor = cursor.next;
+        }
     }
 
     public Platform getNext() {

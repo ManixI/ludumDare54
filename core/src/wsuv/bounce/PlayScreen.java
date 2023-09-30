@@ -38,7 +38,7 @@ public class PlayScreen extends ScreenAdapter {
         boomSfx = bounceGame.am.get(BounceGame.RSC_EXPLOSION_SFX);
 
         platformList = new Platform(game, 100, 200, 10);
-        platformList.generateNext();;
+        platformList.generateNextN(10);;
         player = new Avatar(game, 100, 220);
 
         // we've loaded textures, but the explosion texture isn't quite ready to go--
