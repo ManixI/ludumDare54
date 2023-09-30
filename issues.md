@@ -40,3 +40,4 @@
  - **[35]** more interesting platform patterns
  - [36] fix warping up when colliding with side of platform, should stop movement instead
  - [37] better points sprite
+ - [38] variable jump height
