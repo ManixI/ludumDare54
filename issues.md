@@ -11,10 +11,10 @@
 - **[9]** Add ball tracking HUD item
 - **[10]** Add sounds and music
  - [11] Add platforms with collision
+ - [12] add player avatar
 
 ## Open Issues ##
 
- - [12] add player avatar
  - [13] add jump physics
  - [14] add rng platforms
  - [15] add scrolling camera
