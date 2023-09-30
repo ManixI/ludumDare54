@@ -47,7 +47,7 @@ public class BounceGame extends Game {
         am.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
         FreetypeFontLoader.FreeTypeFontLoaderParameter myFont = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         myFont.fontFileName = RSC_MONO_FONT_FILE;
-        myFont.fontParameters.size = 14;
+        myFont.fontParameters.size = 28;
         am.load(RSC_MONO_FONT, BitmapFont.class, myFont);
 
         // Load Textures after the font...
