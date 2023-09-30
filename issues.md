@@ -17,12 +17,12 @@
  - [15] add scrolling camera
  - [16] add death plane
  - [17] add life counter
+ - [18] add score tracker
  - [19] add 1up
  - [20] add points collectable
 
 ## Open Issues ##
 
- - [18] add score tracker
  - [21] add spike enemy
  - [22] add missile enemy
  - [23] add sfx
