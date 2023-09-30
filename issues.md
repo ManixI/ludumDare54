@@ -44,3 +44,5 @@
  - [39] increase speed over time
  - [40] zoom out as speed increases
  - [41] add graphic for death plane
+ - [42] different platform paths lean twords different directions
+ - [43] increase sense of speed

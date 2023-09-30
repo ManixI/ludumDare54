@@ -67,6 +67,7 @@ public class Platform extends Sprite {
         // max height is currently 90? unts
         float distX = game.random.nextFloat(getX()+getWidth(), getX()+getWidth()+maxDistance);
         int direction;
+        // if platform is near bottom, weight generation upwards
         if (getY() < Gdx.graphics.getHeight()/2) {
             direction = game.random.nextInt(0,4);
         } else {
