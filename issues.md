@@ -20,6 +20,7 @@
  - [18] add score tracker
  - [19] add 1up
  - [20] add points collectable
+ - [31] swap platforms to ArrayList from linked list
 
 ## Open Issues ##
 
@@ -33,4 +34,4 @@
  - [28] add speed pads
  - [29] add multiple platform paths
  - [30] fix speed of player so constantly in motion
- - [31] swap platforms to ArrayList from linked list
+ - [31] add game over screen
