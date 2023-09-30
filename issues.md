@@ -21,6 +21,7 @@
  - [19] add 1up
  - [20] add points collectable
  - [21] add spike enemy
+ - [30] fix speed of player so constantly in motion
  - [31] swap platforms to ArrayList from linked list
  - [34] procedurally generate platforms as player moves
 
@@ -34,7 +35,6 @@
  - [27] add vertical scrolling
  - [28] add speed pads
  - [29] add multiple platform paths
- - [30] fix speed of player so constantly in motion
  - [32] add game over screen
  - [33] associate powerups with platform to guarantee at reachable height
  - **[35]** more interesting platform patterns
