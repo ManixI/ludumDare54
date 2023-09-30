@@ -160,6 +160,19 @@ public class PlayScreen extends ScreenAdapter {
         cam.update();
         hud.updatePosCam();
 
+        // check powerup collision
+        for (int i = 0; i<powerupList.size(); i++) {
+            if (powerupList.get(i).checkCollision(player)) {
+                switch (powerupList.get(i).getType()) {
+                    case Powerup.ONE_UP:
+                        lives++;
+                        break;
+                    default:
+                }
+                powerupList.remove(i);
+            }
+        }
+
         if (platformList.checkCollision(player)) {
             canJump = true;
         }
