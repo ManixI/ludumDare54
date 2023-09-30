@@ -8,11 +8,18 @@ public class Powerup extends Sprite {
     final static String MOON_JUMP = "moon_jump.png";
     final static String DOUBLE_JUMP = "double_jump.png";
 
-    public Powerup(BounceGame game, float x, float y, String type) {
-        super(game.am.get(type, Texture.class));
+    String type;
+    float scaleFactor = 1.2f;
+
+    public Powerup(BounceGame game, float x, float y, String t) {
+        super(game.am.get(t, Texture.class));
+
+        type = t;
+
+        scale(scaleFactor);
 
         setX(x);
-        setX(y);
+        setY(y);
     }
 
     public boolean checkCollision(Avatar player) {
@@ -20,5 +27,9 @@ public class Powerup extends Sprite {
             return true;
         }
         return false;
+    }
+
+    public String getType() {
+        return type;
     }
 }

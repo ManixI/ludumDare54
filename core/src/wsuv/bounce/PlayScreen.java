@@ -29,6 +29,8 @@ public class PlayScreen extends ScreenAdapter {
     Avatar player;
     OrthographicCamera cam;
 
+    ArrayList<Powerup> powerupList;
+
     boolean canJump = true;
 
     public PlayScreen(BounceGame game) {
@@ -42,6 +44,9 @@ public class PlayScreen extends ScreenAdapter {
         cam.translate(500,300);
         cam.update();
         hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT_BIG), cam);
+
+        powerupList = new ArrayList<Powerup>();
+        powerupList.add(new Powerup(game, cam.position.x, cam.position.y, Powerup.ONE_UP));
 
         platformList = new Platform(game, 100, 200, 10);
         platformList.generateNextN(50);;
@@ -227,6 +232,10 @@ public class PlayScreen extends ScreenAdapter {
         while (platPointer != null) {
             platPointer.draw(bounceGame.batch);
             platPointer = platPointer.getNext();
+        }
+
+        for (Powerup p : powerupList) {
+            p.draw(bounceGame.batch);
         }
         player.draw(bounceGame.batch);
         // this logic could also be pushed into a method on SubState enum
