@@ -31,6 +31,7 @@ public class Platform extends Sprite {
             height = 10;
         }
         if (height > Gdx.graphics.getHeight()-100) {
+            // TODO: bug where sometimes left is larger then right
             height = game.random.nextFloat(Gdx.graphics.getHeight()-100, getY()+maxHeight);
         }
         setSize(length, 10);

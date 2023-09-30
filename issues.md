@@ -25,6 +25,7 @@
  - [31] swap platforms to ArrayList from linked list
  - [34] procedurally generate platforms as player moves
  - **[35]** more interesting platform patterns
+ - [33] associate powerups with platform to guarantee at reachable height
 
 ## Open Issues ##
 
@@ -37,12 +38,12 @@
  - [28] add speed pads
  - [29] add multiple platform paths
  - [32] add game over screen
- - [33] associate powerups with platform to guarantee at reachable height
  - [36] fix warping up when colliding with side of platform, should stop movement instead
  - [37] better points sprite
  - [38] variable jump height
  - [39] increase speed over time
  - [40] zoom out as speed increases
  - [41] add graphic for death plane
- - [42] different platform paths lean twords different directions
+ - [42] different platform paths lean towards different directions
  - [43] increase sense of speed
+ - [44] define play area with camera instead of gdx.graphics
