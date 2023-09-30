@@ -10,10 +10,10 @@ public class Avatar extends Sprite {
     public float yVelocity = 0;
 
     float maxXVelocity = 300;
-    float maxYVelocity = 100;
+    float maxYVelocity = 1000;
 
-    float gravity = 5;
-    float jumpVelocity = 100;
+    float gravity = 10;
+    float jumpVelocity = 400;
 
     public float scaleFactor = -0.5f;
 
@@ -25,42 +25,52 @@ public class Avatar extends Sprite {
         //scale(scaleFactor);
     }
 
-    public void update() {
+    public boolean update() {
         float x = getX();
         float y = getY();
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
+
+        boolean collided = false;
 
         // set edges of camera as collision bounds for now
         if (x < 0 || (x + getWidth()) > screenWidth) {
             xVelocity = 0;
             if (x < screenWidth / 2) {
                 xVelocity = 5;
+                setX(0+getWidth()/2);
             } else {
                 xVelocity = -5;
+                setX(screenWidth-getWidth()/2);
             }
         }
         if (y < 0 || (y + getHeight()) > screenHeight) {
             yVelocity = 0;
             if (y < screenHeight / 2) {
+                setY(0+getHeight()/2);
                 yVelocity = 2;
             } else {
                 yVelocity = -2;
+                setY(screenHeight-getHeight()/2);
             }
         }
 
         // set speed caps
         if (xVelocity > maxXVelocity) {
             xVelocity = maxXVelocity;
+            collided = true;
         }
         if (xVelocity < -maxXVelocity) {
             xVelocity = -maxXVelocity;
+            collided = true;
         }
         if (yVelocity > maxYVelocity) {
             yVelocity = maxYVelocity;
+            collided = true;
         }
         if (yVelocity < -maxYVelocity) {
             yVelocity = -maxYVelocity;
+            collided = true;
         }
 
         float time = Gdx.graphics.getDeltaTime();
@@ -68,6 +78,8 @@ public class Avatar extends Sprite {
         setY(y + time * yVelocity);
 
         yVelocity -= gravity;
+
+        return collided;
     }
 
     public void jump() {

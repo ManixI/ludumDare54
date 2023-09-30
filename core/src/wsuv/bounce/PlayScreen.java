@@ -25,6 +25,8 @@ public class PlayScreen extends ScreenAdapter {
     Platform plat;
     Avatar player;
 
+    boolean canJump = true;
+
     public PlayScreen(BounceGame game) {
         timer = 0;
         bounceGame = game;
@@ -137,8 +139,12 @@ public class PlayScreen extends ScreenAdapter {
     public void update(float delta) {
         timer += delta;
 
-        plat.checkCollision(player);
-        player.update();
+        if (plat.checkCollision(player)) {
+            canJump = true;
+        }
+        if (player.update()) {
+            canJump = true;
+        }
 
         // always update the ball, but ignore bounces unless we're in PLAY state
         /*if (ball.update() && state == SubState.PLAYING) {
@@ -167,13 +173,18 @@ public class PlayScreen extends ScreenAdapter {
                 player.yVelocity += 15;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                player.yVelocity -= 2;
+                player.yVelocity -= 10;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                player.xVelocity -= 2;
+                player.xVelocity -= 10;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
                 player.xVelocity += 2;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && canJump) {
+                // TODO: set timer to end jump if it doesn't get released
+                player.jump();
+                canJump = false;
             }
         }
     }
@@ -189,7 +200,7 @@ public class PlayScreen extends ScreenAdapter {
             if (b.completed()) { bi.remove(); }
             else { b.draw(bounceGame.batch); }
         }
-        ball.draw(bounceGame.batch);
+        //ball.draw(bounceGame.batch);
         plat.draw(bounceGame.batch);
         player.draw(bounceGame.batch);
         // this logic could also be pushed into a method on SubState enum

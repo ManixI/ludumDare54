@@ -31,11 +31,11 @@ public class Platform extends Sprite {
         //System.out.println(ball.getX()+" "+ball.getY()+" "+ball.yVelocity);
         //System.out.println(leftmost+" "+rightmost+" "+top);
         if (getBoundingRectangle().overlaps(ball.getBoundingRectangle())) {
-            System.out.println("overlap");
             if (ball.yVelocity <= 0 && passthough == false) {
                 // TODO: avatar bounces on platform when scaled to any size
                 ball.setY(getY()+getHeight());
                 ball.yVelocity = 0;
+                return true;
             } else {
                 // started below platform, don't warp up if jump falls short
                 passthough = true;
