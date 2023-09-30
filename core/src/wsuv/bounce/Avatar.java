@@ -7,10 +7,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Avatar extends Sprite {
 
-    public float xVelocity = 0;
+    public float xVelocity = MAX_X_VELOCITY/2;
     public float yVelocity = 0;
 
-    public static final float MAX_X_VELOCITY = 300;
+    public static final float MIN_X_VELOCITY = 300;
+    public static final float MAX_X_VELOCITY = 600;
     public static final float MAX_Y_VELOCITY = 1000;
 
     public static final float GRAVITY = 25;
@@ -37,7 +38,7 @@ public class Avatar extends Sprite {
 
         // set edges of camera as collision bounds for now
         if (x < cam.position.x - 500) {
-            xVelocity = 0;
+            xVelocity = MIN_X_VELOCITY;
             setY(y + time * yVelocity);
             setX(cam.position.x - 499);
         /*} else if (y < 0 || (y + getHeight()) > screenHeight) {
@@ -61,8 +62,8 @@ public class Avatar extends Sprite {
         if (xVelocity > MAX_X_VELOCITY) {
             xVelocity = MAX_X_VELOCITY;
         }
-        if (xVelocity < -MAX_X_VELOCITY) {
-            xVelocity = -MAX_X_VELOCITY;
+        if (xVelocity < MIN_X_VELOCITY) {
+            xVelocity = MIN_X_VELOCITY;
         }
         if (yVelocity > MAX_Y_VELOCITY) {
             yVelocity = MAX_Y_VELOCITY;
@@ -75,7 +76,7 @@ public class Avatar extends Sprite {
         yVelocity -= GRAVITY;
 
         return collided;
-    }
+    } 
 
     public void respawn(float x, float y) {
         setCenter(x, y);
