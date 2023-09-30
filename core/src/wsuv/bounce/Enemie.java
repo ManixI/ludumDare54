@@ -9,9 +9,12 @@ public class Enemie extends Sprite {
 
     private String type;
     private Platform spot;
+    float scaleFactor = 1.2f;
 
     public Enemie(BounceGame game, float x, float y, String t, Platform platform) {
         super(game.am.get(t, Texture.class));
+
+        scale(scaleFactor);
 
         place(x, platform);
         type = t;
@@ -49,9 +52,9 @@ public class Enemie extends Sprite {
             }
         }
         // if enemy doesn't overlap with any existing platform, make new platform for it
-        Platform p = cursor.generateNext();
+        /*Platform p = platform.generateNext();
         setX(p.leftmost + p.getWidth()/2);
         setY(p.top);
-        spot = p;
+        spot = p;*/
     }
 }

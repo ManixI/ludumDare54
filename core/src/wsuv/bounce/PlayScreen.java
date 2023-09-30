@@ -30,6 +30,7 @@ public class PlayScreen extends ScreenAdapter {
     OrthographicCamera cam;
 
     ArrayList<Powerup> powerupList;
+    ArrayList<Enemie> enemies;
 
     boolean canJump = true;
     public float points = 0;
@@ -52,8 +53,11 @@ public class PlayScreen extends ScreenAdapter {
         powerupList.add(new Powerup(game, cam.position.x, cam.position.y, Powerup.ONE_UP));
         powerupList.add(new Powerup(game, cam.position.x + 500, cam.position.y + 100, Powerup.POINTS));
 
+        enemies = new ArrayList<Enemie>();
+        enemies.add(new Enemie(game, 500, 0, Enemie.SPIKES, platformList));
+
         platformList = new Platform(game, 100, 200, 10);
-        platformList.generateNextN(50);;
+        platformList.generateNextN(20);;
         player = new Avatar(game, 100, 220);
 
         // we've loaded textures, but the explosion texture isn't quite ready to go--
@@ -267,6 +271,9 @@ public class PlayScreen extends ScreenAdapter {
 
         for (Powerup p : powerupList) {
             p.draw(bounceGame.batch);
+        }
+        for (Enemie e : enemies) {
+            e.draw(bounceGame.batch);
         }
         player.draw(bounceGame.batch);
         // this logic could also be pushed into a method on SubState enum

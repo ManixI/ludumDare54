@@ -30,6 +30,7 @@ public class BounceGame extends Game {
     public static final String PLATFORM_IMG = "platform.png";
     public static final String ONE_UP = "1up.png";
     public static final String POINTS = "points.png";
+    public static final String SPIKES = "spikes.png";
 
     AssetManager am;  // AssetManager provides a single source for loaded resources
     SpriteBatch batch;
@@ -70,6 +71,9 @@ public class BounceGame extends Game {
         // powerups
         am.load(ONE_UP, Texture.class);
         am.load(POINTS, Texture.class);
+
+        // enemies
+        am.load(SPIKES, Texture.class);
 
         // Load Sounds
         am.load(RSC_EXPLOSION_SFX, Sound.class);

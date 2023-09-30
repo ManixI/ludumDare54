@@ -33,3 +33,4 @@
  - [28] add speed pads
  - [29] add multiple platform paths
  - [30] fix speed of player so constantly in motion
+ - [31] swap platforms to ArrayList from linked list
