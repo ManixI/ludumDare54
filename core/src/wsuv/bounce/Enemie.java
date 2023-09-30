@@ -13,12 +13,14 @@ public class Enemie extends Sprite {
     private Platform spot;
     float scaleFactor = 1.2f;
 
-    public Enemie(BounceGame game, float x, float y, String t, ArrayList<Platform> platformlist) {
+    public Enemie(BounceGame game, float x, float y, String t) {
         super(game.am.get(t, Texture.class));
 
         scale(scaleFactor);
 
-        place(x, platformlist);
+        //place(x, platformlist);
+        setX(x);
+        setY(y);
         type = t;
     }
 

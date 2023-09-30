@@ -68,4 +68,13 @@ public class Platform extends Sprite {
             game.random.nextFloat(top - 100, top + 100),
             game.random.nextFloat(1, 30));
     }
+
+    public Enemie spawnEnemy() {
+        return new Enemie(
+                game,
+                game.random.nextFloat(getX(), getX()+getWidth()),
+                getY()+getHeight(),
+                Enemie.SPIKES
+        );
+    }
 }
