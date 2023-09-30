@@ -10,11 +10,11 @@ public class Avatar extends Sprite {
     public float xVelocity = 0;
     public float yVelocity = 0;
 
-    float maxXVelocity = 300;
-    float maxYVelocity = 1000;
+    public static final float MAX_X_VELOCITY = 300;
+    public static final float MAX_Y_VELOCITY = 1000;
 
-    float gravity = 10;
-    float jumpVelocity = 400;
+    public static final float GRAVITY = 10;
+    public static final float JUMP_VELOCITY = 400;
 
     public float scaleFactor = -0.5f;
 
@@ -58,21 +58,21 @@ public class Avatar extends Sprite {
         }
 
         // set speed caps
-        if (xVelocity > maxXVelocity) {
-            xVelocity = maxXVelocity;
+        if (xVelocity > MAX_X_VELOCITY) {
+            xVelocity = MAX_X_VELOCITY;
         }
-        if (xVelocity < -maxXVelocity) {
-            xVelocity = -maxXVelocity;
+        if (xVelocity < -MAX_X_VELOCITY) {
+            xVelocity = -MAX_X_VELOCITY;
         }
-        if (yVelocity > maxYVelocity) {
-            yVelocity = maxYVelocity;
+        if (yVelocity > MAX_Y_VELOCITY) {
+            yVelocity = MAX_Y_VELOCITY;
         }
-        if (yVelocity < -maxYVelocity) {
-            yVelocity = -maxYVelocity;
+        if (yVelocity < -MAX_Y_VELOCITY) {
+            yVelocity = -MAX_Y_VELOCITY;
         }
 
 
-        yVelocity -= gravity;
+        yVelocity -= GRAVITY;
 
         return collided;
     }
@@ -82,6 +82,6 @@ public class Avatar extends Sprite {
     }
 
     public void jump() {
-        yVelocity += jumpVelocity;
+        yVelocity += JUMP_VELOCITY;
     }
 }
