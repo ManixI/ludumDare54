@@ -14,8 +14,8 @@ public class Platform extends Sprite {
 
     boolean passthough = false;
 
-    static float lengthFloor = 10;
-    static float maxDistance = 250;
+    static float lengthFloor = 20;
+    static float maxDistance = 400;
 
 
     public Platform(BounceGame g, float startX, float height, float length ) {

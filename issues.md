@@ -41,3 +41,6 @@
  - [36] fix warping up when colliding with side of platform, should stop movement instead
  - [37] better points sprite
  - [38] variable jump height
+ - [39] increase speed over time
+ - [40] zoom out as speed increases
+ - [41] add graphic for death plane
