@@ -234,6 +234,15 @@ public class PlayScreen extends ScreenAdapter {
             player.respawn(cam.position.x, cam.position.y+300);
         }
 
+        // generate more platforms if player gets close enough to end
+        Platform lastPlat = platformList.get(platformList.size()-1);
+        if (lastPlat.getX() < cam.position.x + 2500) {
+            for (int i=0; i<10; i++) {
+                platformList.add(platformList.get(platformList.size()-1).generateNext());
+            }
+        }
+
+        // cleanup stuff that leaves the screen
         cleanupEnemies(enemies);
         cleanupPlatforms(platformList);
         cleanupPowerups(powerupList);
