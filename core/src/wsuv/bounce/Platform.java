@@ -10,14 +10,16 @@ public class Platform extends Sprite {
     float leftmost;
     float rightmost;
     float top;
+    BounceGame game;
 
     boolean passthough = false;
 
     Platform next = null;
 
 
-    public Platform(BounceGame game, float startX, float height, float length ) {
-        super(game.am.get("platform.png", Texture.class));
+    public Platform(BounceGame g, float startX, float height, float length ) {
+        super(g.am.get("platform.png", Texture.class));
+        game = g;
         //scale(length);
         setSize(length*10, 10);
 
@@ -56,7 +58,7 @@ public class Platform extends Sprite {
     }
 
     public void generateNext() {
-
+        next = new Platform(game, rightmost+getWidth()+50, top, 10);
     }
 
     public Platform getNext() {
