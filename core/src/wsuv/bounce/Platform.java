@@ -16,6 +16,7 @@ public class Platform extends Sprite {
 
     static float lengthFloor = 20;
     static float maxDistance = 400;
+    static float maxHeight = 115;
 
 
     public Platform(BounceGame g, float startX, float height, float length ) {
@@ -30,7 +31,7 @@ public class Platform extends Sprite {
             height = 10;
         }
         if (height > Gdx.graphics.getHeight()-100) {
-            height = Gdx.graphics.getHeight() - 100;
+            height = game.random.nextFloat(Gdx.graphics.getHeight()-100, getY()+maxHeight);
         }
         setSize(length, 10);
 
@@ -65,7 +66,18 @@ public class Platform extends Sprite {
     public Platform generateNext() {
         // max height is currently 90? unts
         float distX = game.random.nextFloat(getX()+getWidth(), getX()+getWidth()+maxDistance);
-        float distY = game.random.nextFloat(-(getY()+90), getY()+90);
+        int direction;
+        if (getY() < Gdx.graphics.getHeight()/2) {
+            direction = game.random.nextInt(0,4);
+        } else {
+            direction = game.random.nextInt(0,2);
+        }
+        float distY;
+        if (direction != 0) {
+            distY = game.random.nextFloat(getY(), getY()+maxHeight);
+        } else {
+            distY = game.random.nextFloat(-(getY()+maxHeight*1.5f), getY());
+        }
         return new Platform(
             game,
             distX,
