@@ -91,7 +91,12 @@ public class PlayScreen extends ScreenAdapter {
         });
 
         // HUD Data
-        hud.registerView("Lives:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
+        hud.registerView("Points:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
+            @Override
+            public String execute(boolean consoleIsOpen) {
+                return Integer.toString(points);
+            }
+        });hud.registerView("Lives:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
             @Override
             public String execute(boolean consoleIsOpen) {
                 return Integer.toString(lives);
