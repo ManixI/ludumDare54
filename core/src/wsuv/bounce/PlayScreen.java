@@ -32,6 +32,7 @@ public class PlayScreen extends ScreenAdapter {
     ArrayList<Powerup> powerupList;
 
     boolean canJump = true;
+    public int points = 0;
 
     public PlayScreen(BounceGame game) {
         timer = 0;
@@ -47,6 +48,7 @@ public class PlayScreen extends ScreenAdapter {
 
         powerupList = new ArrayList<Powerup>();
         powerupList.add(new Powerup(game, cam.position.x, cam.position.y, Powerup.ONE_UP));
+        powerupList.add(new Powerup(game, cam.position.x + 500, cam.position.y + 100, Powerup.POINTS));
 
         platformList = new Platform(game, 100, 200, 10);
         platformList.generateNextN(50);;
@@ -166,6 +168,9 @@ public class PlayScreen extends ScreenAdapter {
                 switch (powerupList.get(i).getType()) {
                     case Powerup.ONE_UP:
                         lives++;
+                        break;
+                    case Powerup.POINTS:
+                        points += 1000;
                         break;
                     default:
                 }
