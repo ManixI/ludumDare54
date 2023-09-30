@@ -16,10 +16,10 @@
  - [14] add rng platforms
  - [15] add scrolling camera
  - [17] add life counter
+ - [16] add death plane
 
 ## Open Issues ##
 
- - [16] add death plane
  - [18] add score tracker
  - [19] add 1up
  - [20] add points collectable
