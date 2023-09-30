@@ -1,6 +1,7 @@
 package wsuv.bounce;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -19,7 +20,7 @@ public class Platform extends Sprite {
     static float maxHeight = 115;
 
 
-    public Platform(BounceGame g, float startX, float height, float length ) {
+    public Platform(BounceGame g, float startX, float height, float length, OrthographicCamera cam) {
         super(g.am.get("platform.png", Texture.class));
         game = g;
         length *= 10;
@@ -30,9 +31,8 @@ public class Platform extends Sprite {
         if (height < 10) {
             height = 10;
         }
-        if (height > Gdx.graphics.getHeight()-100) {
-            // TODO: bug where sometimes left is larger then right
-            height = game.random.nextFloat(Gdx.graphics.getHeight()-100, getY()+maxHeight);
+        if (height > cam.position.y - 300) {
+            height = game.random.nextFloat(cam.position.y - 300, getY()+maxHeight);
         }
         setSize(length, 10);
 
@@ -64,7 +64,7 @@ public class Platform extends Sprite {
     }
 
 
-    public Platform generateNext() {
+    public Platform generateNext(OrthographicCamera cam) {
         // max height is currently 90? unts
         float distX = game.random.nextFloat(getX()+getWidth(), getX()+getWidth()+maxDistance);
         int direction;
@@ -84,7 +84,9 @@ public class Platform extends Sprite {
             game,
             distX,
             distY,
-            game.random.nextFloat(1, 30));
+            game.random.nextFloat(1, 30),
+            cam
+        );
     }
 
     public Enemie spawnEnemy() {

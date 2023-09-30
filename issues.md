@@ -23,9 +23,9 @@
  - [21] add spike enemy
  - [30] fix speed of player so constantly in motion
  - [31] swap platforms to ArrayList from linked list
+ - [33] associate powerups with platform to guarantee at reachable height
  - [34] procedurally generate platforms as player moves
  - **[35]** more interesting platform patterns
- - [33] associate powerups with platform to guarantee at reachable height
 
 ## Open Issues ##
 
