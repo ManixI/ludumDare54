@@ -18,6 +18,7 @@ public class PlayScreen extends ScreenAdapter {
     private SubState state;
     private int bounces;
     private float timer;
+    private int lives = 3;
 
     private Sound boomSfx;
     private ArrayList<Bang> explosions;
@@ -33,7 +34,6 @@ public class PlayScreen extends ScreenAdapter {
     public PlayScreen(BounceGame game) {
         timer = 0;
         bounceGame = game;
-        hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT));
         ball = new Ball(game);
         bounces = 0;
         explosions = new ArrayList<>(10);
@@ -41,6 +41,8 @@ public class PlayScreen extends ScreenAdapter {
         cam = new OrthographicCamera(1000, 1000);
         cam.translate(500,300);
         cam.update();
+        hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT), cam);
+
 
 
         platformList = new Platform(game, 100, 200, 10);
@@ -84,10 +86,10 @@ public class PlayScreen extends ScreenAdapter {
         });
 
         // HUD Data
-        hud.registerView("Bounces:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
+        hud.registerView("Lives:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
             @Override
             public String execute(boolean consoleIsOpen) {
-                return Integer.toString(bounces);
+                return Integer.toString(lives);
             }
         });
         hud.registerView("Ball @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
@@ -153,6 +155,7 @@ public class PlayScreen extends ScreenAdapter {
             cam.position.x = player.getX() + 300;
         }*/
         cam.update();
+        hud.updatePosCam();
 
         if (platformList.checkCollision(player)) {
             canJump = true;

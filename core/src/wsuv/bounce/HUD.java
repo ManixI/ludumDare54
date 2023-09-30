@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -68,12 +69,14 @@ public class HUD {
     private long lastDataRefresh;
     private StringBuilder hudDataBuffer;
 
+    OrthographicCamera cam;
+
 
     /**
      * Make a HUD with sane defaults.
      */
-    public HUD(BitmapFont fnt) {
-        this(10, 13, 10, 500, fnt);
+    public HUD(BitmapFont fnt, OrthographicCamera camera) {
+        this(10, 13, 10, 500, fnt, camera);
     }
 
     /**
@@ -86,11 +89,12 @@ public class HUD {
      *                   hud data is shown when the console is open.
      * @param fnt        - the font to use for display
      */
-    public HUD(int linesbuffd, int xmargin, int ymargin, int rcol, BitmapFont fnt) {
+    public HUD(int linesbuffd, int xmargin, int ymargin, int rcol, BitmapFont fnt, OrthographicCamera camera) {
         linesbuffered = linesbuffd;
         xMargin = xmargin;
         yMargin = ymargin;
         rColumn = rcol;
+        cam = camera;
         currentLine = new StringBuilder(60);
         consoleLines = new ArrayDeque<>();
         knownCommands = new HashMap<>(10);
@@ -99,7 +103,7 @@ public class HUD {
         font = fnt;
 
         // make a background for the console...bigger than needed!
-        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2, com.badlogic.gdx.graphics.Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(1000, Gdx.graphics.getHeight() / 2, com.badlogic.gdx.graphics.Pixmap.Format.RGBA8888);
         pixmap.setColor(1, 1, 1, .6f);
         pixmap.fill();
         background = new Texture(pixmap);
@@ -194,6 +198,12 @@ public class HUD {
         }
     }
 
+    public void updatePosCam() {
+        rColumn = (int) (cam.position.x + 250);
+        yMargin = (int) cam.position.y - (250 + 10);
+        xMargin = (int) cam.position.x - (450);
+    }
+
     /**
      * @return true iff the HUD console is open (and accepting input)
      */
@@ -221,7 +231,7 @@ public class HUD {
 
         // draw based on the open/closed status
         if (open) {
-            batch.draw(background, 0, Gdx.graphics.getHeight() - ((font.getLineHeight()) * linesbuffered) - yMargin);
+            batch.draw(background, cam.position.x - 500, cam.position.y + 250 - ((font.getLineHeight()) * linesbuffered) - yMargin);
             console = String.join("\n", consoleLines);
             if (console.equals("")) {
                 console = PROMPT + currentLine.toString();
@@ -289,6 +299,7 @@ public class HUD {
         open = !open;
         hudDataBuffer.setLength(0);
         lastDataRefresh -= DATA_REFRESH_INTERVAL;
+
         return open;
     }
 
