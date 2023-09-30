@@ -31,9 +31,9 @@ public class Platform extends Sprite {
         if (height < 10) {
             height = 10;
         }
-        if (height > cam.position.y - 300) {
+        /*if (height > cam.position.y - 300) {
             height = game.random.nextFloat(cam.position.y - 300, getY()+maxHeight);
-        }
+        }*/
         setSize(length, 10);
 
         setCenter(startX + getWidth()/2, height - getHeight()/2);

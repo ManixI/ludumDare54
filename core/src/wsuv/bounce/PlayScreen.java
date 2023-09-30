@@ -55,7 +55,7 @@ public class PlayScreen extends ScreenAdapter {
             platformList.add(new ArrayList<Platform>());
         }
         for(int i=0; i<platformList.size(); i++) {
-            platformList.get(i).add(new Platform(game, 100, 200, 10, cam));
+            platformList.get(i).add(new Platform(game, 100, 200 + i*200, 10, cam));
             for (int j=0; j<10;j++) {
                 platformList.get(i).add(platformList.get(i).get(j).generateNext(cam));
             }
@@ -329,6 +329,7 @@ public class PlayScreen extends ScreenAdapter {
 
     private void cleanupPlatforms(ArrayList<ArrayList<Platform>> sprites) {
         // TODO: cleanup names here
+        // TODO: fix this
         for (int j=0; j<sprites.size(); j++) {
             ArrayList<Platform> platlist = sprites.get(j);
             for (int i=0; i<sprites.size(); i++) {
