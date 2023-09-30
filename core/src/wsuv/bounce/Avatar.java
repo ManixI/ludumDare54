@@ -30,52 +30,54 @@ public class Avatar extends Sprite {
         float y = getY();
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
+        float time = Gdx.graphics.getDeltaTime();
 
         boolean collided = false;
 
         // set edges of camera as collision bounds for now
         if (x < 0 || (x + getWidth()) > screenWidth) {
             xVelocity = 0;
+            setY(y + time * yVelocity);
             if (x < screenWidth / 2) {
-                xVelocity = 5;
-                setX(0+getWidth()/2);
+                setX(0);
+                xVelocity = 0;
+                collided = true;
             } else {
-                xVelocity = -5;
-                setX(screenWidth-getWidth()/2);
+                setX(screenWidth-getWidth());
+                xVelocity = 0;
+                collided = true;
             }
-        }
-        if (y < 0 || (y + getHeight()) > screenHeight) {
+        } else if (y < 0 || (y + getHeight()) > screenHeight) {
             yVelocity = 0;
-            if (y < screenHeight / 2) {
-                setY(0+getHeight()/2);
-                yVelocity = 2;
+            setX(x + time * xVelocity);
+            if (y < (screenHeight / 2)) {
+                setY(0);
+                yVelocity = 0;
+                collided = true;
             } else {
-                yVelocity = -2;
-                setY(screenHeight-getHeight()/2);
+                setY(screenHeight - getHeight());
+                yVelocity = 0;
+                collided = true;
             }
+        } else {
+            setX(x + time * xVelocity);
+            setY(y + time * yVelocity);
         }
 
         // set speed caps
         if (xVelocity > maxXVelocity) {
             xVelocity = maxXVelocity;
-            collided = true;
         }
         if (xVelocity < -maxXVelocity) {
             xVelocity = -maxXVelocity;
-            collided = true;
         }
         if (yVelocity > maxYVelocity) {
             yVelocity = maxYVelocity;
-            collided = true;
         }
         if (yVelocity < -maxYVelocity) {
             yVelocity = -maxYVelocity;
-            collided = true;
         }
 
-        float time = Gdx.graphics.getDeltaTime();
-        setX(x + time * xVelocity);
-        setY(y + time * yVelocity);
 
         yVelocity -= gravity;
 
