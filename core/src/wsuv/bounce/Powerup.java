@@ -23,8 +23,8 @@ public class Powerup extends Sprite {
         setY(y);
     }
 
-    public boolean checkCollision(Avatar player) {
-        if (getBoundingRectangle().overlaps(player.getBoundingRectangle())) {
+    public boolean checkCollision(Sprite sprite) {
+        if (getBoundingRectangle().overlaps(sprite.getBoundingRectangle())) {
             return true;
         }
         return false;
