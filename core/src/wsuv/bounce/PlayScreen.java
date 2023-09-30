@@ -115,6 +115,13 @@ public class PlayScreen extends ScreenAdapter {
                 return Integer.toString(lives);
             }
         });
+        hud.registerView("Mouse:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
+                    @Override
+                    public String execute(boolean consoleIsOpen) {
+                        return String.format("%.0f %.0f",
+                                (float) Gdx.input.getX(), (float) Gdx.input.getY());
+                    }
+        });
         hud.registerView("Ball @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
             @Override
             public String execute(boolean consoleIsOpen) {

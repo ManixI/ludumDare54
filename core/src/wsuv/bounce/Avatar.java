@@ -13,8 +13,8 @@ public class Avatar extends Sprite {
     public static final float MAX_X_VELOCITY = 300;
     public static final float MAX_Y_VELOCITY = 1000;
 
-    public static final float GRAVITY = 10;
-    public static final float JUMP_VELOCITY = 400;
+    public static final float GRAVITY = 25;
+    public static final float JUMP_VELOCITY = 800;
 
     public float scaleFactor = -0.5f;
 

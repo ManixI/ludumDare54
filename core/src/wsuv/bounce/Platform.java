@@ -15,6 +15,7 @@ public class Platform extends Sprite {
     boolean passthough = false;
 
     static float lengthFloor = 10;
+    static float maxDistance = 250;
 
 
     public Platform(BounceGame g, float startX, float height, float length ) {
@@ -62,10 +63,13 @@ public class Platform extends Sprite {
 
 
     public Platform generateNext() {
+        // max height is currently 90? unts
+        float distX = game.random.nextFloat(getX()+getWidth(), getX()+getWidth()+maxDistance);
+        float distY = game.random.nextFloat(-(getY()+90), getY()+90);
         return new Platform(
             game,
-            rightmost + getWidth() + 50,
-            game.random.nextFloat(top - 100, top + 100),
+            distX,
+            distY,
             game.random.nextFloat(1, 30));
     }
 
