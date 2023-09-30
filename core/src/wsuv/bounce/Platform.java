@@ -73,7 +73,7 @@ public class Platform extends Sprite {
         return new Enemie(
                 game,
                 game.random.nextFloat(getX(), getX()+getWidth()),
-                getY()+getHeight(),
+                getY()+getHeight()+getHeight(),
                 Enemie.SPIKES
         );
     }

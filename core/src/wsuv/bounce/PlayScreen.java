@@ -62,7 +62,7 @@ public class PlayScreen extends ScreenAdapter {
 
         enemies = new ArrayList<Enemie>();
         //enemies.add(new Enemie(game, 500, 0, Enemie.SPIKES));
-        enemies.add(platformList.get(5).spawnEnemy());
+        enemies.add(platformList.get(3).spawnEnemy());
 
         player = new Avatar(game, 100, 220);
 
