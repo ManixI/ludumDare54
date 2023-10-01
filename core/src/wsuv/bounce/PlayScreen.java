@@ -34,7 +34,8 @@ public class PlayScreen extends ScreenAdapter {
     ArrayList<Powerup> powerupList;
     ArrayList<Enemie> enemies;
 
-    boolean canJump = true;
+    int numJumps = 1;
+    int totalJumps = 2;
     public float points = 0;
     private float staticPoints = 0;
     private float distance = 100;
@@ -222,7 +223,7 @@ public class PlayScreen extends ScreenAdapter {
         // check collision on each platform to re-set jump
         for (Platform p : platformList) {
             if (p.checkCollision(player)) {
-                canJump = true;
+                numJumps = totalJumps;
                 break;
             }
         }
@@ -243,7 +244,7 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         if (player.update(cam)) {
-            canJump = true;
+            numJumps = totalJumps;
         }
 
         // death plane
@@ -336,10 +337,10 @@ public class PlayScreen extends ScreenAdapter {
             } else {
                 player.xVelocity = Avatar.MAX_X_VELOCITY/2;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && canJump) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
-                canJump = false;
+                numJumps--;
             }
         }
     }
