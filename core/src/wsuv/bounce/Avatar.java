@@ -17,6 +17,8 @@ public class Avatar extends Sprite {
     public static final float GRAVITY = 25;
     public static final float JUMP_VELOCITY = 800;
 
+    public static final float CEILING_HEIGHT = 680;
+
     public float scaleFactor = -0.5f;
 
 
@@ -34,9 +36,14 @@ public class Avatar extends Sprite {
 
         boolean collided = false;
 
-
         setX(x + time * xVelocity);
         setY(y + time * yVelocity);
+
+        if (getY() > CEILING_HEIGHT) {
+            setY(CEILING_HEIGHT);
+            yVelocity = 0;
+            // TODO: add sfx here
+        }
 
 
         // set speed caps
