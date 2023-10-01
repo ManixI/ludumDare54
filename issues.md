@@ -32,6 +32,7 @@
  - [47] revert issues 27 and 29
  - [48] add ceiling
  - [49] change from platforms to floor
+ - [51] change platforms to fit aesthetic
  - [53] update enemy spawning
 
 ## Open Issues ##
@@ -51,7 +52,6 @@
  - [40] zoom out as speed increases
  - [43] increase sense of speed
  - [50] add falling enemy
- - [51] change platforms to fit aesthetic
  - [52] add pits to floor
  - [54] add double jump
  - [55] platforms shouldn't be pass-though
