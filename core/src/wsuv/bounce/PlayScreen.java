@@ -47,6 +47,8 @@ public class PlayScreen extends ScreenAdapter {
     private Sound stepSfx;
     private Sound powerupSfx;
 
+    private boolean invincible = false;
+
     public PlayScreen(BounceGame game) {
         timer = 0;
         bounceGame = game;
@@ -258,16 +260,27 @@ public class PlayScreen extends ScreenAdapter {
 
 
         // check collision with enemies
-        for (Enemie e : enemies) {
-            if (e.checkColision(player)) {
-                switch (e.getType()) {
-                    case Enemie.SPIKES:
-                        lives--;
-                        player.respawn(cam.position.x, cam.position.y+300);
-                        deathSfx.play();
-                        break;
-                    default:
-                        break;
+        if (!invincible)
+        {
+            for (Enemie e : enemies) {
+                if (e.checkColision(player)) {
+                    switch (e.getType()) {
+                        case Enemie.SPIKES:
+                            lives--;
+                            player.respawn(cam.position.x, cam.position.y + 300);
+                            Timer t = new Timer();
+                            t.schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    invincible = false;
+                                }
+                            }, 1500);
+                            invincible = true;
+                            deathSfx.play();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
