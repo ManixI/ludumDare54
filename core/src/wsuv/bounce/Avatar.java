@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class Avatar extends Sprite {
+public class Avatar extends Sprite implements Cloneable {
 
     public float xVelocity = MAX_X_VELOCITY/2;
     public float yVelocity = 0;
 
-    public static final float MIN_X_VELOCITY = 50;
+    public static final float MIN_X_VELOCITY = 0;
     public static final float MAX_X_VELOCITY = 600;
     public static final float MAX_Y_VELOCITY = 1000;
 
@@ -28,6 +28,10 @@ public class Avatar extends Sprite {
 
         setCenter(startX, startY);
         //scale(scaleFactor);
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public boolean update(OrthographicCamera cam) {

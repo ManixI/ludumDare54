@@ -87,23 +87,42 @@ public class Platform extends Sprite {
         return plats;
     }
 
-    public boolean checkCollision(Avatar player) {
+    public boolean checkCollision(Avatar player, OrthographicCamera cam) {
         // if ball in line with platform
         //System.out.println(ball.getX()+" "+ball.getY()+" "+ball.yVelocity);
         //System.out.println(leftmost+" "+rightmost+" "+top);
-        if (getBoundingRectangle().overlaps(player.getBoundingRectangle())) {
-            if (player.yVelocity <= 0 && passthough == false) {
-                player.setY(getY()+getHeight()*2.5f);
-                player.yVelocity = 0;
-                return true;
-            } else {
-                // started below platform, don't warp up if jump falls short
-                player.setY((getY()-player.getHeight()-getHeight()*2.5f));
-                player.yVelocity = 0;
-                return false;
-            }
+        Avatar futurePlayer;
+        try {
+            futurePlayer = (Avatar) player.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+
+        float time = Gdx.graphics.getDeltaTime();
+
+        futurePlayer.yVelocity = 0;
+        futurePlayer.update(cam);
+        if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
+            player.xVelocity = 0;
+            return false;
         } else {
-            passthough = false;
+            futurePlayer.xVelocity = 0;
+            futurePlayer.yVelocity = player.yVelocity;
+            futurePlayer.update(cam);
+            if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
+                if (player.yVelocity <= 0 && passthough == false) {
+                    player.setY(getY() + getHeight() * 2.5f);
+                    player.yVelocity = 0;
+                    return true;
+                } else {
+                    // started below platform, don't warp up if jump falls short
+                    player.setY((getY() - player.getHeight() - getHeight() * 2.5f));
+                    player.yVelocity = 0;
+                    return false;
+                }
+            } else {
+                passthough = false;
+            }
         }
         return false;
     }
