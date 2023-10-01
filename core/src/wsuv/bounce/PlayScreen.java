@@ -48,6 +48,7 @@ public class PlayScreen extends ScreenAdapter {
     private Sound powerupSfx;
     private Sound missileDeathSfx;
     private Sound missileLaunchSfx;
+    private Sound restartSfx;
 
     private boolean invincible;
 
@@ -55,8 +56,6 @@ public class PlayScreen extends ScreenAdapter {
 
     private Sprite restartButton;
 
-    float currentTime;
-    float pastTime;
     float spikeTimer = 0;
     float ceilingSpikeTimer = 0;
     float missileTimer = 0;
@@ -111,6 +110,7 @@ public class PlayScreen extends ScreenAdapter {
         powerupSfx = bounceGame.am.get(BounceGame.SFX_POWERUP);
         missileDeathSfx = bounceGame.am.get(BounceGame.SFX_MISSILE_DEATH);
         missileLaunchSfx = bounceGame.am.get(BounceGame.SFX_MISSILE_LAUNCH);
+        restartSfx = bounceGame.am.get(BounceGame.SFX_RESTART);
 
         Timer t = new Timer();
         t.schedule(new TimerTask() {
@@ -516,6 +516,7 @@ public class PlayScreen extends ScreenAdapter {
                     float y = Gdx.input.getY();
                     if (y > 365 && y < 440) {
                         player.airborn = true;
+                        restartSfx.play();
                         bounceGame.getScreen().dispose();
                         bounceGame.setScreen(new PlayScreen(bounceGame));
                     }
