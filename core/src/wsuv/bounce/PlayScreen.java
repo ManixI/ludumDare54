@@ -292,9 +292,13 @@ public class PlayScreen extends ScreenAdapter {
         // check collision with enemies
         if (!invincible)
         {
-            for (Enemie e : enemies) {
+            for (int j=0; j< enemies.size()-1; j++) {
+                Enemie e = enemies.get(j);
                 if (e.checkColision(player)) {
                     switch (e.getType()) {
+                        case Enemie.MISSILE:
+                            enemies.remove(j);
+                            j--;
                         case Enemie.SPIKES:
                             lives--;
                             player.respawn(cam.position.x, cam.position.y + 300);
@@ -330,7 +334,13 @@ public class PlayScreen extends ScreenAdapter {
                     for (Platform p : platformList) {
                         if (e.checkColision(p)) {
                             // TODO: remove and explode if collides with platform
+                            enemies.remove(j);
+                            boomSfx.play();
                         }
+                    }
+                    if (e.getY() > player.CEILING_HEIGHT || e.getY() < player.FLOOR_HEIGHT) {
+                        enemies.remove(j);
+                        boomSfx.play();
                     }
                     // TODO: check for collision with walls, ceiling, and other enemies
                 }
