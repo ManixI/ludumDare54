@@ -408,7 +408,7 @@ public class PlayScreen extends ScreenAdapter {
                     Enemie.SPIKES_FLIPPED
             ));
         }
-        if (current_time % 100 == 0) {
+        if (current_time % 1000 == 0) {
             enemies.add( new Enemie(
                     bounceGame,
                     bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),

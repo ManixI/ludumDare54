@@ -16,11 +16,11 @@ public class Enemie extends Sprite {
     private Platform spot;
     float scaleFactor = 1.2f;
 
-    private float missileSpeed = 50;
+    private float missileSpeed = 25;
     private float xVelocity = 0;
     private float yVelocity = 0;
 
-    private float maxVelocity =  1000;
+    private float maxVelocity =  800;
 
     public Enemie(BounceGame game, float x, float y, String t) {
         super(game.am.get(t, Texture.class));
