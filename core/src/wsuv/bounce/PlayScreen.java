@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PlayScreen extends ScreenAdapter {
     private enum SubState {READY, GAME_OVER, PLAYING}
@@ -80,6 +82,16 @@ public class PlayScreen extends ScreenAdapter {
         jumpSfx = bounceGame.am.get(BounceGame.SFX_JUMP);
         deathSfx = bounceGame.am.get(BounceGame.SFX_HIT);
         stepSfx = bounceGame.am.get(BounceGame.SFX_STEP);
+
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (!player.airborn) {
+                    stepSfx.play();
+                }
+            }
+        }, 250, 250);
 
 
         //player.setScale(2,2);
@@ -236,6 +248,7 @@ public class PlayScreen extends ScreenAdapter {
         for (Platform p : platformList) {
             if (p.checkCollision(player, cam)) {
                 numJumps = totalJumps;
+                player.setAirborn(false);
                 break;
             }
         }
@@ -366,6 +379,7 @@ public class PlayScreen extends ScreenAdapter {
                 numJumps--;
                 // TODO: second jump sfx sould be higher in pitch
                 jumpSfx.play();
+                player.setAirborn(true);
             }
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 player.gravity = 15;
@@ -374,6 +388,7 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
     }
+
 
     private void cleanupEnemies(ArrayList<Enemie> sprites) {
         for (int i=0; i<sprites.size(); i++) {

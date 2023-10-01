@@ -32,7 +32,7 @@ public class Avatar extends Sprite implements Cloneable {
     static TextureRegion currentFrame;
     static float stateTime;
 
-    private boolean airborn = true;
+    public boolean airborn = true;
 
     private Sound bonkSfx;
 
@@ -121,6 +121,7 @@ public class Avatar extends Sprite implements Cloneable {
             setY(FLOOR_HEIGHT);
             yVelocity = 0;
             collided = true;
+            airborn = false;
         }
 
 
