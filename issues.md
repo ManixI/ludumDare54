@@ -51,10 +51,11 @@
  - [40] zoom out as speed increases
  - [43] increase sense of speed
  - [50] add falling enemy
- - [51] change platforms to fit asthetic
+ - [51] change platforms to fit aesthetic
  - [52] add pits to floor
  - [54] add double jump
  - [55] platforms shouldn't be pass-though
+ - [56] add spawn groups to spawn pattern of objects instead of just within a random range
 
  ## Old ##
  - [41] add graphic for death plane

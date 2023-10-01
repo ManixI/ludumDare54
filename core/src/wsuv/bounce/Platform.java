@@ -17,8 +17,7 @@ public class Platform extends Sprite {
 
     boolean passthough = false;
 
-    static float lengthFloor = 20;
-    static float maxDistance = 400;
+    static float maxDistance = 1000;
     static float maxHeight = 115;
 
     public boolean isLast = false;
