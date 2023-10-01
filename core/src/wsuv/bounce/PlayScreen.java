@@ -267,6 +267,7 @@ public class PlayScreen extends ScreenAdapter {
         float current_time = timer;
         current_time *= 100;
         current_time = (float) Math.floor(current_time);
+        System.out.println(current_time);
         if (current_time % 100 == 0) {
             enemies.add(new Enemie(
                     bounceGame,

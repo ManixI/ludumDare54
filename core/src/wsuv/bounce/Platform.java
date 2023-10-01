@@ -127,7 +127,7 @@ public class Platform extends Sprite {
     }
 
     private Powerup placePowerup(String type) {
-        float powerupMargin = 100;
+        float powerupMargin = 200;
         float heightFloor = getY() + getHeight()*2 + 50;
         float heightCealing = heightFloor + maxHeight;
         return new Powerup(
