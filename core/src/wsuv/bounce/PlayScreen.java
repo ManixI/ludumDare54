@@ -40,6 +40,10 @@ public class PlayScreen extends ScreenAdapter {
     private float staticPoints = 0;
     private float distance = 100;
 
+    private Sound jumpSfx;
+    private Sound deathSfx;
+    private Sound stepSfx;
+
     public PlayScreen(BounceGame game) {
         timer = 0;
         bounceGame = game;
@@ -72,6 +76,11 @@ public class PlayScreen extends ScreenAdapter {
         //enemies.add(platformList.get(3).spawnEnemy());
 
         player = new Avatar(game, 0, 300);
+
+        jumpSfx = bounceGame.am.get(BounceGame.SFX_JUMP);
+        deathSfx = bounceGame.am.get(BounceGame.SFX_HIT);
+        stepSfx = bounceGame.am.get(BounceGame.SFX_STEP);
+
 
         //player.setScale(2,2);
         //player.setSize(64,64);
@@ -354,6 +363,8 @@ public class PlayScreen extends ScreenAdapter {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 numJumps--;
+                // TODO: second jump sfx sould be higher in pitch
+                jumpSfx.play();
             }
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 player.gravity = 15;
