@@ -22,6 +22,7 @@
  - [20] add points collectable
  - [21] add spike enemy
  - [25] add custom avatar sprite
+ - [26] add scrolling background
  - [27] add vertical scrolling
  - [29] add multiple platform paths
  - [30] fix speed of player so constantly in motion
@@ -45,7 +46,6 @@
  - [22] add missile enemy
  - [23] add sfx
  - [24] add music
- - [26] add scrolling background
  - [28] add speed pads
  - [32] add game over screen
  - [37] better points sprite
