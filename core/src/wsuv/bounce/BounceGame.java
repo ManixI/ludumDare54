@@ -47,6 +47,8 @@ public class BounceGame extends Game {
     public static final int PLAYER_SPRITE_COLS = 2;
     public static final int PLAYER_SPRITE_ROWS = 2;
 
+    public static final String BACKGROUD = "background.png";
+
     AssetManager am;  // AssetManager provides a single source for loaded resources
     SpriteBatch batch;
 
@@ -94,6 +96,8 @@ public class BounceGame extends Game {
         for (String s : FLOOR_TILES) {
             am.load(s, Texture.class);
         }
+
+        am.load(BACKGROUD, Texture.class);
 
         // powerups
         am.load(ONE_UP, Texture.class);

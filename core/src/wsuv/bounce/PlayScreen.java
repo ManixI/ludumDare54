@@ -388,6 +388,24 @@ public class PlayScreen extends ScreenAdapter {
         ScreenUtils.clear(0, 0, 0, 1);
         bounceGame.batch.setProjectionMatrix(cam.combined);
         bounceGame.batch.begin();
+
+        // draw background
+        Texture background = bounceGame.am.get(bounceGame.BACKGROUD, Texture.class);
+        double start = (cam.position.y - 1300);
+        start = Math.floor(start);
+        for (int i=1; i<1000; i++) {
+            for (int j=0; j<3; j++) {
+                bounceGame.batch.draw(
+                        background,
+                        (float) start+(i*background.getWidth()*7),
+                        Avatar.CEILING_HEIGHT-background.getHeight()*j*7-830,
+                        background.getWidth()*7,
+                        background.getHeight()*7
+                );
+            }
+
+        }
+
         for(Iterator<Bang> bi = explosions.iterator(); bi.hasNext(); ) {
             Bang b = bi.next();
             if (b.completed()) { bi.remove(); }
@@ -408,7 +426,7 @@ public class PlayScreen extends ScreenAdapter {
         // draw ceiling
         Texture ceilingTex = bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class);
         Texture floorTex = bounceGame.am.get(bounceGame.FLOOR_TILES[0], Texture.class);
-        double start = (cam.position.y - 600) / ceilingTex.getWidth();
+        start = (cam.position.y - 600) / ceilingTex.getWidth();
         start = Math.floor(start);
         for (int i=0; i< 3000; i++) {
             bounceGame.batch.draw(
@@ -426,6 +444,8 @@ public class PlayScreen extends ScreenAdapter {
                     floorTex.getHeight()*3
             );
         }
+
+
         //bounceGame.batch.draw(bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class), 200, 200);
 
         player.draw(bounceGame.batch);
