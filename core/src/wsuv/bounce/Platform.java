@@ -87,18 +87,20 @@ public class Platform extends Sprite {
         return plats;
     }
 
-    public boolean checkCollision(Avatar ball) {
+    public boolean checkCollision(Avatar player) {
         // if ball in line with platform
         //System.out.println(ball.getX()+" "+ball.getY()+" "+ball.yVelocity);
         //System.out.println(leftmost+" "+rightmost+" "+top);
-        if (getBoundingRectangle().overlaps(ball.getBoundingRectangle())) {
-            if (ball.yVelocity <= 0 && passthough == false) {
-                ball.setY(getY()+getHeight()*2.5f);
-                ball.yVelocity = 0;
+        if (getBoundingRectangle().overlaps(player.getBoundingRectangle())) {
+            if (player.yVelocity <= 0 && passthough == false) {
+                player.setY(getY()+getHeight()*2.5f);
+                player.yVelocity = 0;
                 return true;
             } else {
                 // started below platform, don't warp up if jump falls short
-                passthough = true;
+                player.setY((getY()-player.getHeight()-getHeight()*2.5f));
+                player.yVelocity = 0;
+                return false;
             }
         } else {
             passthough = false;
