@@ -44,7 +44,7 @@
  - [22] add missile enemy
  - [23] add sfx
  - [24] add music
- - [25] add custom sprites
+ - [25] add custom avatar sprite
  - [26] add scrolling background
  - [28] add speed pads
  - [32] add game over screen
