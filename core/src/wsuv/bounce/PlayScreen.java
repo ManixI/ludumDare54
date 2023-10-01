@@ -45,6 +45,7 @@ public class PlayScreen extends ScreenAdapter {
     private Sound jumpSfx;
     private Sound deathSfx;
     private Sound stepSfx;
+    private Sound powerupSfx;
 
     public PlayScreen(BounceGame game) {
         timer = 0;
@@ -82,6 +83,7 @@ public class PlayScreen extends ScreenAdapter {
         jumpSfx = bounceGame.am.get(BounceGame.SFX_JUMP);
         deathSfx = bounceGame.am.get(BounceGame.SFX_HIT);
         stepSfx = bounceGame.am.get(BounceGame.SFX_STEP);
+        powerupSfx = bounceGame.am.get(BounceGame.SFX_POWERUP);
 
         Timer t = new Timer();
         t.schedule(new TimerTask() {
@@ -91,7 +93,7 @@ public class PlayScreen extends ScreenAdapter {
                     stepSfx.play();
                 }
             }
-        }, 250, 250);
+        }, 0, 150);
 
 
         //player.setScale(2,2);
@@ -235,6 +237,7 @@ public class PlayScreen extends ScreenAdapter {
                     default:
                 }
                 powerupList.remove(i);
+                powerupSfx.play();
             }
         }
 

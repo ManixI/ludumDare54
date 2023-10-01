@@ -35,6 +35,7 @@ public class Avatar extends Sprite implements Cloneable {
     public boolean airborn = true;
 
     private Sound bonkSfx;
+    private Sound stepSfx;
 
 
 
@@ -64,6 +65,7 @@ public class Avatar extends Sprite implements Cloneable {
         //scale(2);
         //setSize(2,2);
         bonkSfx = game.am.get(game.SFX_BONK);
+        stepSfx = game.am.get(game.SFX_STEP);
 
         //setCenter(startX, startY);
     }
@@ -137,6 +139,10 @@ public class Avatar extends Sprite implements Cloneable {
         }
         if (yVelocity < -MAX_Y_VELOCITY) {
             yVelocity = -MAX_Y_VELOCITY;
+        }
+
+        if (yVelocity < 0) {
+            airborn = true;
         }
 
 
