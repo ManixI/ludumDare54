@@ -21,7 +21,7 @@ public class PlayScreen extends ScreenAdapter {
     private SubState state;
     private int bounces;
     private float timer;
-    private int lives = 3;
+    private int lives;
 
     private Sound boomSfx;
     private ArrayList<Bang> explosions;
@@ -36,20 +36,20 @@ public class PlayScreen extends ScreenAdapter {
     ArrayList<Powerup> powerupList;
     ArrayList<Enemie> enemies;
 
-    int numJumps = 1;
-    int totalJumps = 2;
-    public float points = 0;
-    private float staticPoints = 0;
-    private float distance = 100;
+    int numJumps;
+    int totalJumps;
+    public float points;
+    private float staticPoints;
+    private float distance;
 
     private Sound jumpSfx;
     private Sound deathSfx;
     private Sound stepSfx;
     private Sound powerupSfx;
 
-    private boolean invincible = false;
+    private boolean invincible;
 
-    private boolean drawPlayer = true;
+    private boolean drawPlayer;
 
     public PlayScreen(BounceGame game) {
         timer = 0;
@@ -62,6 +62,13 @@ public class PlayScreen extends ScreenAdapter {
         cam.translate(500,300);
         cam.update();
         hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT_BIG), cam);
+        lives = 3;
+        numJumps = 1;
+        totalJumps = 2;
+        points = 0;
+        distance = 1000;
+        invincible = false;
+        drawPlayer = true;
 
         platformList = new ArrayList<Platform>();
         platformList.addAll(Platform.makePlat(game, 100, 200, 10, cam));
