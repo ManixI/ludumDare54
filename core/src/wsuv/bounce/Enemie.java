@@ -14,6 +14,8 @@ public class Enemie extends Sprite {
     private Platform spot;
     float scaleFactor = 1.2f;
 
+    private float missileSpeed = 30;
+
     public Enemie(BounceGame game, float x, float y, String t) {
         super(game.am.get(t, Texture.class));
 
@@ -23,7 +25,7 @@ public class Enemie extends Sprite {
         setY(y);
         type = t;
     }
-
+    // TODO: fix collision with ceiling enemies
     public void update(Avatar player) {
         switch (type) {
             case MISSILE:

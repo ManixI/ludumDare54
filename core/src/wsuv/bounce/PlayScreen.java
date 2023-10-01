@@ -269,6 +269,10 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
+        for (Enemie e : enemies) {
+            e.update(player);
+        }
+
         // points are combination of the furthest distance traveled and static pickup
         if (player.getX() > distance) {
             distance = player.getX();
@@ -321,6 +325,14 @@ public class PlayScreen extends ScreenAdapter {
                         default:
                             break;
                     }
+                }
+                if (e.getType() == e.MISSILE) {
+                    for (Platform p : platformList) {
+                        if (e.checkColision(p)) {
+                            // TODO: remove and explode if collides with platform
+                        }
+                    }
+                    // TODO: check for collision with walls, ceiling, and other enemies
                 }
             }
         }
