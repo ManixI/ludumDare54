@@ -48,6 +48,7 @@
  - **[63]** improve respawn mechanic
  - **[64]** re-start button
  - **[65]** fix rounding error preventing enemies from spawning
+ - [67] fix platforms spawning below screen
 
 ## Open Issues ##
 
@@ -66,7 +67,6 @@
  - [60] scale avatar size
  - [61] running sfx that scales with speed
  - [66] add button sfx
- - [67] fix platforms spawning below screen
 
  ## Old ##
  - [41] add graphic for death plane
