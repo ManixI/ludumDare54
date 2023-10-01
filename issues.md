@@ -31,6 +31,7 @@
  - [44] define play area with camera instead of gdx.graphics
  - [47] revert issues 27 and 29
  - [48] add ceiling
+ - [49] change from platforms to floor
 
 ## Open Issues ##
 
@@ -47,9 +48,10 @@
  - [39] increase speed over time
  - [40] zoom out as speed increases
  - [43] increase sense of speed
- - [49] change from platforms to floor
  - [50] add falling enemy
- 
+ - [51] change platforms to fit asthetic
+ - [52] add pits to floor
+
  ## Old ##
  - [41] add graphic for death plane
  - [42] different platform paths lean towards different directions
