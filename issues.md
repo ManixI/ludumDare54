@@ -21,6 +21,7 @@
  - [19] add 1up
  - [20] add points collectable
  - [21] add spike enemy
+ - [25] add custom avatar sprite
  - [27] add vertical scrolling
  - [29] add multiple platform paths
  - [30] fix speed of player so constantly in motion
@@ -44,7 +45,6 @@
  - [22] add missile enemy
  - [23] add sfx
  - [24] add music
- - [25] add custom avatar sprite
  - [26] add scrolling background
  - [28] add speed pads
  - [32] add game over screen
@@ -59,6 +59,7 @@
  - [57] freeze player animation on jump
  - [58] spinning sprite on second jump
  - [59] add spikes to bottom of platforms
+ - [60] scale avatar size
 
  ## Old ##
  - [41] add graphic for death plane
