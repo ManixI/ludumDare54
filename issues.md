@@ -62,6 +62,7 @@
  - [60] scale avatar size
  - [61] running sfx that scales with speed
  - [62] fix collision issue with player sprite
+ - [63] improve respawn mechanic
 
  ## Old ##
  - [41] add graphic for death plane

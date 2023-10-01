@@ -117,7 +117,6 @@ public class Platform extends Sprite {
                     player.yVelocity = 0;
                     return true;
                 } else {
-                    // TODO: can get stuck on bottom of platform
                     // started below platform, don't warp up if jump falls short
                     player.setY((getY() - player.getHeight() - getHeight()*2.5f + 20));
                     player.yVelocity = 0;
