@@ -73,6 +73,9 @@ public class PlayScreen extends ScreenAdapter {
 
         player = new Avatar(game, 100, 250);
 
+        //player.setScale(2,2);
+        //player.setSize(64,64);
+
         // we've loaded textures, but the explosion texture isn't quite ready to go--
         // we need to carve it up into frames.  All that work really
         // only needs to happen once.  Since we only use explosions in the PlayScreen,

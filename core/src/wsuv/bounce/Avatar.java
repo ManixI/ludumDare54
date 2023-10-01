@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Avatar extends Sprite implements Cloneable {
 
@@ -38,6 +39,7 @@ public class Avatar extends Sprite implements Cloneable {
         //scale(scaleFactor);
 
 
+        //ref: https://www.catalinmunteanu.com/libgdx-2d-animations-from-sprites/
         TextureRegion[][] tmp = TextureRegion.split(
                 getTexture(),
                 (int) (getWidth()/game.PLAYER_SPRITE_COLS),
@@ -54,8 +56,20 @@ public class Avatar extends Sprite implements Cloneable {
         //runAnimation.getKeyFrame(0, true);
         stateTime = 0;
 
-        setCenter(startX, startY);
+        //scale(2);
+        //setSize(2,2);
+
+        //setCenter(startX, startY);
     }
+
+    /*@Override public Rectangle getBoundingRectangle() {
+        Rectangle rec = super.getBoundingRectangle();
+        //rec.setSize(rec.getWidth(), rec.getHeight());
+        rec.height *= 2;
+        rec.width *= 2;
+        rec.setCenter(getX()+getWidth(), getY()+getHeight());
+        return rec;
+    }*/
 
     @Override public void draw(Batch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
