@@ -65,6 +65,7 @@
  - [60] scale avatar size
  - [61] running sfx that scales with speed
  - **[65]** fix rounding error preventing enemies from spawning
+ - [66] add button sfx
 
  ## Old ##
  - [41] add graphic for death plane

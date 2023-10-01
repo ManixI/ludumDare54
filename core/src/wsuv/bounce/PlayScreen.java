@@ -342,7 +342,7 @@ public class PlayScreen extends ScreenAdapter {
                             missileDeathSfx.play();
                         }
                     }
-                    if (e.getY() > player.CEILING_HEIGHT || e.getY() < player.FLOOR_HEIGHT) {
+                    if (e.getY() > player.CEILING_HEIGHT-10 || e.getY() < player.FLOOR_HEIGHT+10) {
                         enemies.remove(j);
                         missileDeathSfx.play();
                     }
