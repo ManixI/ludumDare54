@@ -21,6 +21,7 @@
  - [19] add 1up
  - [20] add points collectable
  - [21] add spike enemy
+ - **[23]** add sfx
  - [25] add custom avatar sprite
  - [26] add scrolling background
  - [27] add vertical scrolling
@@ -47,7 +48,6 @@
 
  - [0] general game balance tweeks
  - **[22]** add missile enemy
- - **[23]** add sfx
  - **[24]** add music
  - [28] add speed pads
  - [37] better points sprite
