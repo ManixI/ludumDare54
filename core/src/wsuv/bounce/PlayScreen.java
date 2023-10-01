@@ -55,6 +55,12 @@ public class PlayScreen extends ScreenAdapter {
 
     private Sprite restartButton;
 
+    float currentTime;
+    float pastTime;
+    float spikeTimer = 0;
+    float ceilingSpikeTimer = 0;
+    float missileTimer = 0;
+
     public PlayScreen(BounceGame game) {
         timer = 0;
         bounceGame = game;
@@ -388,11 +394,14 @@ public class PlayScreen extends ScreenAdapter {
 
         // spawn enemies based on time
         // TODO: fix wierd gaps in spike spawns
-        float current_time = timer;
-        current_time *= 100;
-        current_time = (float) Math.floor(current_time);
-        //System.out.println(current_time);
-        if (current_time % 100 == 0) {
+        float time = Gdx.graphics.getDeltaTime();
+        time *= 1000;
+
+        missileTimer += time;
+        spikeTimer += time;
+        ceilingSpikeTimer += time;
+        if (spikeTimer > 1000) {
+            spikeTimer = 0;
             enemies.add(new Enemie(
                     bounceGame,
                     bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
@@ -400,7 +409,8 @@ public class PlayScreen extends ScreenAdapter {
                     Enemie.SPIKES
             ));
         }
-        if (current_time % 50 == 0) {
+        if (ceilingSpikeTimer > 250) {
+            ceilingSpikeTimer = 0;
             enemies.add(new Enemie(
                     bounceGame,
                     bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
@@ -408,7 +418,8 @@ public class PlayScreen extends ScreenAdapter {
                     Enemie.SPIKES_FLIPPED
             ));
         }
-        if (current_time % 1000 == 0) {
+        if (missileTimer > 4000) {
+            missileTimer = 0;
             enemies.add( new Enemie(
                     bounceGame,
                     bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
