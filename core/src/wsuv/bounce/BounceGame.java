@@ -34,6 +34,9 @@ public class BounceGame extends Game {
     public static final String[] CEILING_TILES = {
             "ceiling-1.png",
     };
+    public static final String[] FLOOR_TILES = {
+            "floor-1.png",
+    };
 
     AssetManager am;  // AssetManager provides a single source for loaded resources
     SpriteBatch batch;
@@ -73,6 +76,11 @@ public class BounceGame extends Game {
 
         // ceiling tiles
         for (String s : CEILING_TILES) {
+            am.load(s, Texture.class);
+        }
+
+        // floor tiles
+        for (String s : FLOOR_TILES) {
             am.load(s, Texture.class);
         }
 

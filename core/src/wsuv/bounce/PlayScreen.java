@@ -371,6 +371,7 @@ public class PlayScreen extends ScreenAdapter {
 
         // draw ceiling
         Texture ceilingTex = bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class);
+        Texture floorTex = bounceGame.am.get(bounceGame.FLOOR_TILES[0], Texture.class);
         double start = (cam.position.y - 600) / ceilingTex.getWidth();
         start = Math.floor(start);
         for (int i=0; i< 3000; i++) {
@@ -380,6 +381,13 @@ public class PlayScreen extends ScreenAdapter {
                     Avatar.CEILING_HEIGHT+ ceilingTex.getHeight(),
                     ceilingTex.getWidth()*3,
                     ceilingTex.getHeight()*3
+            );
+            bounceGame.batch.draw(
+                    floorTex,
+                    (float) start+(i*floorTex.getWidth()*3),
+                    Avatar.FLOOR_HEIGHT-floorTex.getHeight()*3,
+                    floorTex.getWidth()*3,
+                    floorTex.getHeight()*3
             );
         }
         //bounceGame.batch.draw(bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class), 200, 200);

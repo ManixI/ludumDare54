@@ -18,6 +18,7 @@ public class Avatar extends Sprite {
     public static final float JUMP_VELOCITY = 800;
 
     public static final float CEILING_HEIGHT = 680;
+    public static final float FLOOR_HEIGHT = -150;
 
     public float scaleFactor = -0.5f;
 
@@ -43,6 +44,9 @@ public class Avatar extends Sprite {
             setY(CEILING_HEIGHT);
             yVelocity = 0;
             // TODO: add sfx here
+        } else if (getY() < FLOOR_HEIGHT) {
+            setY(FLOOR_HEIGHT);
+            yVelocity = 0;
         }
 
 
