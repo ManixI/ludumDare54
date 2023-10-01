@@ -76,6 +76,6 @@ public class Avatar extends Sprite {
     }
 
     public void jump() {
-        yVelocity += JUMP_VELOCITY;
+        yVelocity = JUMP_VELOCITY;
     }
 }

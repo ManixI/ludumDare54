@@ -91,6 +91,7 @@ public class Platform extends Sprite {
         // if ball in line with platform
         //System.out.println(ball.getX()+" "+ball.getY()+" "+ball.yVelocity);
         //System.out.println(leftmost+" "+rightmost+" "+top);
+        // TODO: player clipping into platform slightly
         if (getBoundingRectangle().overlaps(ball.getBoundingRectangle())) {
             if (ball.yVelocity <= 0 && passthough == false) {
                 ball.setY(getY()+getHeight());
