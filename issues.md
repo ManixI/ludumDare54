@@ -28,6 +28,7 @@
  - [33] associate powerups with platform to guarantee at reachable height
  - [34] procedurally generate platforms as player moves
  - **[35]** more interesting platform patterns
+ - [36] fix warping up when colliding with side of platform, should stop movement instead
  - [44] define play area with camera instead of gdx.graphics
  - [47] revert issues 27 and 29
  - [48] add ceiling
@@ -35,6 +36,7 @@
  - [51] change platforms to fit aesthetic
  - [53] update enemy spawning
  - [54] add double jump
+ - [55] platforms shouldn't be pass-though
 
 ## Open Issues ##
 
@@ -46,7 +48,6 @@
  - [26] add scrolling background
  - [28] add speed pads
  - [32] add game over screen
- - [36] fix warping up when colliding with side of platform, should stop movement instead
  - [37] better points sprite
  - [38] variable jump height, hold space to reduce gravity
  - [39] increase speed over time
@@ -54,7 +55,6 @@
  - [43] increase sense of speed
  - [50] add falling enemy
  - [52] add pits to floor
- - [55] platforms shouldn't be pass-though
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
 
  ## Old ##
