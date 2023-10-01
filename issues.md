@@ -56,6 +56,9 @@
  - [50] add falling enemy
  - [52] add pits to floor
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
+ - [57] freeze player animation on jump
+ - [58] spinning sprite on second jump
+ - [59] add spikes to bottom of platforms
 
  ## Old ##
  - [41] add graphic for death plane

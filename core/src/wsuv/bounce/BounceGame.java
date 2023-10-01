@@ -104,7 +104,7 @@ public class BounceGame extends Game {
         am.load(SPIKES_FLIPPED, Texture.class);
 
         // player
-        am.load(PLLAYER_SPRITE_2X2, Texture.class);
+        am.load(PLAYER_SPRITE_2X2, Texture.class);
 
         // Load Sounds
         am.load(RSC_EXPLOSION_SFX, Sound.class);
