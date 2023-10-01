@@ -34,6 +34,7 @@
  - [49] change from platforms to floor
  - [51] change platforms to fit aesthetic
  - [53] update enemy spawning
+ - [54] add double jump
 
 ## Open Issues ##
 
@@ -53,7 +54,6 @@
  - [43] increase sense of speed
  - [50] add falling enemy
  - [52] add pits to floor
- - [54] add double jump
  - [55] platforms shouldn't be pass-though
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
 
