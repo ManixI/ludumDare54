@@ -14,7 +14,7 @@ public class Platform extends Sprite {
     float leftmost;
     float rightmost;
     float top;
-    BounceGame game;
+    EscapeGame game;
 
     boolean passthough = false;
 
@@ -28,7 +28,7 @@ public class Platform extends Sprite {
     public static final float FLOOR_HEIGHT = -150;
 
 
-    private Platform(BounceGame g, float startX, float height, String type, OrthographicCamera cam) {
+    private Platform(EscapeGame g, float startX, float height, String type, OrthographicCamera cam) {
         super(g.am.get(type, Texture.class));
         game = g;
 
@@ -45,7 +45,7 @@ public class Platform extends Sprite {
         top = height;
     }
 
-    public static ArrayList<Platform> makePlat(BounceGame g, float startX, float startY, int length, OrthographicCamera cam) {
+    public static ArrayList<Platform> makePlat(EscapeGame g, float startX, float startY, int length, OrthographicCamera cam) {
         ArrayList<Platform> plats = new ArrayList<Platform>();
 
         // needs to be at least 2 tiles wide to look right
@@ -70,7 +70,7 @@ public class Platform extends Sprite {
                         g,
                         startX,
                         startY,
-                        BounceGame.PLATFORM_TILES[0],
+                        EscapeGame.PLATFORM_TILES[0],
                         cam
                 ));
             } else if (i == length-1) {
@@ -79,7 +79,7 @@ public class Platform extends Sprite {
                         g,
                         startX+(cwidth*(i-1))+lwidth,
                         startY,
-                        BounceGame.PLATFORM_TILES[2],
+                        EscapeGame.PLATFORM_TILES[2],
                         cam
                 ));
                 plats.get(plats.size()-1).isLast = true;
@@ -89,7 +89,7 @@ public class Platform extends Sprite {
                         g,
                         startX+(cwidth*(i-1))+lwidth,
                         startY,
-                        BounceGame.PLATFORM_TILES[1],
+                        EscapeGame.PLATFORM_TILES[1],
                         cam
                 ));
             }

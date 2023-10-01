@@ -16,7 +16,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 
 import java.util.Random;
 
-public class BounceGame extends Game {
+public class EscapeGame extends Game {
     public static final int RSC_EXPLOSION_FRAMES_ROWS = 8;
     public static final int RSC_EXPLOSION_FRAMES_COLS = 8;
     public static final String RSC_EXPLOSION_FRAMES = "explosion8x8.png";

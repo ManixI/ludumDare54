@@ -12,7 +12,7 @@ public class Powerup extends Sprite {
     String type;
     float scaleFactor = 1.2f;
 
-    public Powerup(BounceGame game, float x, float y, String t) {
+    public Powerup(EscapeGame game, float x, float y, String t) {
         super(game.am.get(t, Texture.class));
 
         type = t;

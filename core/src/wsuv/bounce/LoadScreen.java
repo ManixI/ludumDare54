@@ -8,15 +8,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class LoadScreen extends ScreenAdapter {
-    BounceGame bounceGame;
+    EscapeGame escapeGame;
     int frames;
     BitmapFont font;
     int scrollrate;
     int linesShown;
     String[] credits;
 
-    public LoadScreen(BounceGame game) {
-        bounceGame = game;
+    public LoadScreen(EscapeGame game) {
+        escapeGame = game;
         linesShown = 10;
         scrollrate = 30;  // this is currently pixels/frame, not pixels/sec!
 
@@ -39,27 +39,27 @@ public class LoadScreen extends ScreenAdapter {
         ScreenUtils.clear(0, 0, 0, 1);
         // let the AssetManager load for 15 milliseconds (~1 frame)
         // this happens in another thread
-        bounceGame.am.update(10);
+        escapeGame.am.update(10);
 
-        if (font == null && bounceGame.am.isLoaded(BounceGame.RSC_MONO_FONT)) {
-            font = bounceGame.am.get(BounceGame.RSC_MONO_FONT);
-        } else if (bounceGame.am.isFinished() && (credits_offset >= credits.length || Gdx.input.isKeyPressed(Input.Keys.SPACE)) ) {
-            bounceGame.setScreen(new PlayScreen(bounceGame));
+        if (font == null && escapeGame.am.isLoaded(EscapeGame.RSC_MONO_FONT)) {
+            font = escapeGame.am.get(EscapeGame.RSC_MONO_FONT);
+        } else if (escapeGame.am.isFinished() && (credits_offset >= credits.length || Gdx.input.isKeyPressed(Input.Keys.SPACE)) ) {
+            escapeGame.setScreen(new PlayScreen(escapeGame));
         } else if (font != null) {
             // once the font is loaded, start showing credits.
             // we'll assume a fairly smooth framerate at just start scrolling
             // at a fixed rate per frame until all credits are off screen
             // then we'll switch to the playing state.
-            bounceGame.batch.begin();
+            escapeGame.batch.begin();
             float y = 300;
             float lineHeight = font.getLineHeight();
-            font.draw(bounceGame.batch, "Thanks to...", 200f, y + 2 * lineHeight);
+            font.draw(escapeGame.batch, "Thanks to...", 200f, y + 2 * lineHeight);
 
             for(int i = 0; i < linesShown && (credits_offset + i) < credits.length; i++) {
-                font.draw(bounceGame.batch, credits[credits_offset + i], 200f, y);
+                font.draw(escapeGame.batch, credits[credits_offset + i], 200f, y);
                 y -= lineHeight;
             }
-            bounceGame.batch.end();
+            escapeGame.batch.end();
             frames += 1;
         }
     }

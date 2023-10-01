@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.setTitle("Bounce");
 		config.setWindowedMode(800, 600);
 		config.useVsync(true);
-		new Lwjgl3Application(new BounceGame(), config);
+		new Lwjgl3Application(new EscapeGame(), config);
 	}
 }

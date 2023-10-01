@@ -10,7 +10,7 @@ public class Ball extends Sprite {
     float xVelocity;
     float yVelocity;
 
-    public Ball(BounceGame game) {
+    public Ball(EscapeGame game) {
         super(game.am.get("ball.png", Texture.class));
 
         xVelocity = game.random.nextFloat(80, 150);

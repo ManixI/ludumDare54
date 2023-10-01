@@ -22,7 +22,7 @@ public class Enemie extends Sprite {
 
     private float maxVelocity =  800;
 
-    public Enemie(BounceGame game, float x, float y, String t) {
+    public Enemie(EscapeGame game, float x, float y, String t) {
         super(game.am.get(t, Texture.class));
 
         if (type != MISSILE) {

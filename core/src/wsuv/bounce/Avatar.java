@@ -8,9 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
 public class Avatar extends Sprite implements Cloneable {
 
@@ -41,7 +38,7 @@ public class Avatar extends Sprite implements Cloneable {
 
 
 
-    public Avatar(BounceGame game, float startX, float startY) {
+    public Avatar(EscapeGame game, float startX, float startY) {
         super(game.am.get(game.PLAYER_SPRITE_2X2, Texture.class));
 
         //scale(scaleFactor);

@@ -15,7 +15,7 @@ import java.util.TimerTask;
 
 public class PlayScreen extends ScreenAdapter {
     private enum SubState {READY, GAME_OVER, PLAYING}
-    private BounceGame bounceGame;
+    private EscapeGame escapeGame;
     private Ball ball;
     private HUD hud;
     private SubState state;
@@ -61,17 +61,17 @@ public class PlayScreen extends ScreenAdapter {
     float missileTimer = 0;
     float gameSpeed = 1.0f;
 
-    public PlayScreen(BounceGame game) {
+    public PlayScreen(EscapeGame game) {
         timer = 0;
-        bounceGame = game;
+        escapeGame = game;
         ball = new Ball(game);
         bounces = 0;
         explosions = new ArrayList<>(10);
-        boomSfx = bounceGame.am.get(BounceGame.RSC_EXPLOSION_SFX);
+        boomSfx = escapeGame.am.get(EscapeGame.RSC_EXPLOSION_SFX);
         cam = new OrthographicCamera(1000, 1000);
         cam.translate(500,300);
         cam.update();
-        hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT_BIG), cam);
+        hud = new HUD(escapeGame.am.get(EscapeGame.RSC_MONO_FONT_BIG), cam);
         lives = 5;
         numJumps = 1;
         totalJumps = 2;
@@ -81,7 +81,7 @@ public class PlayScreen extends ScreenAdapter {
         drawPlayer = true;
 
         restartButton = new Sprite();
-        restartButton.setTexture(bounceGame.am.get(bounceGame.BTN_RESTART));
+        restartButton.setTexture(escapeGame.am.get(escapeGame.BTN_RESTART));
 
         platformList = new ArrayList<Platform>();
         platformList.addAll(Platform.makePlat(game, 100, 200, 10, cam));
@@ -104,13 +104,13 @@ public class PlayScreen extends ScreenAdapter {
 
         player = new Avatar(game, 0, 300);
 
-        jumpSfx = bounceGame.am.get(BounceGame.SFX_JUMP);
-        deathSfx = bounceGame.am.get(BounceGame.SFX_HIT);
-        stepSfx = bounceGame.am.get(BounceGame.SFX_STEP);
-        powerupSfx = bounceGame.am.get(BounceGame.SFX_POWERUP);
-        missileDeathSfx = bounceGame.am.get(BounceGame.SFX_MISSILE_DEATH);
-        missileLaunchSfx = bounceGame.am.get(BounceGame.SFX_MISSILE_LAUNCH);
-        restartSfx = bounceGame.am.get(BounceGame.SFX_RESTART);
+        jumpSfx = escapeGame.am.get(EscapeGame.SFX_JUMP);
+        deathSfx = escapeGame.am.get(EscapeGame.SFX_HIT);
+        stepSfx = escapeGame.am.get(EscapeGame.SFX_STEP);
+        powerupSfx = escapeGame.am.get(EscapeGame.SFX_POWERUP);
+        missileDeathSfx = escapeGame.am.get(EscapeGame.SFX_MISSILE_DEATH);
+        missileLaunchSfx = escapeGame.am.get(EscapeGame.SFX_MISSILE_LAUNCH);
+        restartSfx = escapeGame.am.get(EscapeGame.SFX_RESTART);
 
         Timer t = new Timer();
         t.schedule(new TimerTask() {
@@ -140,7 +140,7 @@ public class PlayScreen extends ScreenAdapter {
         // only needs to happen once.  Since we only use explosions in the PlayScreen,
         // we'll do it here, storing the work in a special object we'll use each time
         // a new Bang instance is created...
-        baf = new BangAnimationFrames(bounceGame.am.get(BounceGame.RSC_EXPLOSION_FRAMES));
+        baf = new BangAnimationFrames(escapeGame.am.get(EscapeGame.RSC_EXPLOSION_FRAMES));
 
         // the HUD will show FPS always, by default.  Here's how
         // to use the HUD interface to silence it (and other HUD Data)
@@ -397,7 +397,7 @@ public class PlayScreen extends ScreenAdapter {
                 if (p != null) {
                     powerupList.add(p);
                 }
-                if (bounceGame.random.nextInt(0, 5) == 0) {
+                if (escapeGame.random.nextInt(0, 5) == 0) {
                     enemies.add(platformList.get(platformList.size()-1).spawnEnemy());
                 }
             }
@@ -414,8 +414,8 @@ public class PlayScreen extends ScreenAdapter {
         if (spikeTimer > 1000) {
             spikeTimer = 0;
             enemies.add(new Enemie(
-                    bounceGame,
-                    bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
+                    escapeGame,
+                    escapeGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
                     Avatar.FLOOR_HEIGHT + 14,
                     Enemie.SPIKES
             ));
@@ -423,8 +423,8 @@ public class PlayScreen extends ScreenAdapter {
         if (ceilingSpikeTimer > 250) {
             ceilingSpikeTimer = 0;
             enemies.add(new Enemie(
-                    bounceGame,
-                    bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
+                    escapeGame,
+                    escapeGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
                     Avatar.CEILING_HEIGHT + 30,
                     Enemie.SPIKES_FLIPPED
             ));
@@ -432,9 +432,9 @@ public class PlayScreen extends ScreenAdapter {
         if (missileTimer > 4000) {
             missileTimer = 0;
             enemies.add( new Enemie(
-                    bounceGame,
-                    bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
-                    bounceGame.random.nextFloat(player.FLOOR_HEIGHT + 50, player.CEILING_HEIGHT - 50),
+                    escapeGame,
+                    escapeGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
+                    escapeGame.random.nextFloat(player.FLOOR_HEIGHT + 50, player.CEILING_HEIGHT - 50),
                     Enemie.MISSILE
             ));
             missileLaunchSfx.play();
@@ -460,7 +460,7 @@ public class PlayScreen extends ScreenAdapter {
         }*/
         if (state == SubState.READY && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             state = SubState.PLAYING;
-            bounceGame.music.setVolume(bounceGame.music.getVolume() / 2);
+            escapeGame.music.setVolume(escapeGame.music.getVolume() / 2);
             bounces = 0;
         }
         /*if (state == SubState.GAME_OVER && timer > 3.0f) {
@@ -517,8 +517,8 @@ public class PlayScreen extends ScreenAdapter {
                     if (y > 365 && y < 440) {
                         player.airborn = true;
                         restartSfx.play();
-                        bounceGame.getScreen().dispose();
-                        bounceGame.setScreen(new PlayScreen(bounceGame));
+                        escapeGame.getScreen().dispose();
+                        escapeGame.setScreen(new PlayScreen(escapeGame));
                     }
                 }
             }
@@ -564,18 +564,18 @@ public class PlayScreen extends ScreenAdapter {
         update(delta);
 
         ScreenUtils.clear(0, 0, 0, 1);
-        bounceGame.batch.setProjectionMatrix(cam.combined);
-        bounceGame.batch.begin();
+        escapeGame.batch.setProjectionMatrix(cam.combined);
+        escapeGame.batch.begin();
 
 
 
         // draw background
-        Texture background = bounceGame.am.get(bounceGame.BACKGROUD, Texture.class);
+        Texture background = escapeGame.am.get(escapeGame.BACKGROUD, Texture.class);
         double start = (cam.position.y - 1300);
         start = Math.floor(start);
         for (int i=1; i<1000; i++) {
             for (int j=0; j<3; j++) {
-                bounceGame.batch.draw(
+                escapeGame.batch.draw(
                         background,
                         (float) start+(i*background.getWidth()*7),
                         Avatar.CEILING_HEIGHT-background.getHeight()*j*7-830,
@@ -589,34 +589,34 @@ public class PlayScreen extends ScreenAdapter {
         for(Iterator<Bang> bi = explosions.iterator(); bi.hasNext(); ) {
             Bang b = bi.next();
             if (b.completed()) { bi.remove(); }
-            else { b.draw(bounceGame.batch); }
+            else { b.draw(escapeGame.batch); }
         }
         //ball.draw(bounceGame.batch);
         for (Platform p : platformList) {
-            p.draw(bounceGame.batch);
+            p.draw(escapeGame.batch);
         }
 
         for (Powerup p : powerupList) {
-            p.draw(bounceGame.batch);
+            p.draw(escapeGame.batch);
         }
         for (Enemie e : enemies) {
-            e.draw(bounceGame.batch);
+            e.draw(escapeGame.batch);
         }
 
         // draw ceiling
-        Texture ceilingTex = bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class);
-        Texture floorTex = bounceGame.am.get(bounceGame.FLOOR_TILES[0], Texture.class);
+        Texture ceilingTex = escapeGame.am.get(escapeGame.CEILING_TILES[0], Texture.class);
+        Texture floorTex = escapeGame.am.get(escapeGame.FLOOR_TILES[0], Texture.class);
         start = (cam.position.y - 600) / ceilingTex.getWidth();
         start = Math.floor(start);
         for (int i=0; i< 3000; i++) {
-            bounceGame.batch.draw(
+            escapeGame.batch.draw(
                     ceilingTex,
                     (float) start+(i* ceilingTex.getWidth()*3),
                     Avatar.CEILING_HEIGHT+ ceilingTex.getHeight(),
                     ceilingTex.getWidth()*3,
                     ceilingTex.getHeight()*3
             );
-            bounceGame.batch.draw(
+            escapeGame.batch.draw(
                     floorTex,
                     (float) start+(i*floorTex.getWidth()*3),
                     Avatar.FLOOR_HEIGHT-floorTex.getHeight()*3,
@@ -631,20 +631,20 @@ public class PlayScreen extends ScreenAdapter {
         if (invincible && !drawPlayer) {
 
         } else {
-            player.draw(bounceGame.batch);
+            player.draw(escapeGame.batch);
         }
 
         // this logic could also be pushed into a method on SubState enum
         switch (state) {
             case GAME_OVER:
-                bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_GAMEOVER_IMG, Texture.class), cam.position.x-200, cam.position.y-200);
+                escapeGame.batch.draw(escapeGame.am.get(EscapeGame.RSC_GAMEOVER_IMG, Texture.class), cam.position.x-200, cam.position.y-200);
                 //restartButton.draw(bounceGame.batch);
-                bounceGame.batch.draw(
-                        bounceGame.am.get(BounceGame.BTN_RESTART, Texture.class),
+                escapeGame.batch.draw(
+                        escapeGame.am.get(EscapeGame.BTN_RESTART, Texture.class),
                         cam.position.x-100,
                         cam.position.y-230,
-                        bounceGame.am.get(BounceGame.BTN_RESTART, Texture.class).getWidth()*2,
-                        bounceGame.am.get(BounceGame.BTN_RESTART, Texture.class).getHeight()*2
+                        escapeGame.am.get(EscapeGame.BTN_RESTART, Texture.class).getWidth()*2,
+                        escapeGame.am.get(EscapeGame.BTN_RESTART, Texture.class).getHeight()*2
                         );
                 break;
             case READY:
@@ -653,8 +653,8 @@ public class PlayScreen extends ScreenAdapter {
             case PLAYING:
                 break;
         }
-        hud.draw(bounceGame.batch);
-        bounceGame.batch.end();
+        hud.draw(escapeGame.batch);
+        escapeGame.batch.end();
     }
 }
 
@@ -668,16 +668,16 @@ class BangAnimationFrames {
     BangAnimationFrames(Texture spritesheet) {
         // split the single spritesheet into an array of equally sized TextureRegions
         TextureRegion[][] tmp = TextureRegion.split(spritesheet,
-                spritesheet.getWidth() / BounceGame.RSC_EXPLOSION_FRAMES_COLS,
-                spritesheet.getHeight() / BounceGame.RSC_EXPLOSION_FRAMES_ROWS);
+                spritesheet.getWidth() / EscapeGame.RSC_EXPLOSION_FRAMES_COLS,
+                spritesheet.getHeight() / EscapeGame.RSC_EXPLOSION_FRAMES_ROWS);
 
-        halfW = (spritesheet.getWidth() / 2f) / BounceGame.RSC_EXPLOSION_FRAMES_COLS;
-        halfH = (spritesheet.getHeight() / 2f) / BounceGame.RSC_EXPLOSION_FRAMES_ROWS;
+        halfW = (spritesheet.getWidth() / 2f) / EscapeGame.RSC_EXPLOSION_FRAMES_COLS;
+        halfH = (spritesheet.getHeight() / 2f) / EscapeGame.RSC_EXPLOSION_FRAMES_ROWS;
 
-        frames = new TextureRegion[BounceGame.RSC_EXPLOSION_FRAMES_COLS * BounceGame.RSC_EXPLOSION_FRAMES_ROWS];
+        frames = new TextureRegion[EscapeGame.RSC_EXPLOSION_FRAMES_COLS * EscapeGame.RSC_EXPLOSION_FRAMES_ROWS];
         int index = 0;
-        for (int i = 0; i < BounceGame.RSC_EXPLOSION_FRAMES_ROWS; i++) {
-            for (int j = 0; j < BounceGame.RSC_EXPLOSION_FRAMES_COLS; j++) {
+        for (int i = 0; i < EscapeGame.RSC_EXPLOSION_FRAMES_ROWS; i++) {
+            for (int j = 0; j < EscapeGame.RSC_EXPLOSION_FRAMES_COLS; j++) {
                 frames[index++] = tmp[i][j];
             }
         }
