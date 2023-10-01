@@ -32,9 +32,11 @@
  - [47] revert issues 27 and 29
  - [48] add ceiling
  - [49] change from platforms to floor
+ - [53] update enemy spawning
 
 ## Open Issues ##
 
+ - [0] general game balance tweeks
  - [22] add missile enemy
  - [23] add sfx
  - [24] add music
@@ -51,7 +53,6 @@
  - [50] add falling enemy
  - [51] change platforms to fit asthetic
  - [52] add pits to floor
- - [53] update enemy spawning
  - [54] add double jump
  - [55] platforms shouldn't be pass-though
 
