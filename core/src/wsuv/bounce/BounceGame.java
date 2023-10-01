@@ -49,6 +49,11 @@ public class BounceGame extends Game {
 
     public static final String BACKGROUD = "background.png";
 
+    public static final String SFX_JUMP = "jump.wav";
+    public static final String SFX_BONK = "bonk2.wav";
+    public static final String SFX_STEP = "step.wav";
+    public static final String SFX_HIT = "death1.wav";
+
     AssetManager am;  // AssetManager provides a single source for loaded resources
     SpriteBatch batch;
 
@@ -112,6 +117,12 @@ public class BounceGame extends Game {
 
         // Load Sounds
         am.load(RSC_EXPLOSION_SFX, Sound.class);
+
+        // sfx
+        am.load(SFX_BONK, Sound.class);
+        am.load(SFX_HIT, Sound.class);
+        am.load(SFX_JUMP, Sound.class);
+        am.load(SFX_STEP, Sound.class);
 
         batch = new SpriteBatch();
         setScreen(new LoadScreen(this));
