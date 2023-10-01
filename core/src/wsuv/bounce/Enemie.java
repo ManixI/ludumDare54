@@ -34,7 +34,7 @@ public class Enemie extends Sprite {
         type = t;
     }
     // TODO: fix collision with ceiling enemies
-    public void update(Avatar player) {
+    public void update(Avatar player, float gameSpeed) {
         switch (type) {
             case MISSILE:
                 // ref: https://gamedev.stackexchange.com/questions/88317/sprite-rotation-libgdx
@@ -53,9 +53,9 @@ public class Enemie extends Sprite {
 
                 float time = Gdx.graphics.getDeltaTime();
                 if (x > px) {
-                    xVelocity -= missileSpeed;
+                    xVelocity -= missileSpeed*gameSpeed;
                 } else {
-                    xVelocity += missileSpeed;
+                    xVelocity += missileSpeed*gameSpeed;
                 }
                 if (y < py) {
                     yVelocity += missileSpeed;
@@ -68,13 +68,13 @@ public class Enemie extends Sprite {
                 } else if (yVelocity < -maxVelocity) {
                     yVelocity = -maxVelocity;
                 }
-                if (xVelocity > maxVelocity) {
-                    xVelocity = maxVelocity;
-                } else if (xVelocity < -maxVelocity) {
-                    xVelocity = -maxVelocity;
+                if (xVelocity > maxVelocity*gameSpeed) {
+                    xVelocity = maxVelocity*gameSpeed;
+                } else if (xVelocity < -maxVelocity*gameSpeed) {
+                    xVelocity = -maxVelocity*gameSpeed;
                 }
 
-                setX(getX() + xVelocity * time);
+                setX(getX() + xVelocity * time*gameSpeed);
                 setY(getY() + yVelocity * time);
 
             case SPIKES:

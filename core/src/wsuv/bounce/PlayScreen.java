@@ -60,6 +60,7 @@ public class PlayScreen extends ScreenAdapter {
     float spikeTimer = 0;
     float ceilingSpikeTimer = 0;
     float missileTimer = 0;
+    float gameSpeed = 1.0f;
 
     public PlayScreen(BounceGame game) {
         timer = 0;
@@ -72,7 +73,7 @@ public class PlayScreen extends ScreenAdapter {
         cam.translate(500,300);
         cam.update();
         hud = new HUD(bounceGame.am.get(BounceGame.RSC_MONO_FONT_BIG), cam);
-        lives = 3;
+        lives = 5;
         numJumps = 1;
         totalJumps = 2;
         points = 0;
@@ -120,6 +121,15 @@ public class PlayScreen extends ScreenAdapter {
                 }
             }
         }, 0, 150);
+
+        // increase game speed by 10 base speed every 10s
+        Timer b = new Timer();
+        b.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                gameSpeed += 0.08f;
+            }
+        },4500, 4500);
 
 
         //player.setScale(2,2);
@@ -253,7 +263,7 @@ public class PlayScreen extends ScreenAdapter {
         /*if (player.getX() > (cam.position.x)) {
             cam.position.x = player.getX();
         }*/
-        cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2);
+        cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2)*gameSpeed;
         //cam.position.y = player.getY();
         /*if (cam.position.y < 300) {
             cam.position.y = 300;
@@ -280,7 +290,7 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         for (Enemie e : enemies) {
-            e.update(player);
+            e.update(player, gameSpeed);
         }
 
         // points are combination of the furthest distance traveled and static pickup
@@ -291,7 +301,7 @@ public class PlayScreen extends ScreenAdapter {
 
         // check collision on each platform to re-set jump
         for (Platform p : platformList) {
-            if (p.checkCollision(player, cam)) {
+            if (p.checkCollision(player, cam, gameSpeed)) {
                 numJumps = totalJumps;
                 player.setAirborn(false);
                 break;
@@ -302,6 +312,7 @@ public class PlayScreen extends ScreenAdapter {
         // check collision with enemies
         if (!invincible)
         {
+            // TODO: bug where missiles despawn and remove spikes as well
             for (int j=0; j< enemies.size()-1; j++) {
                 Enemie e = enemies.get(j);
                 if (e.checkColision(player)) {
@@ -357,7 +368,7 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
-        if (player.update(cam)) {
+        if (player.update(cam, gameSpeed)) {
             numJumps = totalJumps;
         }
 
@@ -466,14 +477,14 @@ public class PlayScreen extends ScreenAdapter {
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
                 // so player can move off left side of screen
                 if (player.getX() <= cam.position.x - 500) {
-                    player.xVelocity = Avatar.MAX_X_VELOCITY/2;
+                    player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
                 } else {
-                    player.xVelocity = Avatar.MIN_X_VELOCITY;
+                    player.xVelocity = Avatar.MIN_X_VELOCITY*gameSpeed;
                 }
             } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                player.xVelocity = Avatar.MAX_X_VELOCITY;
+                player.xVelocity = Avatar.MAX_X_VELOCITY*gameSpeed;
             } else {
-                player.xVelocity = Avatar.MAX_X_VELOCITY/2;
+                player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released

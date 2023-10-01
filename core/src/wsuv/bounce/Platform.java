@@ -89,7 +89,7 @@ public class Platform extends Sprite {
         return plats;
     }
 
-    public boolean checkCollision(Avatar player, OrthographicCamera cam) {
+    public boolean checkCollision(Avatar player, OrthographicCamera cam, float gameSpeed) {
         // if ball in line with platform
         //System.out.println(ball.getX()+" "+ball.getY()+" "+ball.yVelocity);
         //System.out.println(leftmost+" "+rightmost+" "+top);
@@ -103,7 +103,7 @@ public class Platform extends Sprite {
         float time = Gdx.graphics.getDeltaTime();
 
         futurePlayer.yVelocity = 0;
-        futurePlayer.update(cam);
+        futurePlayer.update(cam, gameSpeed);
         // TODO fix collision on sides of platforms
         if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
             player.xVelocity = 0;
@@ -116,7 +116,7 @@ public class Platform extends Sprite {
         } else {
             futurePlayer.xVelocity = 0;
             futurePlayer.yVelocity = player.yVelocity;
-            futurePlayer.update(cam);
+            futurePlayer.update(cam, gameSpeed);
             if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
                 if (player.yVelocity <= 0 && passthough == false) {
                     player.setY(getY() + getHeight() * 2.5f);
