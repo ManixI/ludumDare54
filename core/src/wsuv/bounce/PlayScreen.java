@@ -71,7 +71,7 @@ public class PlayScreen extends ScreenAdapter {
         //enemies.add(new Enemie(game, 500, 0, Enemie.SPIKES));
         //enemies.add(platformList.get(3).spawnEnemy());
 
-        player = new Avatar(game, 100, 220);
+        player = new Avatar(game, 100, 250);
 
         // we've loaded textures, but the explosion texture isn't quite ready to go--
         // we need to carve it up into frames.  All that work really
