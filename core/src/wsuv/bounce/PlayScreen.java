@@ -174,7 +174,7 @@ public class PlayScreen extends ScreenAdapter {
                 return Integer.toString(lives);
             }
         });
-        hud.registerView("Mouse:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
+        hud.registerView("Mouse:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
                     @Override
                     public String execute(boolean consoleIsOpen) {
                         return String.format("%.0f %.0f",
