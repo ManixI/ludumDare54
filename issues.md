@@ -27,6 +27,7 @@
  - [29] add multiple platform paths
  - [30] fix speed of player so constantly in motion
  - [31] swap platforms to ArrayList from linked list
+ - [32] add game over screen
  - [33] associate powerups with platform to guarantee at reachable height
  - [34] procedurally generate platforms as player moves
  - **[35]** more interesting platform patterns
@@ -40,6 +41,7 @@
  - [53] update enemy spawning
  - [54] add double jump
  - [55] platforms shouldn't be pass-though
+ - [62] fix collision issue with player sprite
 
 ## Open Issues ##
 
@@ -48,7 +50,6 @@
  - [23] add sfx
  - [24] add music
  - [28] add speed pads
- - [32] add game over screen
  - [37] better points sprite
  - [39] increase speed over time
  - [40] zoom out as speed increases
@@ -61,7 +62,6 @@
  - [59] add spikes to bottom of platforms
  - [60] scale avatar size
  - [61] running sfx that scales with speed
- - [62] fix collision issue with player sprite
  - [63] improve respawn mechanic
 
  ## Old ##
