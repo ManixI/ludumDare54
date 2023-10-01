@@ -18,7 +18,7 @@ public class Avatar extends Sprite implements Cloneable {
     public static final float MAX_X_VELOCITY = 600;
     public static final float MAX_Y_VELOCITY = 1000;
 
-    public static final float GRAVITY = 25;
+    public float gravity = 25;
     public static final float JUMP_VELOCITY = 800;
 
     public static final float CEILING_HEIGHT = 680;
@@ -129,7 +129,7 @@ public class Avatar extends Sprite implements Cloneable {
         }
 
 
-        yVelocity -= GRAVITY;
+        yVelocity -= gravity;
 
         return collided;
     }

@@ -345,6 +345,11 @@ public class PlayScreen extends ScreenAdapter {
                 player.jump();
                 numJumps--;
             }
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                player.gravity = 15;
+            } else {
+                player.gravity = 30;
+            }
         }
     }
 
