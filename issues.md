@@ -44,6 +44,7 @@
  - [55] platforms shouldn't be pass-though
  - [62] fix collision issue with player sprite
  - **[63]** improve respawn mechanic
+ - **[64]** re-start button
 
 ## Open Issues ##
 
@@ -63,7 +64,6 @@
  - [59] add spikes to bottom of platforms
  - [60] scale avatar size
  - [61] running sfx that scales with speed
- - **[64]** re-start button
 
  ## Old ##
  - [41] add graphic for death plane
