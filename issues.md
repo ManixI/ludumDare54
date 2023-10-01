@@ -35,6 +35,7 @@
  - **[35]** more interesting platform patterns
  - [36] fix warping up when colliding with side of platform, should stop movement instead
  - [38] variable jump height, hold space to reduce gravity
+ - **[39]** increase speed over time
  - [44] define play area with camera instead of gdx.graphics
  - [47] revert issues 27 and 29
  - [48] add ceiling
@@ -54,7 +55,6 @@
  - **[24]** add music
  - [28] add speed pads
  - [37] better points sprite
- - **[39]** increase speed over time
  - [40] zoom out as speed increases
  - **[43]** increase sense of speed
  - [50] add falling enemy
@@ -66,6 +66,7 @@
  - [60] scale avatar size
  - [61] running sfx that scales with speed
  - [66] add button sfx
+ - [67] fix platforms spawning below screen
 
  ## Old ##
  - [41] add graphic for death plane
