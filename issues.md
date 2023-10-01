@@ -48,6 +48,7 @@
  - [40] zoom out as speed increases
  - [43] increase sense of speed
  - [49] change from platforms to floor
+ - [50] add falling enemy
  
  ## Old ##
  - [41] add graphic for death plane
@@ -61,3 +62,7 @@ In keeping with idea of limited space, have ceiling and floor. floor is RNG pits
 Ceiling has enemy spawns
 floor has enemy and powerup spawns
 player has double jump, but max jump easily hits ceiling
+throwable hat
+hat is one use
+can hold up to 3 (stack on head)
+collapsing ceiling that needs to be reset
