@@ -256,6 +256,10 @@ public class PlayScreen extends ScreenAdapter {
             player.respawn(cam.position.x, cam.position.y+300);
         }
 
+        if (lives <= 0) {
+            state = SubState.GAME_OVER;
+        }
+
 
         // generate more platforms if player gets close enough to end
         if (platformList.get(platformList.size()-1).getX() < cam.position.x + 2500) {
@@ -317,11 +321,11 @@ public class PlayScreen extends ScreenAdapter {
             bounceGame.music.setVolume(bounceGame.music.getVolume() / 2);
             bounces = 0;
         }
-        if (state == SubState.GAME_OVER && timer > 3.0f) {
+        /*if (state == SubState.GAME_OVER && timer > 3.0f) {
             state = SubState.READY;
-        }
+        }*/
         // ignore key presses when console is open...
-        if (!hud.isOpen()) {
+        if (!hud.isOpen() && state == SubState.PLAYING) {
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
                 player.yVelocity += 30;
             }
@@ -394,6 +398,8 @@ public class PlayScreen extends ScreenAdapter {
         bounceGame.batch.setProjectionMatrix(cam.combined);
         bounceGame.batch.begin();
 
+
+
         // draw background
         Texture background = bounceGame.am.get(bounceGame.BACKGROUD, Texture.class);
         double start = (cam.position.y - 1300);
@@ -457,10 +463,10 @@ public class PlayScreen extends ScreenAdapter {
         // this logic could also be pushed into a method on SubState enum
         switch (state) {
             case GAME_OVER:
-                bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_GAMEOVER_IMG, Texture.class), 200, 200);
+                bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_GAMEOVER_IMG, Texture.class), cam.position.x, cam.position.y);
                 break;
             case READY:
-                bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_PRESSAKEY_IMG, Texture.class), 200, 200);
+                //bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_PRESSAKEY_IMG, Texture.class), 200, 200);
                 break;
             case PLAYING:
                 break;
