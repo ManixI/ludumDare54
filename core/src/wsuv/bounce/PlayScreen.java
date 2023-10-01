@@ -51,6 +51,8 @@ public class PlayScreen extends ScreenAdapter {
 
     private boolean drawPlayer;
 
+    private Sprite restartButton;
+
     public PlayScreen(BounceGame game) {
         timer = 0;
         bounceGame = game;
@@ -69,6 +71,9 @@ public class PlayScreen extends ScreenAdapter {
         distance = 1000;
         invincible = false;
         drawPlayer = true;
+
+        restartButton = new Sprite();
+        restartButton.setTexture(bounceGame.am.get(bounceGame.BTN_RESTART));
 
         platformList = new ArrayList<Platform>();
         platformList.addAll(Platform.makePlat(game, 100, 200, 10, cam));
@@ -186,6 +191,18 @@ public class PlayScreen extends ScreenAdapter {
             public String execute(boolean consoleIsOpen) {
                 return String.format("%.0f %.0f [%.0f %.0f]",
                         player.getX(), player.getY(), player.xVelocity, player.yVelocity);
+            }
+        });
+        hud.registerAction("die", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                //HUDViewCommand.Visibility v = hudData.get("FPS:").nextVisiblityState();
+                lives = 0;
+                return "killed";
+            }
+
+            public String help(String[] cmd) {
+                return "kills the player";
             }
         });
 
@@ -426,6 +443,28 @@ public class PlayScreen extends ScreenAdapter {
                 player.gravity = 30;
             }
         }
+
+
+
+        if (state == SubState.GAME_OVER) {
+            restartButton.setY(cam.position.y - 230);
+            restartButton.setX(cam.position.x - 200);
+
+            // button location hard code but it works
+            if (Gdx.input.justTouched()) {
+                System.out.println(Gdx.input.getX()+" "+Gdx.input.getY());
+                float x = Gdx.input.getX();
+                //Texture tex = bounceGame.am.get(BounceGame.BTN_RESTART, Texture.class);
+                if (x > 320 && x < 420) {
+                    float y = Gdx.input.getY();
+                    if (y > 365 && y < 440) {
+                        player.airborn = true;
+                        bounceGame.getScreen().dispose();
+                        bounceGame.setScreen(new PlayScreen(bounceGame));
+                    }
+                }
+            }
+        }
     }
 
 
@@ -541,6 +580,14 @@ public class PlayScreen extends ScreenAdapter {
         switch (state) {
             case GAME_OVER:
                 bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_GAMEOVER_IMG, Texture.class), cam.position.x-200, cam.position.y-200);
+                //restartButton.draw(bounceGame.batch);
+                bounceGame.batch.draw(
+                        bounceGame.am.get(BounceGame.BTN_RESTART, Texture.class),
+                        cam.position.x-100,
+                        cam.position.y-230,
+                        bounceGame.am.get(BounceGame.BTN_RESTART, Texture.class).getWidth()*2,
+                        bounceGame.am.get(BounceGame.BTN_RESTART, Texture.class).getHeight()*2
+                        );
                 break;
             case READY:
                 //bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_PRESSAKEY_IMG, Texture.class), 200, 200);
