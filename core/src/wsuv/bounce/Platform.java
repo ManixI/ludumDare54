@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import java.util.ArrayList;
+
 public class Platform extends Sprite {
     
     // left and right extreams as well as height of top
@@ -20,27 +22,66 @@ public class Platform extends Sprite {
     static float maxHeight = 115;
 
 
-    public Platform(BounceGame g, float startX, float height, float length, OrthographicCamera cam) {
-        super(g.am.get("platform.png", Texture.class));
+    private Platform(BounceGame g, float startX, float height, String type, OrthographicCamera cam) {
+        super(g.am.get(type, Texture.class));
         game = g;
-        length *= 10;
-        if (length < lengthFloor) {
-            length = 10;
-        }
 
-        if (height < 10) {
-            height = 10;
-        }
-        /*if (height > cam.position.y - 300) {
-            height = game.random.nextFloat(cam.position.y - 300, getY()+maxHeight);
-        }*/
-        setSize(length, 10);
+
+
+
+        //setSize(length, 10);
+        scale(3);
 
         setCenter(startX + getWidth()/2, height - getHeight()/2);
 
-        rightmost = startX;
-        leftmost = startX+length;
+        rightmost = startX+getWidth();
+        leftmost = startX;
         top = height;
+    }
+
+    public static ArrayList<Platform> makePlat(BounceGame g, float startX, float startY, int length, OrthographicCamera cam) {
+        ArrayList<Platform> plats = new ArrayList<Platform>();
+
+        // needs to be at least 2 tiles wide to look right
+        // TODO: add single tile platform texture
+        if (length < 2) {
+            length = 2;
+        }
+
+        float width = g.am.get(BounceGame.PLATFORM_TILES[1], Texture.class).getWidth();
+
+        for (int i=0; i<length; i++) {
+            // leftmost tile
+            if (i == 0) {
+                plats.add(new Platform(
+                        g,
+                        startX,
+                        startY,
+                        BounceGame.PLATFORM_TILES[0],
+                        cam
+                ));
+            } else if (i == length-1) {
+                // rightmost tile
+                plats.add(new Platform(
+                        g,
+                        startX+(i*width),
+                        startY,
+                        BounceGame.PLATFORM_TILES[2],
+                        cam
+                ));
+            } else {
+                // center tiles
+                plats.add(new Platform(
+                        g,
+                        startX+(i*width),
+                        startY,
+                        BounceGame.PLATFORM_TILES[1],
+                        cam
+                ));
+            }
+        }
+
+        return plats;
     }
 
     public boolean checkCollision(Avatar ball) {
@@ -64,7 +105,7 @@ public class Platform extends Sprite {
     }
 
 
-    public Platform generateNext(OrthographicCamera cam) {
+    public ArrayList<Platform> generateNext(OrthographicCamera cam) {
         // max height is currently 90? unts
         float distX = game.random.nextFloat(getX()+getWidth(), getX()+getWidth()+maxDistance);
         int direction;
@@ -78,13 +119,13 @@ public class Platform extends Sprite {
         if (direction != 0) {
             distY = game.random.nextFloat(getY(), getY()+maxHeight);
         } else {
-            distY = game.random.nextFloat(-(getY()+maxHeight*1.5f), getY());
+            distY = game.random.nextFloat(getY()-maxHeight*1.5f, getY());
         }
-        return new Platform(
+        return makePlat(
             game,
             distX,
             distY,
-            game.random.nextFloat(1, 30),
+            game.random.nextInt(2, 5),
             cam
         );
     }

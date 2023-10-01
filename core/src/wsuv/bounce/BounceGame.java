@@ -27,7 +27,12 @@ public class BounceGame extends Game {
     public static final String RSC_MONO_FONT = "JBM.ttf";
     public static final String RSC_MONO_FONT_BIG = "JBMB.ttf";
     public static final String RSC_EXPLOSION_SFX = "explosion7s.wav";
-    public static final String PLATFORM_IMG = "platform.png";
+    //public static final String PLATFORM_IMG = "platform.png";
+    public static final String[] PLATFORM_TILES = {
+            "plat-left.png",
+            "plat-center.png",
+            "plat-right.png",
+    };
     public static final String ONE_UP = "1up.png";
     public static final String POINTS = "points.png";
     public static final String SPIKES = "spikes.png";
@@ -73,7 +78,9 @@ public class BounceGame extends Game {
         am.load(RSC_EXPLOSION_FRAMES, Texture.class);
 
         // platforms
-        am.load(PLATFORM_IMG, Texture.class);
+        for (String s : PLATFORM_TILES) {
+            am.load(s, Texture.class);
+        }
 
         // ceiling tiles
         for (String s : CEILING_TILES) {
