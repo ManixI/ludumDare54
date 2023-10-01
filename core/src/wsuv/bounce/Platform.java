@@ -24,6 +24,9 @@ public class Platform extends Sprite {
     public boolean isLast = false;
     private Sound bonkSfx;
 
+    public static final float CEILING_HEIGHT = 680;
+    public static final float FLOOR_HEIGHT = -150;
+
 
     private Platform(BounceGame g, float startX, float height, String type, OrthographicCamera cam) {
         super(g.am.get(type, Texture.class));
@@ -53,6 +56,12 @@ public class Platform extends Sprite {
 
         float lwidth = 64;
         float cwidth = 82;
+
+        if (startY < FLOOR_HEIGHT + 60) {
+            startY = FLOOR_HEIGHT + 60;
+        } else if (startY > CEILING_HEIGHT - 60) {
+            startY = CEILING_HEIGHT - 60;
+        }
 
         for (int i=0; i<length; i++) {
             // leftmost tile
