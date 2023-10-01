@@ -51,6 +51,8 @@
  - [50] add falling enemy
  - [51] change platforms to fit asthetic
  - [52] add pits to floor
+ - [53] update enemy spawning
+ - [54] add double jump
 
  ## Old ##
  - [41] add graphic for death plane
@@ -68,3 +70,4 @@ throwable hat
 hat is one use
 can hold up to 3 (stack on head)
 collapsing ceiling that needs to be reset
+needs to feel clostrophobic
