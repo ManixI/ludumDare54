@@ -47,6 +47,7 @@ public class Avatar extends Sprite {
         } else if (getY() < FLOOR_HEIGHT) {
             setY(FLOOR_HEIGHT);
             yVelocity = 0;
+            collided = true;
         }
 
 

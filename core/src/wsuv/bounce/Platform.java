@@ -93,7 +93,6 @@ public class Platform extends Sprite {
         //System.out.println(leftmost+" "+rightmost+" "+top);
         if (getBoundingRectangle().overlaps(ball.getBoundingRectangle())) {
             if (ball.yVelocity <= 0 && passthough == false) {
-                // TODO: avatar bounces on platform when scaled to any size
                 ball.setY(getY()+getHeight());
                 ball.yVelocity = 0;
                 return true;
@@ -109,6 +108,7 @@ public class Platform extends Sprite {
 
 
     public ArrayList<Platform> generateNext(OrthographicCamera cam) {
+        // TODO: can spawn in floor
         // max height is currently 90? unts
         float distX = game.random.nextFloat(getX()+getWidth(), getX()+getWidth()+maxDistance);
         int direction;
@@ -134,16 +134,17 @@ public class Platform extends Sprite {
     }
 
     public Enemie spawnEnemy() {
+        // TODO: make sure spikes are positioned properly
         return new Enemie(
                 game,
                 game.random.nextFloat(getX(), getX()+getWidth()),
-                getY()+getHeight()+getHeight(),
+                getY()+getHeight()*4,
                 Enemie.SPIKES
         );
     }
 
     public Powerup spawnPowerup() {
-        if (game.random.nextInt(0, 5) == 0) {
+        if (game.random.nextInt(0, 5) ==  0) {
             String type;
             switch (game.random.nextInt(0, 10)) {
                 case 0:
