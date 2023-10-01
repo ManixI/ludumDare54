@@ -46,14 +46,14 @@
 ## Open Issues ##
 
  - [0] general game balance tweeks
- - [22] add missile enemy
- - [23] add sfx
- - [24] add music
+ - **[22]** add missile enemy
+ - **[23]** add sfx
+ - **[24]** add music
  - [28] add speed pads
  - [37] better points sprite
- - [39] increase speed over time
+ - **[39]** increase speed over time
  - [40] zoom out as speed increases
- - [43] increase sense of speed
+ - **[43]** increase sense of speed
  - [50] add falling enemy
  - [52] add pits to floor
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
@@ -62,7 +62,7 @@
  - [59] add spikes to bottom of platforms
  - [60] scale avatar size
  - [61] running sfx that scales with speed
- - [63] improve respawn mechanic
+ - **[63]** improve respawn mechanic
 
  ## Old ##
  - [41] add graphic for death plane
