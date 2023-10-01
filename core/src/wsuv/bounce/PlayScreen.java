@@ -46,6 +46,8 @@ public class PlayScreen extends ScreenAdapter {
     private Sound deathSfx;
     private Sound stepSfx;
     private Sound powerupSfx;
+    private Sound missileDeathSfx;
+    private Sound missileLaunchSfx;
 
     private boolean invincible;
 
@@ -100,6 +102,8 @@ public class PlayScreen extends ScreenAdapter {
         deathSfx = bounceGame.am.get(BounceGame.SFX_HIT);
         stepSfx = bounceGame.am.get(BounceGame.SFX_STEP);
         powerupSfx = bounceGame.am.get(BounceGame.SFX_POWERUP);
+        missileDeathSfx = bounceGame.am.get(BounceGame.SFX_MISSILE_DEATH);
+        missileLaunchSfx = bounceGame.am.get(BounceGame.SFX_MISSILE_LAUNCH);
 
         Timer t = new Timer();
         t.schedule(new TimerTask() {
@@ -335,12 +339,12 @@ public class PlayScreen extends ScreenAdapter {
                         if (e.checkColision(p)) {
                             // TODO: remove and explode if collides with platform
                             enemies.remove(j);
-                            boomSfx.play();
+                            missileDeathSfx.play();
                         }
                     }
                     if (e.getY() > player.CEILING_HEIGHT || e.getY() < player.FLOOR_HEIGHT) {
                         enemies.remove(j);
-                        boomSfx.play();
+                        missileDeathSfx.play();
                     }
                     // TODO: check for collision with walls, ceiling, and other enemies
                 }
@@ -411,7 +415,7 @@ public class PlayScreen extends ScreenAdapter {
                     bounceGame.random.nextFloat(player.FLOOR_HEIGHT + 50, player.CEILING_HEIGHT - 50),
                     Enemie.MISSILE
             ));
-            boomSfx.play();
+            missileLaunchSfx.play();
         }
 
         // cleanup stuff that leaves the screen

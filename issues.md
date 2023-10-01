@@ -64,6 +64,7 @@
  - [59] add spikes to bottom of platforms
  - [60] scale avatar size
  - [61] running sfx that scales with speed
+ - **[65]** fix rounding error preventing enemies from spawning
 
  ## Old ##
  - [41] add graphic for death plane
