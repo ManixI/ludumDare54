@@ -54,8 +54,12 @@ public class PlayScreen extends ScreenAdapter {
         platformList = new ArrayList<Platform>();
         platformList.addAll(Platform.makePlat(game, 100, 200, 10, cam));
         //platformList.add(new Platform(game, 100, 200, 10, cam));
-        for (int j=0; j<10;j++) {
-            platformList.addAll(platformList.get(j).generateNext(cam));
+        int i = 0;
+        ArrayList<Platform> plats;
+        while (i < 10) {
+            plats = platformList.get(platformList.size()-1).generateNext(cam);
+            platformList.addAll(plats);
+            i++;
         }
 
         powerupList = new ArrayList<Powerup>();

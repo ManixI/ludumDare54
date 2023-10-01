@@ -21,6 +21,8 @@ public class Platform extends Sprite {
     static float maxDistance = 400;
     static float maxHeight = 115;
 
+    public boolean isLast = false;
+
 
     private Platform(BounceGame g, float startX, float height, String type, OrthographicCamera cam) {
         super(g.am.get(type, Texture.class));
@@ -48,7 +50,8 @@ public class Platform extends Sprite {
             length = 2;
         }
 
-        float width = g.am.get(BounceGame.PLATFORM_TILES[1], Texture.class).getWidth();
+        float lwidth = 64;
+        float cwidth = 82;
 
         for (int i=0; i<length; i++) {
             // leftmost tile
@@ -64,16 +67,17 @@ public class Platform extends Sprite {
                 // rightmost tile
                 plats.add(new Platform(
                         g,
-                        startX+(i*width),
+                        startX+(cwidth*(i-1))+lwidth,
                         startY,
                         BounceGame.PLATFORM_TILES[2],
                         cam
                 ));
+                plats.get(plats.size()-1).isLast = true;
             } else {
                 // center tiles
                 plats.add(new Platform(
                         g,
-                        startX+(i*width),
+                        startX+(cwidth*(i-1))+lwidth,
                         startY,
                         BounceGame.PLATFORM_TILES[1],
                         cam
