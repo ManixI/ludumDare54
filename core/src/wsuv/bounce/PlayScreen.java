@@ -533,7 +533,7 @@ public class PlayScreen extends ScreenAdapter {
         // this logic could also be pushed into a method on SubState enum
         switch (state) {
             case GAME_OVER:
-                bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_GAMEOVER_IMG, Texture.class), cam.position.x, cam.position.y);
+                bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_GAMEOVER_IMG, Texture.class), cam.position.x-200, cam.position.y-200);
                 break;
             case READY:
                 //bounceGame.batch.draw(bounceGame.am.get(BounceGame.RSC_PRESSAKEY_IMG, Texture.class), 200, 200);
