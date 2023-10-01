@@ -394,6 +394,15 @@ public class PlayScreen extends ScreenAdapter {
                     Enemie.SPIKES_FLIPPED
             ));
         }
+        if (current_time % 100 == 0) {
+            enemies.add( new Enemie(
+                    bounceGame,
+                    bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
+                    bounceGame.random.nextFloat(player.FLOOR_HEIGHT + 50, player.CEILING_HEIGHT - 50),
+                    Enemie.MISSILE
+            ));
+            boomSfx.play();
+        }
 
         // cleanup stuff that leaves the screen
         cleanupEnemies(enemies);
