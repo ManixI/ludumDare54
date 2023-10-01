@@ -19,16 +19,11 @@ public class PlayScreen extends ScreenAdapter {
     private Ball ball;
     private HUD hud;
     private SubState state;
-    private int bounces;
-    private float timer;
     private int lives;
 
-    private Sound boomSfx;
     private ArrayList<Bang> explosions;
     BangAnimationFrames baf;
 
-    Platform plat;
-    //ArrayList<ArrayList<Platform>> platformList;
     ArrayList<Platform> platformList;
     Avatar player;
     OrthographicCamera cam;
@@ -62,12 +57,9 @@ public class PlayScreen extends ScreenAdapter {
     float gameSpeed = 1.0f;
 
     public PlayScreen(EscapeGame game) {
-        timer = 0;
         escapeGame = game;
-        ball = new Ball(game);
-        bounces = 0;
+        //ball = new Ball(game);
         explosions = new ArrayList<>(10);
-        boomSfx = escapeGame.am.get(EscapeGame.RSC_EXPLOSION_SFX);
         cam = new OrthographicCamera(1000, 1000);
         cam.translate(500,300);
         cam.update();
@@ -140,7 +132,6 @@ public class PlayScreen extends ScreenAdapter {
         // only needs to happen once.  Since we only use explosions in the PlayScreen,
         // we'll do it here, storing the work in a special object we'll use each time
         // a new Bang instance is created...
-        baf = new BangAnimationFrames(escapeGame.am.get(EscapeGame.RSC_EXPLOSION_FRAMES));
 
         // the HUD will show FPS always, by default.  Here's how
         // to use the HUD interface to silence it (and other HUD Data)
@@ -239,7 +230,6 @@ public class PlayScreen extends ScreenAdapter {
                 if (character == '!') {
                     Gdx.app.log("Boom!",  "(" + explosions.size() + ")" );
                     explosions.add(new Bang(baf, false, ball.getX() + ball.getOriginX(), ball.getY() + ball.getOriginY()));
-                    boomSfx.play();
                     return true;
                 }
                 return false;
@@ -253,12 +243,9 @@ public class PlayScreen extends ScreenAdapter {
     public void show() {
         Gdx.app.log("PlayScreen", "show");
         state = SubState.READY;
-        bounces = 0;
     }
 
     public void update(float delta) {
-        timer += delta;
-
 
         /*if (player.getX() > (cam.position.x)) {
             cam.position.x = player.getX();
@@ -461,7 +448,6 @@ public class PlayScreen extends ScreenAdapter {
         if (state == SubState.READY && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             state = SubState.PLAYING;
             escapeGame.music.setVolume(escapeGame.music.getVolume() / 2);
-            bounces = 0;
         }
         /*if (state == SubState.GAME_OVER && timer > 3.0f) {
             state = SubState.READY;

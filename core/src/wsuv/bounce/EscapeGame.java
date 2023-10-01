@@ -19,14 +19,11 @@ import java.util.Random;
 public class EscapeGame extends Game {
     public static final int RSC_EXPLOSION_FRAMES_ROWS = 8;
     public static final int RSC_EXPLOSION_FRAMES_COLS = 8;
-    public static final String RSC_EXPLOSION_FRAMES = "explosion8x8.png";
     public static final String RSC_GAMEOVER_IMG = "gameover.png";
     public static final String RSC_PRESSAKEY_IMG = "pressakey.png";
-    public static final String RSC_BALL_IMG = "ball.png";
     public static final String RSC_MONO_FONT_FILE = "JetBrainsMono-Regular.ttf";
     public static final String RSC_MONO_FONT = "JBM.ttf";
     public static final String RSC_MONO_FONT_BIG = "JBMB.ttf";
-    public static final String RSC_EXPLOSION_SFX = "explosion7s.wav";
     //public static final String PLATFORM_IMG = "platform.png";
     public static final String[] PLATFORM_TILES = {
             "plat-left.png",
@@ -88,10 +85,8 @@ public class EscapeGame extends Game {
         am.load(RSC_MONO_FONT_BIG, BitmapFont.class, playFont);
 
         // Load Textures after the font...
-        am.load(RSC_BALL_IMG, Texture.class);
         am.load(RSC_GAMEOVER_IMG, Texture.class);
         am.load(RSC_PRESSAKEY_IMG, Texture.class);
-        am.load(RSC_EXPLOSION_FRAMES, Texture.class);
 
         // platforms
         for (String s : PLATFORM_TILES) {
@@ -124,8 +119,6 @@ public class EscapeGame extends Game {
         am.load(PLAYER_SPRITE_2X2, Texture.class);
 
         // Load Sounds
-        am.load(RSC_EXPLOSION_SFX, Sound.class);
-
         // sfx
         am.load(SFX_BONK, Sound.class);
         am.load(SFX_HIT, Sound.class);
