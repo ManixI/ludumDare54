@@ -30,6 +30,7 @@
  - **[35]** more interesting platform patterns
  - [44] define play area with camera instead of gdx.graphics
  - [47] revert issues 27 and 29
+ - [48] add ceiling
 
 ## Open Issues ##
 
@@ -46,7 +47,6 @@
  - [39] increase speed over time
  - [40] zoom out as speed increases
  - [43] increase sense of speed
- - [48] add ceiling
  - [49] change from platforms to floor
  
  ## Old ##
