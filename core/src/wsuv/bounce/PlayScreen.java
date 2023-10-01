@@ -256,10 +256,14 @@ public class PlayScreen extends ScreenAdapter {
                 if (p != null) {
                     powerupList.add(p);
                 }
+                if (bounceGame.random.nextInt(0, 5) == 0) {
+                    enemies.add(platformList.get(platformList.size()-1).spawnEnemy());
+                }
             }
         }
 
         // spawn enemies based on time
+        // TODO: fix wierd gaps in spike spawns
         float current_time = timer;
         current_time *= 100;
         current_time = (float) Math.floor(current_time);
@@ -272,15 +276,12 @@ public class PlayScreen extends ScreenAdapter {
             ));
         }
         if (current_time % 50 == 0) {
-            Enemie spike = new Enemie(
+            enemies.add(new Enemie(
                     bounceGame,
                     bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
                     Avatar.CEILING_HEIGHT + 30,
                     Enemie.SPIKES_FLIPPED
-            );
-            //spike.flip(false, true);
-            enemies.add(spike);
-            //enemies.get(enemies.size()).flip(false, true);
+            ));
         }
 
         // cleanup stuff that leaves the screen
