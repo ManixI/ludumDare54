@@ -18,7 +18,6 @@ public class Enemie extends Sprite {
 
         scale(scaleFactor);
 
-        //place(x, platformlist);
         setX(x);
         setY(y);
         type = t;

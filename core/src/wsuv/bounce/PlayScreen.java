@@ -179,6 +179,7 @@ public class PlayScreen extends ScreenAdapter {
     public void update(float delta) {
         timer += delta;
 
+
         /*if (player.getX() > (cam.position.x)) {
             cam.position.x = player.getX();
         }*/
@@ -256,6 +257,19 @@ public class PlayScreen extends ScreenAdapter {
                     powerupList.add(p);
                 }
             }
+        }
+
+        // spawn enemies based on time
+        float current_time = timer;
+        current_time *= 100;
+        current_time = (float) Math.floor(current_time);
+        if (current_time % 100 == 0) {
+            enemies.add(new Enemie(
+                    bounceGame,
+                    bounceGame.random.nextFloat(cam.position.x + 700, cam.position.x + 800),
+                    Avatar.FLOOR_HEIGHT + 14,
+                    Enemie.SPIKES
+            ));
         }
 
         // cleanup stuff that leaves the screen
