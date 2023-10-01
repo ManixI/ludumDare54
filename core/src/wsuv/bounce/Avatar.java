@@ -117,8 +117,8 @@ public class Avatar extends Sprite implements Cloneable {
         setX(x + time * xVelocity);
         setY(y + time * yVelocity);
 
-        if (getY() > CEILING_HEIGHT) {
-            setY(CEILING_HEIGHT);
+        if (getY() > CEILING_HEIGHT+20) {
+            setY(CEILING_HEIGHT+20);
             yVelocity = 0;
             bonkSfx.play();
         } else if (getY() < FLOOR_HEIGHT) {
