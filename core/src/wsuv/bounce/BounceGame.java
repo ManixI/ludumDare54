@@ -48,6 +48,7 @@ public class BounceGame extends Game {
     public static final int PLAYER_SPRITE_ROWS = 2;
 
     public static final String BACKGROUD = "background.png";
+    public static final String BTN_RESTART = "restart.png";
 
     public static final String SFX_JUMP = "jump.wav";
     public static final String SFX_BONK = "bonk2.wav";
@@ -104,6 +105,7 @@ public class BounceGame extends Game {
         }
 
         am.load(BACKGROUD, Texture.class);
+        am.load(BTN_RESTART, Texture.class);
 
         // powerups
         am.load(ONE_UP, Texture.class);
