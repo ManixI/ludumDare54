@@ -368,6 +368,22 @@ public class PlayScreen extends ScreenAdapter {
         for (Enemie e : enemies) {
             e.draw(bounceGame.batch);
         }
+
+        // draw ceiling
+        Texture ceilingTex = bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class);
+        double start = (cam.position.y - 600) / ceilingTex.getWidth();
+        start = Math.floor(start);
+        for (int i=0; i< 3000; i++) {
+            bounceGame.batch.draw(
+                    ceilingTex,
+                    (float) start+(i* ceilingTex.getWidth()*3),
+                    Avatar.CEILING_HEIGHT+ ceilingTex.getHeight(),
+                    ceilingTex.getWidth()*3,
+                    ceilingTex.getHeight()*3
+            );
+        }
+        //bounceGame.batch.draw(bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class), 200, 200);
+
         player.draw(bounceGame.batch);
         // this logic could also be pushed into a method on SubState enum
         switch (state) {
