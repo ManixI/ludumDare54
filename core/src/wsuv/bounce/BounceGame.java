@@ -31,6 +31,7 @@ public class BounceGame extends Game {
     public static final String ONE_UP = "1up.png";
     public static final String POINTS = "points.png";
     public static final String SPIKES = "spikes.png";
+    public static final String SPIKES_FLIPPED = "spikes-flipped.png";
     public static final String[] CEILING_TILES = {
             "ceiling-1.png",
     };
@@ -90,6 +91,7 @@ public class BounceGame extends Game {
 
         // enemies
         am.load(SPIKES, Texture.class);
+        am.load(SPIKES_FLIPPED, Texture.class);
 
         // Load Sounds
         am.load(RSC_EXPLOSION_SFX, Sound.class);

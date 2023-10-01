@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Enemie extends Sprite {
     public final static String MISSILE = "missile.png";
     public final static String SPIKES = "spikes.png";
+    public final static String SPIKES_FLIPPED = "spikes-flipped.png";
 
     private String type;
     private Platform spot;

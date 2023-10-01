@@ -53,6 +53,7 @@
  - [52] add pits to floor
  - [53] update enemy spawning
  - [54] add double jump
+ - [55] platforms shouldn't be pass-though
 
  ## Old ##
  - [41] add graphic for death plane
@@ -70,4 +71,4 @@ throwable hat
 hat is one use
 can hold up to 3 (stack on head)
 collapsing ceiling that needs to be reset
-needs to feel clostrophobic
+needs to feel claustrophobic

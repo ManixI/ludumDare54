@@ -266,10 +266,21 @@ public class PlayScreen extends ScreenAdapter {
         if (current_time % 100 == 0) {
             enemies.add(new Enemie(
                     bounceGame,
-                    bounceGame.random.nextFloat(cam.position.x + 700, cam.position.x + 800),
+                    bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
                     Avatar.FLOOR_HEIGHT + 14,
                     Enemie.SPIKES
             ));
+        }
+        if (current_time % 50 == 0) {
+            Enemie spike = new Enemie(
+                    bounceGame,
+                    bounceGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
+                    Avatar.CEILING_HEIGHT + 30,
+                    Enemie.SPIKES_FLIPPED
+            );
+            //spike.flip(false, true);
+            enemies.add(spike);
+            //enemies.get(enemies.size()).flip(false, true);
         }
 
         // cleanup stuff that leaves the screen
