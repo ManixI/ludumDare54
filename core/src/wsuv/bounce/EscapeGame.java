@@ -135,10 +135,10 @@ public class EscapeGame extends Game {
         // start the music right away.
         // this one we'll only reference via the GameInstance, and it's streamed
         // so, no need to add it to the AssetManager...
-        music = Gdx.audio.newMusic(Gdx.files.internal("sadshark.mp3"));
+        /*music = Gdx.audio.newMusic(Gdx.files.internal("sadshark.mp3"));
         music.setLooping(true);
         music.setVolume(.5f);
-        music.play();
+        music.play();*/
     }
 
     @Override

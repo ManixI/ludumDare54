@@ -447,7 +447,7 @@ public class PlayScreen extends ScreenAdapter {
         }*/
         if (state == SubState.READY && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             state = SubState.PLAYING;
-            escapeGame.music.setVolume(escapeGame.music.getVolume() / 2);
+            //escapeGame.music.setVolume(escapeGame.music.getVolume() / 2);
         }
         /*if (state == SubState.GAME_OVER && timer > 3.0f) {
             state = SubState.READY;
