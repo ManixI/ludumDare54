@@ -105,6 +105,7 @@ public class Platform extends Sprite {
         // TODO fix collision on sides of platforms
         if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
             player.xVelocity = 0;
+            player.setX(getX()-player.getWidth());
             return false;
         } else {
             futurePlayer.xVelocity = 0;
