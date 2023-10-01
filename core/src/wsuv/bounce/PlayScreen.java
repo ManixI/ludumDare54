@@ -49,6 +49,8 @@ public class PlayScreen extends ScreenAdapter {
 
     private boolean invincible = false;
 
+    private boolean drawPlayer = true;
+
     public PlayScreen(BounceGame game) {
         timer = 0;
         bounceGame = game;
@@ -275,6 +277,20 @@ public class PlayScreen extends ScreenAdapter {
                                     invincible = false;
                                 }
                             }, 1500);
+
+                            Timer b = new Timer();
+                            for (int i=0; i<20; i++) {
+                                b.schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        if (drawPlayer) {
+                                            drawPlayer = false;
+                                        } else {
+                                            drawPlayer = true;
+                                        }
+                                    }
+                                }, (1500/20)*i);
+                            }
                             invincible = true;
                             deathSfx.play();
                             break;
@@ -508,7 +524,12 @@ public class PlayScreen extends ScreenAdapter {
 
         //bounceGame.batch.draw(bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class), 200, 200);
 
-        player.draw(bounceGame.batch);
+        if (invincible && !drawPlayer) {
+
+        } else {
+            player.draw(bounceGame.batch);
+        }
+
         // this logic could also be pushed into a method on SubState enum
         switch (state) {
             case GAME_OVER:
