@@ -43,6 +43,9 @@ public class BounceGame extends Game {
     public static final String[] FLOOR_TILES = {
             "floor-1.png",
     };
+    public static final String PLAYER_SPRITE_2X2 = "avatar-anim.png";
+    public static final int PLAYER_SPRITE_COLS = 2;
+    public static final int PLAYER_SPRITE_ROWS = 2;
 
     AssetManager am;  // AssetManager provides a single source for loaded resources
     SpriteBatch batch;
@@ -99,6 +102,9 @@ public class BounceGame extends Game {
         // enemies
         am.load(SPIKES, Texture.class);
         am.load(SPIKES_FLIPPED, Texture.class);
+
+        // player
+        am.load(PLLAYER_SPRITE_2X2, Texture.class);
 
         // Load Sounds
         am.load(RSC_EXPLOSION_SFX, Sound.class);
