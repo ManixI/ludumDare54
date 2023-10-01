@@ -1,6 +1,7 @@
 package wsuv.bounce;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -21,6 +22,7 @@ public class Platform extends Sprite {
     static float maxHeight = 115;
 
     public boolean isLast = false;
+    private Sound bonkSfx;
 
 
     private Platform(BounceGame g, float startX, float height, String type, OrthographicCamera cam) {
@@ -28,7 +30,7 @@ public class Platform extends Sprite {
         game = g;
 
 
-
+        bonkSfx = game.am.get(game.SFX_BONK);
 
         //setSize(length, 10);
         scale(3);
@@ -124,6 +126,7 @@ public class Platform extends Sprite {
                     // started below platform, don't warp up if jump falls short
                     player.setY((getY() - player.getHeight() - getHeight()*2.5f + 20));
                     player.yVelocity = 0;
+                    bonkSfx.play();
                     return false;
                 }
             } else {

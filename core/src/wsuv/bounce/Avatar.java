@@ -1,6 +1,7 @@
 package wsuv.bounce;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -31,6 +32,10 @@ public class Avatar extends Sprite implements Cloneable {
     static TextureRegion currentFrame;
     static float stateTime;
 
+    private boolean airborn = true;
+
+    private Sound bonkSfx;
+
 
 
     public Avatar(BounceGame game, float startX, float startY) {
@@ -58,6 +63,7 @@ public class Avatar extends Sprite implements Cloneable {
 
         //scale(2);
         //setSize(2,2);
+        bonkSfx = game.am.get(game.SFX_BONK);
 
         //setCenter(startX, startY);
     }
@@ -89,6 +95,10 @@ public class Avatar extends Sprite implements Cloneable {
 
     }
 
+    public void setAirborn(boolean b) {
+        airborn = b;
+    }
+
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -106,7 +116,7 @@ public class Avatar extends Sprite implements Cloneable {
         if (getY() > CEILING_HEIGHT) {
             setY(CEILING_HEIGHT);
             yVelocity = 0;
-            // TODO: add sfx here
+            bonkSfx.play();
         } else if (getY() < FLOOR_HEIGHT) {
             setY(FLOOR_HEIGHT);
             yVelocity = 0;

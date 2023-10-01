@@ -248,6 +248,7 @@ public class PlayScreen extends ScreenAdapter {
                     case Enemie.SPIKES:
                         lives--;
                         player.respawn(cam.position.x, cam.position.y+300);
+                        deathSfx.play();
                         break;
                     default:
                         break;
