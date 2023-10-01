@@ -108,9 +108,9 @@ public class Platform extends Sprite {
         if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
             player.xVelocity = 0;
             if (player.getX() < getX()-player.getWidth()) {
-                player.setX(getX()-player.getWidth());
+                //player.setX(getX()-player.getWidth());
             } else {
-                player.setX(getX()+getWidth());
+                //player.setX(getX()+getWidth());
             }
             return false;
         } else {
