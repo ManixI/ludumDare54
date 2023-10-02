@@ -309,7 +309,7 @@ public class PlayScreen extends ScreenAdapter {
                             j--;
                         case Enemie.SPIKES:
                             lives--;
-                            player.respawn(cam.position.x, cam.position.y + 300);
+                            player.respawn(cam.position.x, cam.position.y + 150);
                             Timer t = new Timer();
                             t.schedule(new TimerTask() {
                                 @Override
@@ -384,7 +384,7 @@ public class PlayScreen extends ScreenAdapter {
                 if (p != null) {
                     powerupList.add(p);
                 }
-                if (escapeGame.random.nextInt(0, 5) == 0) {
+                if (escapeGame.random.nextInt(5) == 0) {
                     enemies.add(platformList.get(platformList.size()-1).spawnEnemy());
                 }
             }
@@ -398,11 +398,12 @@ public class PlayScreen extends ScreenAdapter {
         missileTimer += time;
         spikeTimer += time;
         ceilingSpikeTimer += time;
+        float min = cam.position.x + 500;
         if (spikeTimer > 1000) {
             spikeTimer = 0;
             enemies.add(new Enemie(
                     escapeGame,
-                    escapeGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
+                    escapeGame.random.nextFloat()*100+min,
                     Avatar.FLOOR_HEIGHT + 14,
                     Enemie.SPIKES
             ));
@@ -411,7 +412,7 @@ public class PlayScreen extends ScreenAdapter {
             ceilingSpikeTimer = 0;
             enemies.add(new Enemie(
                     escapeGame,
-                    escapeGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
+                    escapeGame.random.nextFloat()*100+min,
                     Avatar.CEILING_HEIGHT + 30,
                     Enemie.SPIKES_FLIPPED
             ));
@@ -420,8 +421,8 @@ public class PlayScreen extends ScreenAdapter {
             missileTimer = 0;
             enemies.add( new Enemie(
                     escapeGame,
-                    escapeGame.random.nextFloat(cam.position.x + 500, cam.position.x + 600),
-                    escapeGame.random.nextFloat(player.FLOOR_HEIGHT + 50, player.CEILING_HEIGHT - 50),
+                    escapeGame.random.nextFloat()*100+min,
+                    escapeGame.random.nextFloat( )*(player.CEILING_HEIGHT - 50-(player.FLOOR_HEIGHT + 50))+player.FLOOR_HEIGHT + 50,
                     Enemie.MISSILE
             ));
             missileLaunchSfx.play();
@@ -454,9 +455,9 @@ public class PlayScreen extends ScreenAdapter {
         }*/
         // ignore key presses when console is open...
         if (!hud.isOpen() && state == SubState.PLAYING) {
-            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            /*if (Gdx.input.isKeyPressed(Input.Keys.W)) {
                 player.yVelocity += 30;
-            }
+            }*/
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
                 player.yVelocity -= 10;
             }

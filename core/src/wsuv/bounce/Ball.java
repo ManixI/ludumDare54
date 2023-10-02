@@ -13,8 +13,8 @@ public class Ball extends Sprite {
     public Ball(EscapeGame game) {
         super(game.am.get("ball.png", Texture.class));
 
-        xVelocity = game.random.nextFloat(80, 150);
-        yVelocity = game.random.nextFloat(80, 150);
+        xVelocity = game.random.nextFloat()*70+80;
+        yVelocity = game.random.nextFloat()*70+80;
         if (game.random.nextBoolean()) xVelocity *= -1;
         if (game.random.nextBoolean()) yVelocity *= -1;
         setCenter(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f);

@@ -149,25 +149,25 @@ public class Platform extends Sprite {
     public ArrayList<Platform> generateNext(OrthographicCamera cam) {
         // TODO: can spawn in floor
         // max height is currently 90? unts
-        float distX = game.random.nextFloat(getX()+getWidth(), getX()+getWidth()+maxDistance);
+        float distX = game.random.nextFloat()*(getX()+getWidth()+maxDistance-(getX()+getWidth()))+getX()+getWidth()+maxDistance;
         int direction;
         // if platform is near bottom, weight generation upwards
         if (getY() < cam.position.y - 300) {
-            direction = game.random.nextInt(0,4);
+            direction = game.random.nextInt(4);
         } else {
-            direction = game.random.nextInt(0,2);
+            direction = game.random.nextInt(2);
         }
         float distY;
         if (direction != 0) {
-            distY = game.random.nextFloat(getY(), getY()+maxHeight);
+            distY = game.random.nextFloat()*maxHeight+getY();
         } else {
-            distY = game.random.nextFloat(getY()-maxHeight*1.5f, getY());
+            distY = game.random.nextFloat()*getY()-(getY()-maxHeight*1.5f)+getY();
         }
         return makePlat(
             game,
             distX,
             distY,
-            game.random.nextInt(2, 5),
+            game.random.nextInt(3)+2,
             cam
         );
     }
@@ -176,16 +176,16 @@ public class Platform extends Sprite {
         // TODO: make sure spikes are positioned properly
         return new Enemie(
                 game,
-                game.random.nextFloat(getX(), getX()+getWidth()),
+                game.random.nextFloat()*getX()+getWidth(),
                 getY()+getHeight()*4,
                 Enemie.SPIKES
         );
     }
 
     public Powerup spawnPowerup() {
-        if (game.random.nextInt(0, 5) ==  0) {
+        if (game.random.nextInt(5) ==  0) {
             String type;
-            switch (game.random.nextInt(0, 10)) {
+            switch (game.random.nextInt( 10)) {
                 case 0:
                     // 1up
                     type = Powerup.ONE_UP;
@@ -216,8 +216,8 @@ public class Platform extends Sprite {
         float heightCealing = heightFloor + maxHeight;
         return new Powerup(
                 game,
-                game.random.nextFloat(this.getX()-powerupMargin, this.getX()+this.getWidth()+powerupMargin),
-                game.random.nextFloat(heightFloor, heightCealing),
+                game.random.nextFloat()*(this.getX()+this.getWidth()+powerupMargin-(this.getX()-powerupMargin))+this.getX()+this.getWidth()+powerupMargin,
+                game.random.nextFloat()*(heightCealing-heightFloor)+heightCealing,
                 type
 
         );
