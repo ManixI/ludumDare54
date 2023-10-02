@@ -58,7 +58,11 @@
  - [28] add speed pads
  - [37] better points sprite
  - [40] zoom out as speed increases
+ - [41] add graphic for death plane
+ - [42] different platform paths lean towards different directions
  - **[43]** increase sense of speed
+ - [45] spawn enemies as function of spawning platform
+ - [46] set minimum height separation between platforms
  - [50] add falling enemy
  - [52] add pits to floor
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
@@ -67,12 +71,11 @@
  - [59] add spikes to bottom of platforms
  - [60] scale avatar size
  - [61] running sfx that scales with speed
+ - [68] remove ceiling and floor
+ - [69] multiple platform paths
+ - [70] vertical scrolling
 
  ## Old ##
- - [41] add graphic for death plane
- - [42] different platform paths lean towards different directions
- - [45] spawn enemies as function of spawning platform
- - [46] set minimum height separation between platforms
 
 
 ## general ideas ##
