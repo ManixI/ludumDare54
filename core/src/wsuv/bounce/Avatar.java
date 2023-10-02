@@ -144,6 +144,12 @@ public class Avatar extends Sprite implements Cloneable {
             airborn = true;
         }
 
+        if (getX() < cam.position.x - 500 + 10) {
+            setX(cam.position.x + 10 - 500);
+        } else if (getX() + getWidth() > cam.position.x + 500) {
+            setX(cam.position.x+500 -getWidth());
+        }
+
 
         yVelocity -= gravity;
 
