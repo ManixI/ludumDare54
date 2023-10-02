@@ -113,7 +113,6 @@ public class Platform extends Sprite {
 
         futurePlayer.yVelocity = 0;
         futurePlayer.update(cam, gameSpeed);
-        // TODO fix collision on sides of platforms
         if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
             player.xVelocity = 0;
             if (player.getX() < getX()-player.getWidth()) {
@@ -147,7 +146,6 @@ public class Platform extends Sprite {
 
 
     public ArrayList<Platform> generateNext(OrthographicCamera cam) {
-        // TODO: can spawn in floor
         // max height is currently 90? unts
         float distX = game.random.nextFloat()*(getX()+getWidth()+maxDistance-(getX()+getWidth()))+getX()+getWidth()+50;
         int direction;

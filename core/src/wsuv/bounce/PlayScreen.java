@@ -247,15 +247,8 @@ public class PlayScreen extends ScreenAdapter {
 
     public void update(float delta) {
 
-        /*if (player.getX() > (cam.position.x)) {
-            cam.position.x = player.getX();
-        }*/
         cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2)*gameSpeed;
 
-        //cam.position.y = player.getY();
-        /*if (cam.position.y < 300) {
-            cam.position.y = 300;
-        }*/
         cam.update();
         hud.updateCam(cam);
         hud.updatePosCam();
@@ -300,7 +293,6 @@ public class PlayScreen extends ScreenAdapter {
         // check collision with enemies
         if (!invincible)
         {
-            // TODO: bug where missiles despawn and remove spikes as well
             for (int j=0; j< enemies.size()-1; j++) {
                 Enemie e = enemies.get(j);
                 if (e.checkColision(player)) {

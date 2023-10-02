@@ -74,6 +74,7 @@
  - [68] remove ceiling and floor
  - [69] multiple platform paths
  - [70] vertical scrolling
+ - [71] stop spokes from spawning partly off platforms
 
  ## Old ##
 
