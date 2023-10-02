@@ -18,7 +18,7 @@ public class Platform extends Sprite {
 
     boolean passthough = false;
 
-    static float maxDistance = 1000;
+    static float maxDistance = 500;
     static float maxHeight = 115;
 
     public boolean isLast = false;
@@ -59,8 +59,8 @@ public class Platform extends Sprite {
 
         if (startY < FLOOR_HEIGHT + 60) {
             startY = FLOOR_HEIGHT + 60;
-        } else if (startY > CEILING_HEIGHT - 60) {
-            startY = CEILING_HEIGHT - 60;
+        } else if (startY > CEILING_HEIGHT - 100) {
+            startY = CEILING_HEIGHT - 100;
         }
 
         for (int i=0; i<length; i++) {
@@ -149,7 +149,7 @@ public class Platform extends Sprite {
     public ArrayList<Platform> generateNext(OrthographicCamera cam) {
         // TODO: can spawn in floor
         // max height is currently 90? unts
-        float distX = game.random.nextFloat()*(getX()+getWidth()+maxDistance-(getX()+getWidth()))+getX()+getWidth()+maxDistance;
+        float distX = game.random.nextFloat()*(getX()+getWidth()+maxDistance-(getX()+getWidth()))+getX()+getWidth()+50;
         int direction;
         // if platform is near bottom, weight generation upwards
         if (getY() < cam.position.y - 300) {
@@ -176,7 +176,7 @@ public class Platform extends Sprite {
         // TODO: make sure spikes are positioned properly
         return new Enemie(
                 game,
-                game.random.nextFloat()*getX()+getWidth(),
+                game.random.nextFloat()*getWidth()+getX(),
                 getY()+getHeight()*4,
                 Enemie.SPIKES
         );

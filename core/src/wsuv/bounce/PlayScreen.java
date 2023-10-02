@@ -308,6 +308,7 @@ public class PlayScreen extends ScreenAdapter {
                             enemies.remove(j);
                             j--;
                         case Enemie.SPIKES:
+                        case Enemie.SPIKES_FLIPPED:
                             lives--;
                             player.respawn(cam.position.x, cam.position.y + 150);
                             Timer t = new Timer();
@@ -341,16 +342,16 @@ public class PlayScreen extends ScreenAdapter {
                 if (e.getType() == e.MISSILE) {
                     for (Platform p : platformList) {
                         if (e.checkColision(p)) {
-                            // TODO: remove and explode if collides with platform
-                            enemies.remove(j);
                             missileDeathSfx.play();
+                            enemies.remove(j);
+                            break;
                         }
                     }
                     if (e.getY() > player.CEILING_HEIGHT-10 || e.getY() < player.FLOOR_HEIGHT+10) {
                         enemies.remove(j);
                         missileDeathSfx.play();
+                        break;
                     }
-                    // TODO: check for collision with walls, ceiling, and other enemies
                 }
             }
         }
@@ -384,7 +385,7 @@ public class PlayScreen extends ScreenAdapter {
                 if (p != null) {
                     powerupList.add(p);
                 }
-                if (escapeGame.random.nextInt(5) == 0) {
+                if (escapeGame.random.nextInt(3) == 0) {
                     enemies.add(platformList.get(platformList.size()-1).spawnEnemy());
                 }
             }
@@ -403,7 +404,7 @@ public class PlayScreen extends ScreenAdapter {
             spikeTimer = 0;
             enemies.add(new Enemie(
                     escapeGame,
-                    escapeGame.random.nextFloat()*100+min,
+                    escapeGame.random.nextFloat()*150+min,
                     Avatar.FLOOR_HEIGHT + 14,
                     Enemie.SPIKES
             ));
