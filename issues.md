@@ -76,6 +76,10 @@
  - [70] vertical scrolling
  - [71] stop spokes from spawning partly off platforms
  - [72] only check collision for things on screen
+ - [73] fix bug where score increases after death
+ - [74] slow down game pacing and add speed cap
+ - [75] increase player size
+ - [76] spike hitboxes are too big
 
  ## Old ##
 
