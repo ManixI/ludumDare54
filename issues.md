@@ -80,6 +80,7 @@
  - [74] slow down game pacing and add speed cap
  - [75] increase player size
  - [76] spike hitboxes are too big
+ - [77] do grid based spawning
 
  ## Old ##
 
