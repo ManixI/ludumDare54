@@ -18,7 +18,9 @@ public class Platform extends Sprite {
 
     boolean passthough = false;
 
+    // max x distance one platform can spawn from another
     static float maxDistance = 500;
+    // max y one platform can spawn from another
     static float maxHeight = 115;
 
     public boolean isLast = false;
@@ -59,9 +61,9 @@ public class Platform extends Sprite {
 
         if (startY < FLOOR_HEIGHT + 60) {
             startY = FLOOR_HEIGHT + 60;
-        } else if (startY > CEILING_HEIGHT - 100) {
+        } /*else if (startY > CEILING_HEIGHT - 100) {
             startY = CEILING_HEIGHT - 100;
-        }
+        }*/
 
         for (int i=0; i<length; i++) {
             // leftmost tile
