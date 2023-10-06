@@ -50,6 +50,7 @@
  - **[65]** fix rounding error preventing enemies from spawning
  - [66] add button sfx
  - [67] fix platforms spawning below screen
+ - [70] vertical scrolling
 
 ## Open Issues ##
 
@@ -73,7 +74,6 @@
  - [61] running sfx that scales with speed
  - [68] remove ceiling and floor
  - [69] multiple platform paths
- - [70] vertical scrolling
  - [71] stop spokes from spawning partly off platforms
  - [72] only check collision for things on screen
  - [73] fix bug where score increases after death
@@ -85,8 +85,8 @@
 
 
 ## general ideas ##
-In keeping with idea of limited space, have ceiling and floor. floor is RNG pits and floor
-Ceiling has enemy spawns
+can handle platforms differently. Instead of lists of objects that hold their xy position, set game on grid and then track if every cell is a platform, enemy, powerup, etc.
+
 floor has enemy and powerup spawns
 player has double jump, but max jump easily hits ceiling
 throwable hat
