@@ -351,11 +351,12 @@ public class PlayScreen extends ScreenAdapter {
                             break;
                         }
                     }
-                    if (e.getY() > player.CEILING_HEIGHT-10 || e.getY() < player.FLOOR_HEIGHT+10) {
+                    // despawm missile if collides with ceiling
+                    /*if (e.getY() > player.CEILING_HEIGHT-10 || e.getY() < player.FLOOR_HEIGHT+10) {
                         enemies.remove(j);
                         missileDeathSfx.play();
                         break;
-                    }
+                    }*/
                 }
             }
         }
@@ -413,7 +414,7 @@ public class PlayScreen extends ScreenAdapter {
                     Enemie.SPIKES
             ));
         }
-        if (ceilingSpikeTimer > 250) {
+        /*if (ceilingSpikeTimer > 250) {
             ceilingSpikeTimer = 0;
             enemies.add(new Enemie(
                     escapeGame,
@@ -421,13 +422,13 @@ public class PlayScreen extends ScreenAdapter {
                     Avatar.CEILING_HEIGHT + 30,
                     Enemie.SPIKES_FLIPPED
             ));
-        }
+        }*/
         if (missileTimer > 4000) {
             missileTimer = 0;
             enemies.add( new Enemie(
                     escapeGame,
                     escapeGame.random.nextFloat()*100+min,
-                    escapeGame.random.nextFloat( )*(player.CEILING_HEIGHT - 50-(player.FLOOR_HEIGHT + 50))+player.FLOOR_HEIGHT + 50,
+                    escapeGame.random.nextFloat( )*(cam.position.y + 300 -(cam.position.y +300))+cam.position.y + 300,
                     Enemie.MISSILE
             ));
             missileLaunchSfx.play();
@@ -562,7 +563,7 @@ public class PlayScreen extends ScreenAdapter {
 
 
         // draw background
-        Texture background = escapeGame.am.get(escapeGame.BACKGROUD, Texture.class);
+        /*Texture background = escapeGame.am.get(escapeGame.BACKGROUD, Texture.class);
         double start = (cam.position.y - 1300);
         start = Math.floor(start);
         for (int i=1; i<1000; i++) {
@@ -576,7 +577,7 @@ public class PlayScreen extends ScreenAdapter {
                 );
             }
 
-        }
+        }*/
 
         for(Iterator<Bang> bi = explosions.iterator(); bi.hasNext(); ) {
             Bang b = bi.next();
@@ -596,7 +597,7 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         // draw ceiling
-        Texture ceilingTex = escapeGame.am.get(escapeGame.CEILING_TILES[0], Texture.class);
+        /*Texture ceilingTex = escapeGame.am.get(escapeGame.CEILING_TILES[0], Texture.class);
         Texture floorTex = escapeGame.am.get(escapeGame.FLOOR_TILES[0], Texture.class);
         start = (cam.position.y - 600) / ceilingTex.getWidth();
         start = Math.floor(start);
@@ -615,7 +616,7 @@ public class PlayScreen extends ScreenAdapter {
                     floorTex.getWidth()*3,
                     floorTex.getHeight()*3
             );
-        }
+        }*/
 
 
         //bounceGame.batch.draw(bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class), 200, 200);
