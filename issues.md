@@ -80,9 +80,15 @@
  - [74] slow down game pacing and add speed cap
  - [75] increase player size
  - [76] spike hitboxes are too big
- - [77] do grid based spawning
-
+ - [78] add background
+ - [79] update sprites to reflect target aesthetic
+ - [80] portals to different levels/locations
+ - [81] bounding rectangle draw function
+ - [82] change how camera operates
+ - [83] redo spike sprite to fit in grid space and to better reflect side damage
+ 
  ## Old ##
+ - [77] do grid based spawning
 
 
 ## general ideas ##
@@ -95,3 +101,11 @@ hat is one use
 can hold up to 3 (stack on head)
 collapsing ceiling that needs to be reset
 needs to feel claustrophobic
+
+## notes ##
+Don't do grid based platforms, use original linked list. Grid severely limits platforms abilities to reference each other, bad for rng generation outlined in proposal
+32x32 pixels seems a good size for a single block size
+many objects like spikes, etc will need to be 1x2 at that size
+spikes and platforms handled as background tiles, powerups and other enemies handled as sprites
+camera should fix on player location, with player having a fixed speed rather then player following camera, need to modify how missiles work of go this path
+only check collision for enemies if they are on screen
