@@ -88,6 +88,7 @@
  - [83] redo spike sprite to fit in grid space and to better reflect side damage
  - [84] camera follows player, instead of current player follows camera
  - [85] add varied spawn behavior to different platform paths
+ - [86] jump up though platforms
  
  ## Old ##
  - [77] do grid based spawning
