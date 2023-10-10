@@ -50,6 +50,7 @@
  - **[65]** fix rounding error preventing enemies from spawning
  - [66] add button sfx
  - [67] fix platforms spawning below screen
+ - [69] multiple platform paths
  - [70] vertical scrolling
 
 ## Open Issues ##
@@ -73,7 +74,6 @@
  - [60] scale avatar size
  - [61] running sfx that scales with speed
  - [68] remove ceiling and floor
- - [69] multiple platform paths
  - [71] stop spokes from spawning partly off platforms
  - [72] only check collision for things on screen
  - [73] fix bug where score increases after death
@@ -86,7 +86,8 @@
  - [81] bounding rectangle draw function
  - [82] change how camera operates
  - [83] redo spike sprite to fit in grid space and to better reflect side damage
- - [84] camera follows player, instead of current palyer follows camera
+ - [84] camera follows player, instead of current player follows camera
+ - [85] add varied spawn behavior to different platform paths
  
  ## Old ##
  - [77] do grid based spawning
