@@ -24,7 +24,7 @@ public class PlayScreen extends ScreenAdapter {
     private ArrayList<Bang> explosions;
     BangAnimationFrames baf;
 
-    ArrayList<Platform> platformList;
+    ArrayList<Platform>[] platformList;
     Avatar player;
     OrthographicCamera cam;
 
@@ -75,16 +75,24 @@ public class PlayScreen extends ScreenAdapter {
         restartButton = new Sprite();
         restartButton.setTexture(escapeGame.am.get(escapeGame.BTN_RESTART));
 
-        platformList = new ArrayList<Platform>();
-        platformList.addAll(Platform.makePlat(game, 100, 200, 10, cam));
-        //platformList.add(new Platform(game, 100, 200, 10, cam));
-        int i = 0;
-        ArrayList<Platform> plats;
-        while (i < 10) {
-            plats = platformList.get(platformList.size()-1).generateNext(cam);
-            platformList.addAll(plats);
-            i++;
+        //platformList = new ArrayList<Platform>();
+        platformList = new ArrayList[9];
+        for (int i=0; i<platformList.length; i++) {
+            platformList[i] = new ArrayList<Platform>();
         }
+        for (ArrayList<Platform> l : platformList) {
+            l.addAll(Platform.makePlat(game, 100, 200, 10, cam));
+
+            int i = 0;
+            ArrayList<Platform> plats;
+            while (i < 10) {
+                plats = l.get(l.size()-1).generateNext(cam);
+                l.addAll(plats);
+                i++;
+            }
+        }
+        //platformList.add(new Platform(game, 100, 200, 10, cam));
+
 
         powerupList = new ArrayList<Powerup>();
         powerupList.add(new Powerup(game, cam.position.x, cam.position.y, Powerup.ONE_UP));
@@ -292,14 +300,15 @@ public class PlayScreen extends ScreenAdapter {
         points = staticPoints + distance;
 
         // check collision on each platform to re-set jump
-        for (Platform p : platformList) {
-            if (p.checkCollision(player, cam, gameSpeed)) {
-                numJumps = totalJumps;
-                player.setAirborn(false);
-                break;
+        for (ArrayList<Platform> l : platformList) {
+            for (Platform p : l) {
+                if (p.checkCollision(player, cam, gameSpeed)) {
+                    numJumps = totalJumps;
+                    player.setAirborn(false);
+                    break;
+                }
             }
         }
-
 
         // check collision with enemies
         if (!invincible)
@@ -344,11 +353,13 @@ public class PlayScreen extends ScreenAdapter {
                     }
                 }
                 if (e.getType() == e.MISSILE) {
-                    for (Platform p : platformList) {
-                        if (e.checkColision(p)) {
-                            missileDeathSfx.play();
-                            enemies.remove(j);
-                            break;
+                    for (ArrayList<Platform> l : platformList) {
+                        for (Platform p : l) {
+                            if (e.checkColision(p)) {
+                                missileDeathSfx.play();
+                                enemies.remove(j);
+                                break;
+                            }
                         }
                     }
                     // despawm missile if collides with ceiling
@@ -383,18 +394,21 @@ public class PlayScreen extends ScreenAdapter {
 
 
         // generate more platforms if player gets close enough to end
-        if (platformList.get(platformList.size()-1).getX() < cam.position.x + 2500) {
-            for (int i=0; i<10; i++) {
-                platformList.addAll(platformList.get(platformList.size()-1).generateNext(cam));
-                Powerup p = platformList.get(platformList.size()-1).spawnPowerup();
-                if (p != null) {
-                    powerupList.add(p);
-                }
-                if (escapeGame.random.nextInt(3) == 0) {
-                    enemies.add(platformList.get(platformList.size()-1).spawnEnemy());
+        for (ArrayList<Platform> l : platformList) {
+            if (l.get(l.size()-1).getX() < cam.position.x + 2500) {
+                for (int i=0; i<10; i++) {
+                    l.addAll(l.get(l.size()-1).generateNext(cam));
+                    Powerup p = l.get(l.size()-1).spawnPowerup();
+                    if (p != null) {
+                        powerupList.add(p);
+                    }
+                    if (escapeGame.random.nextInt(3) == 0) {
+                        enemies.add(l.get(l.size()-1).spawnEnemy());
+                    }
                 }
             }
         }
+
 
         // spawn enemies based on time
         // TODO: fix wierd gaps in spike spawns
@@ -531,14 +545,17 @@ public class PlayScreen extends ScreenAdapter {
     }
 
     private void cleanupPlatforms() {
-        for (int i=0; i<platformList.size(); i++) {
-            Platform plat = platformList.get(i);
-            if (plat.getX()+plat.getWidth() < cam.position.x - 500) {
-                platformList.remove(i);
-                // return early rather than fixing index error
-                return;
+        for (ArrayList<Platform> l : platformList) {
+            for (int i=0; i<l.size(); i++) {
+                Platform plat = l.get(i);
+                if (plat.getX()+plat.getWidth() < cam.position.x - 500) {
+                    l.remove(i);
+                    // return early rather than fixing index error
+                    return;
+                }
             }
         }
+
     }
 
     private void cleanupPowerups(ArrayList<Powerup> sprites) {
@@ -585,10 +602,11 @@ public class PlayScreen extends ScreenAdapter {
             else { b.draw(escapeGame.batch); }
         }
         //ball.draw(bounceGame.batch);
-        for (Platform p : platformList) {
-            p.draw(escapeGame.batch);
+        for (ArrayList<Platform> l : platformList) {
+            for (Platform p : l) {
+                p.draw(escapeGame.batch);
+            }
         }
-
         for (Powerup p : powerupList) {
             p.draw(escapeGame.batch);
         }

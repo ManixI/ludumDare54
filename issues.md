@@ -104,6 +104,7 @@ needs to feel claustrophobic
 
 ## notes ##
 Don't do grid based platforms, use original linked list. Grid severely limits platforms abilities to reference each other, bad for rng generation outlined in proposal
+Limit each list of platforms in array to band it can spawn in
 32x32 pixels seems a good size for a single block size
 many objects like spikes, etc will need to be 1x2 at that size
 spikes and platforms handled as background tiles, powerups and other enemies handled as sprites
