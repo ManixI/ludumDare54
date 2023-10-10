@@ -61,7 +61,7 @@
  - [40] zoom out as speed increases
  - [41] add graphic for death plane
  - [42] different platform paths lean towards different directions
- - **[43]** increase sense of speed
+ - [43] increase sense of speed
  - [45] spawn enemies as function of spawning platform
  - [46] set minimum height separation between platforms
  - [50] add falling enemy
@@ -86,6 +86,7 @@
  - [81] bounding rectangle draw function
  - [82] change how camera operates
  - [83] redo spike sprite to fit in grid space and to better reflect side damage
+ - [84] camera follows player, instead of current palyer follows camera
  
  ## Old ##
  - [77] do grid based spawning
