@@ -59,6 +59,7 @@ public class EscapeGame extends Game {
 
     // debug stuff
     public static final String DBG_COLLISION_REC = "debug-collision-image.png";
+    public static final String DBG_BOX = "debug-box.png";
 
     AssetManager am;  // AssetManager provides a single source for loaded resources
     SpriteBatch batch;
@@ -123,6 +124,7 @@ public class EscapeGame extends Game {
 
         // debug stuff
         am.load(DBG_COLLISION_REC, Texture.class);
+        am.load(DBG_BOX, Texture.class);
 
         // Load Sounds
         // sfx
