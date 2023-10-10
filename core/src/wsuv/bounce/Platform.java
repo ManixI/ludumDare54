@@ -29,10 +29,22 @@ public class Platform extends Sprite {
     public static final float CEILING_HEIGHT = 680;
     public static final float FLOOR_HEIGHT = -150;
 
+    public float upperBounds;
+    public float lowerBounds;
 
-    private Platform(EscapeGame g, float startX, float height, String type, OrthographicCamera cam) {
+
+    private Platform(EscapeGame g, float startX, float height, String type, OrthographicCamera cam, float upper, float lower) {
         super(g.am.get(type, Texture.class));
         game = g;
+
+        upperBounds = upper;
+        lowerBounds = lower;
+
+        if (height > upper) {
+            height = upper;
+        } else if (height < lower) {
+            height = lower;
+        }
 
 
         bonkSfx = game.am.get(game.SFX_BONK);
@@ -47,7 +59,16 @@ public class Platform extends Sprite {
         top = height;
     }
 
-    public static ArrayList<Platform> makePlat(EscapeGame g, float startX, float startY, int length, OrthographicCamera cam) {
+    public static ArrayList<Platform> makeFirstPlat(
+            EscapeGame g,
+            float startX,
+            float startY,
+            int length,
+            OrthographicCamera cam,
+            float higherst,
+            float lowest
+    ) {
+        // TODO: there's got to be a better way of doing this then copy paste
         ArrayList<Platform> plats = new ArrayList<Platform>();
 
         // needs to be at least 2 tiles wide to look right
@@ -73,7 +94,9 @@ public class Platform extends Sprite {
                         startX,
                         startY,
                         EscapeGame.PLATFORM_TILES[0],
-                        cam
+                        cam,
+                        higherst,
+                        lowest
                 ));
             } else if (i == length-1) {
                 // rightmost tile
@@ -82,7 +105,9 @@ public class Platform extends Sprite {
                         startX+(cwidth*(i-1))+lwidth,
                         startY,
                         EscapeGame.PLATFORM_TILES[2],
-                        cam
+                        cam,
+                        higherst,
+                        lowest
                 ));
                 plats.get(plats.size()-1).isLast = true;
             } else {
@@ -92,7 +117,68 @@ public class Platform extends Sprite {
                         startX+(cwidth*(i-1))+lwidth,
                         startY,
                         EscapeGame.PLATFORM_TILES[1],
-                        cam
+                        cam,
+                        higherst,
+                        lowest
+                ));
+            }
+        }
+
+        return plats;
+    }
+
+    public ArrayList<Platform> makePlat(EscapeGame g, float startX, float startY, int length, OrthographicCamera cam) {
+        ArrayList<Platform> plats = new ArrayList<Platform>();
+
+        // needs to be at least 2 tiles wide to look right
+        // TODO: add single tile platform texture
+        if (length < 2) {
+            length = 2;
+        }
+
+        float lwidth = 64;
+        float cwidth = 82;
+
+        if (startY < FLOOR_HEIGHT + 60) {
+            startY = FLOOR_HEIGHT + 60;
+        } /*else if (startY > CEILING_HEIGHT - 100) {
+            startY = CEILING_HEIGHT - 100;
+        }*/
+
+        for (int i=0; i<length; i++) {
+            // leftmost tile
+            if (i == 0) {
+                plats.add(new Platform(
+                        g,
+                        startX,
+                        startY,
+                        EscapeGame.PLATFORM_TILES[0],
+                        cam,
+                        this.upperBounds,
+                        this.lowerBounds
+                ));
+            } else if (i == length-1) {
+                // rightmost tile
+                plats.add(new Platform(
+                        g,
+                        startX+(cwidth*(i-1))+lwidth,
+                        startY,
+                        EscapeGame.PLATFORM_TILES[2],
+                        cam,
+                        this.upperBounds,
+                        this.lowerBounds
+                ));
+                plats.get(plats.size()-1).isLast = true;
+            } else {
+                // center tiles
+                plats.add(new Platform(
+                        g,
+                        startX+(cwidth*(i-1))+lwidth,
+                        startY,
+                        EscapeGame.PLATFORM_TILES[1],
+                        cam,
+                        this.upperBounds,
+                        this.lowerBounds
                 ));
             }
         }

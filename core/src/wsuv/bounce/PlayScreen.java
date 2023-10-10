@@ -77,12 +77,20 @@ public class PlayScreen extends ScreenAdapter {
 
         //platformList = new ArrayList<Platform>();
         platformList = new ArrayList[9];
+        int tmpPlatSpace = 300;
         for (int i=0; i<platformList.length; i++) {
             platformList[i] = new ArrayList<Platform>();
+            platformList[i].addAll(Platform.makeFirstPlat(
+                    game,
+                    100,
+                    200+(tmpPlatSpace*i),
+                    10,
+                    cam,
+                    tmpPlatSpace*i,
+                    400 + tmpPlatSpace*i
+            ));
         }
         for (ArrayList<Platform> l : platformList) {
-            l.addAll(Platform.makePlat(game, 100, 200, 10, cam));
-
             int i = 0;
             ArrayList<Platform> plats;
             while (i < 10) {
@@ -92,7 +100,6 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
         //platformList.add(new Platform(game, 100, 200, 10, cam));
-
 
         powerupList = new ArrayList<Powerup>();
         powerupList.add(new Powerup(game, cam.position.x, cam.position.y, Powerup.ONE_UP));
