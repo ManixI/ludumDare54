@@ -220,9 +220,10 @@ public class Platform extends Sprite {
                     return true;
                 } else {
                     // started below platform, don't warp up if jump falls short
-                    player.setY((getY() - player.getHeight() - getHeight()*2.5f + 20));
+                    /*player.setY((getY() - player.getHeight() - getHeight()*2.5f + 20));
                     player.yVelocity = 0;
-                    bonkSfx.play();
+                    bonkSfx.play();*/
+                    passthough = true;
                     return false;
                 }
             } else {
