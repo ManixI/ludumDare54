@@ -57,6 +57,9 @@ public class EscapeGame extends Game {
     public static final String SFX_MISSILE_DEATH = "missileDeath.wav";
     public static final String SFX_RESTART = "restart.wav";
 
+    // debug stuff
+    public static final String DBG_COLLISION_REC = "debug-collision-image.png";
+
     AssetManager am;  // AssetManager provides a single source for loaded resources
     SpriteBatch batch;
 
@@ -117,6 +120,9 @@ public class EscapeGame extends Game {
 
         // player
         am.load(PLAYER_SPRITE_2X2, Texture.class);
+
+        // debug stuff
+        am.load(DBG_COLLISION_REC, Texture.class);
 
         // Load Sounds
         // sfx
