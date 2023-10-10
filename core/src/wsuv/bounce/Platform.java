@@ -202,7 +202,7 @@ public class Platform extends Sprite {
         futurePlayer.yVelocity = 0;
         futurePlayer.update(cam, gameSpeed);
         if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
-            player.xVelocity = 0;
+            //player.xVelocity = 0;
             if (player.getX() < getX()-player.getWidth()) {
                 //player.setX(getX()-player.getWidth());
             } else {
