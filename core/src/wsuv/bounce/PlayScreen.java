@@ -267,9 +267,9 @@ public class PlayScreen extends ScreenAdapter {
         if (player.getY() < 300) {
             // camera floor
             cam.position.y = 300;
-        } else if (player.getY() > 2000) {
+        //} else if (player.getY() > 2000) {
             // camera ceiling
-            cam.position.y = 2000;
+            //cam.position.y = 2000;
         } else {
             // camera track player
             cam.position.y = player.getY();
@@ -482,9 +482,9 @@ public class PlayScreen extends ScreenAdapter {
         }*/
         // ignore key presses when console is open...
         if (!hud.isOpen() && state == SubState.PLAYING) {
-            /*if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                player.yVelocity += 30;
-            }*/
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                player.yVelocity = 200;
+            }
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
                 player.yVelocity -= 10;
             }
