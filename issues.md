@@ -52,6 +52,7 @@
  - [67] fix platforms spawning below screen
  - [69] multiple platform paths
  - [70] vertical scrolling
+ - [86] jump up though platforms
 
 ## Open Issues ##
 
@@ -88,7 +89,6 @@
  - [83] redo spike sprite to fit in grid space and to better reflect side damage
  - [84] camera follows player, instead of current player follows camera
  - [85] add varied spawn behavior to different platform paths
- - [86] jump up though platforms
  
  ## Old ##
  - [77] do grid based spawning
@@ -107,9 +107,14 @@ needs to feel claustrophobic
 
 ## notes ##
 Don't do grid based platforms, use original linked list. Grid severely limits platforms abilities to reference each other, bad for rng generation outlined in proposal
-Limit each list of platforms in array to band it can spawn in
+
+~~Limit each list of platforms in array to band it can spawn in~~
+
 32x32 pixels seems a good size for a single block size
 many objects like spikes, etc will need to be 1x2 at that size
 spikes and platforms handled as background tiles, powerups and other enemies handled as sprites
+
 camera should fix on player location, with player having a fixed speed rather then player following camera, need to modify how missiles work of go this path
 only check collision for enemies if they are on screen
+
+player now clips though corner of platforms when falling down instead of bonking, updated platform sprite needs to reflect this
