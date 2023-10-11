@@ -2,6 +2,7 @@ package wsuv.bounce;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -22,7 +23,7 @@ public class Avatar extends Sprite implements Cloneable {
     public static final float JUMP_VELOCITY = 800;
 
     public static final float CEILING_HEIGHT = 680;
-    public static final float FLOOR_HEIGHT = -150;
+    public static final float FLOOR_HEIGHT = -130;
 
     public float scaleFactor = 2f;
 
@@ -58,13 +59,20 @@ public class Avatar extends Sprite implements Cloneable {
             }
         }
         runAnimation = new Animation(0.1f, runFrames);
-        //runAnimation.getKeyFrame(0, true);
+        currentFrame = (TextureRegion) runAnimation.getKeyFrame(0, true);
         stateTime = 0;
 
         //scale(2);
         //setSize(2,2);
         bonkSfx = game.am.get(game.SFX_BONK);
         stepSfx = game.am.get(game.SFX_STEP);
+
+        //setCenter(getX()+getWidth()/2, getY()+getHeight()/2);
+        //scale(2);
+        //System.out.println(getY()+" "+getHeight());
+        setSize(getWidth()/2, getHeight()/2);
+        scale(scaleFactor);
+        //System.out.println(getY()+" "+getHeight());
 
         //setCenter(startX, startY);
     }
@@ -93,6 +101,25 @@ public class Avatar extends Sprite implements Cloneable {
                 getScaleY(),
                 getRotation()
         );
+        /*super.draw(batch);
+
+        stateTime += Gdx.graphics.getDeltaTime();
+        currentFrame = (TextureRegion) runAnimation.getKeyFrame(stateTime, true);
+
+        Color color = getColor();
+        batch.setColor(color.r, color.g, color.b, color.a);
+        batch.draw(
+                currentFrame,
+                getX(),
+                getY(),
+                getWidth()/2,
+                getHeight()/2,
+                getWidth(),
+                getHeight(),
+                getScaleX(),
+                getScaleY(),
+                getRotation()
+        );*/
 
     }
 
@@ -124,8 +151,8 @@ public class Avatar extends Sprite implements Cloneable {
             setY(CEILING_HEIGHT+20);
             yVelocity = 0;
             bonkSfx.play();
-        } else*/ if (getY() < FLOOR_HEIGHT) {
-            setY(FLOOR_HEIGHT);
+        } else*/ if (getY() < FLOOR_HEIGHT + getHeight()*2) {
+            setY(FLOOR_HEIGHT+getHeight()*2);
             yVelocity = 0;
             collided = true;
             airborn = false;
