@@ -268,7 +268,8 @@ public class PlayScreen extends ScreenAdapter {
 
     public void update(float delta) {
 
-        cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2)*gameSpeed;
+        //cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2)*gameSpeed;
+        cam.position.x = player.getX() + 250;
 
         if (player.getY() < 300) {
             // camera floor
