@@ -217,7 +217,7 @@ public class Platform extends Sprite {
             futurePlayer.update(cam, gameSpeed);
             if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
                 if (player.yVelocity <= 0 && passthough == false) {
-                    player.setY(getY() + getHeight() * 2.5f);
+                    player.setY(getY() + getHeight() * 2.5f + player.scaleFactor * player.getHeight());
                     player.yVelocity = 0;
                     return true;
                 } else {
