@@ -58,7 +58,6 @@ public class PlayScreen extends ScreenAdapter {
     float missileTimer = 0;
     float gameSpeed = 1.0f;
 
-    Sprite testSprite;
     Texture collisionBox;
     private boolean drawDbugBox = true;
 
@@ -146,16 +145,8 @@ public class PlayScreen extends ScreenAdapter {
 
 
         // debug stuff
-        Texture tex = game.am.get(EscapeGame.DBG_BOX, Texture.class);
-        testSprite = new Sprite(tex);
         collisionBox = game.am.get(EscapeGame.DBG_COLLISION_REC, Texture.class);
 
-        //testSprite.setBounds(testSprite.getX(), testSprite.getY(), testSprite.getWidth()*2, testSprite.getHeight()*2);
-        //testSprite.scale(2);
-        testSprite.setScale(2,2);
-
-        //player.setScale(2,2);
-        //player.setSize(64,64);
 
         // we've loaded textures, but the explosion texture isn't quite ready to go--
         // we need to carve it up into frames.  All that work really
@@ -630,15 +621,42 @@ public class PlayScreen extends ScreenAdapter {
             for (Platform p : l) {
                 p.draw(escapeGame.batch);
                 if (drawDbugBox) {
-
+                    tmp = p.getBoundingRectangle();
+                    escapeGame.batch.draw(
+                            collisionBox,
+                            tmp.getX(),
+                            tmp.getY(),
+                            tmp.getWidth(),
+                            tmp.getHeight()
+                    );
                 }
             }
         }
         for (Powerup p : powerupList) {
             p.draw(escapeGame.batch);
+            if (drawDbugBox) {
+                tmp = p.getBoundingRectangle();
+                escapeGame.batch.draw(
+                        collisionBox,
+                        tmp.getX(),
+                        tmp.getY(),
+                        tmp.getWidth(),
+                        tmp.getHeight()
+                );
+            }
         }
         for (Enemie e : enemies) {
             e.draw(escapeGame.batch);
+            if (drawDbugBox) {
+                tmp = e.getBoundingRectangle();
+                escapeGame.batch.draw(
+                        collisionBox,
+                        tmp.getX(),
+                        tmp.getY(),
+                        tmp.getWidth(),
+                        tmp.getHeight()
+                );
+            }
         }
 
         // draw ceiling
@@ -703,23 +721,7 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         // debug stuff goes over every other sprite
-        testSprite.setY(cam.position.y);
-        testSprite.setX(cam.position.x);
-        testSprite.draw(escapeGame.batch);
 
-        tmp = testSprite.getBoundingRectangle();
-
-        escapeGame.batch.draw(
-                collisionBox,
-                tmp.getX(),
-                tmp.getY(),
-                tmp.getWidth(),
-                tmp.getHeight()
-        );
-
-        if (player.getBoundingRectangle().overlaps(tmp)) {
-
-        }
 
         hud.draw(escapeGame.batch);
         escapeGame.batch.end();
