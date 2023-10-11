@@ -30,6 +30,7 @@ public class EscapeGame extends Game {
             "plat-center.png",
             "plat-right.png",
     };
+    public static final String SPEED_PLAT = "speed-pad.png";
     public static final String ONE_UP = "1up.png";
     public static final String POINTS = "points.png";
     public static final String SPIKES = "spikes.png";
@@ -96,6 +97,7 @@ public class EscapeGame extends Game {
         for (String s : PLATFORM_TILES) {
             am.load(s, Texture.class);
         }
+        am.load(SPEED_PLAT, Texture.class);
 
         // ceiling tiles
         for (String s : CEILING_TILES) {
