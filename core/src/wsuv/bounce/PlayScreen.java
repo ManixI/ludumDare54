@@ -277,16 +277,19 @@ public class PlayScreen extends ScreenAdapter {
             cam.position.x += Gdx.graphics.getDeltaTime() * camSpeed * gameSpeed;
         }
 
-        if (player.getY() < 300) {
-            // camera floor
-            cam.position.y = 300;
-        } else if (player.getY() > 6000) {
-            // camera ceiling
-            cam.position.y = 6000;
-        } else {
-            // camera track player
-            cam.position.y = player.getY();
+        if (state == SubState.PLAYING) {
+            if (player.getY() < 300) {
+                // camera floor
+                cam.position.y = 300;
+            } else if (player.getY() > 6000) {
+                // camera ceiling
+                cam.position.y = 6000;
+            } else {
+                // camera track player
+                cam.position.y = player.getY();
+            }
         }
+
 
         cam.update();
         hud.updateCam(cam);
