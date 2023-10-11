@@ -57,6 +57,7 @@ public class PlayScreen extends ScreenAdapter {
     float ceilingSpikeTimer = 0;
     float missileTimer = 0;
     float gameSpeed = 1.0f;
+    float camSpeed = 500;
 
     Texture collisionBox;
     private boolean drawDbugBox = true;
@@ -272,7 +273,7 @@ public class PlayScreen extends ScreenAdapter {
         if (debugCam) {
             cam.position.x = player.getX();
         } else {
-            cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2)*gameSpeed;
+            cam.position.x += Gdx.graphics.getDeltaTime() * camSpeed * gameSpeed;
         }
 
         if (player.getY() < 300) {
@@ -289,6 +290,11 @@ public class PlayScreen extends ScreenAdapter {
         cam.update();
         hud.updateCam(cam);
         hud.updatePosCam();
+
+        // lock player in back half of screen
+        if (player.getX()+player.getWidth() >= cam.position.x) {
+            player.setX(cam.position.x - player.getWidth());
+        }
 
         // check powerup collision
         for (int i = 0; i<powerupList.size(); i++) {
