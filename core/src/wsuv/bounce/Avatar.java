@@ -56,8 +56,8 @@ public class Avatar extends Sprite implements Cloneable {
             }
         }
         runAnimation = new Animation(0.1f, runFrames);
-        currentFrame = (TextureRegion) runAnimation.getKeyFrame(0, true);
         stateTime = 0;
+        currentFrame = (TextureRegion) runAnimation.getKeyFrame(stateTime, true);
 
         bonkSfx = game.am.get(game.SFX_BONK);
         stepSfx = game.am.get(game.SFX_STEP);
@@ -68,8 +68,14 @@ public class Avatar extends Sprite implements Cloneable {
     }
 
     @Override public void draw(Batch batch) {
-        stateTime += Gdx.graphics.getDeltaTime();
-        currentFrame = (TextureRegion) runAnimation.getKeyFrame(stateTime, true);
+        if (!airborn) {
+            stateTime += Gdx.graphics.getDeltaTime();
+            currentFrame = (TextureRegion) runAnimation.getKeyFrame(stateTime, true);
+        } else {
+            // freezes animation on this frame if airborn
+            currentFrame = (TextureRegion) runAnimation.getKeyFrame(0, true);
+        }
+
         batch.draw(
                 currentFrame,
                 getX(),
