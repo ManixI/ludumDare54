@@ -698,6 +698,9 @@ public class PlayScreen extends ScreenAdapter {
 
         if (invincible && !drawPlayer) {
 
+        } else if (state != SubState.PLAYING) {
+            // don't draw player if not playing
+            // TODO: clean up this
         } else {
             player.draw(escapeGame.batch);
             if (drawDbugBox) {
