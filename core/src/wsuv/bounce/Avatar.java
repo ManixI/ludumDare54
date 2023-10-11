@@ -42,9 +42,6 @@ public class Avatar extends Sprite implements Cloneable {
     public Avatar(EscapeGame game, float startX, float startY) {
         super(game.am.get(game.PLAYER_SPRITE_2X2, Texture.class));
 
-        //scale(scaleFactor);
-
-
         //ref: https://www.catalinmunteanu.com/libgdx-2d-animations-from-sprites/
         TextureRegion[][] tmp = TextureRegion.split(
                 getTexture(),
@@ -62,29 +59,13 @@ public class Avatar extends Sprite implements Cloneable {
         currentFrame = (TextureRegion) runAnimation.getKeyFrame(0, true);
         stateTime = 0;
 
-        //scale(2);
-        //setSize(2,2);
         bonkSfx = game.am.get(game.SFX_BONK);
         stepSfx = game.am.get(game.SFX_STEP);
 
-        //setCenter(getX()+getWidth()/2, getY()+getHeight()/2);
-        //scale(2);
-        //System.out.println(getY()+" "+getHeight());
-        setSize(getWidth()/2, getHeight()/2);
+        setSize(getWidth()/game.PLAYER_SPRITE_COLS, getHeight()/game.PLAYER_SPRITE_ROWS);
         scale(scaleFactor);
-        //System.out.println(getY()+" "+getHeight());
 
-        //setCenter(startX, startY);
     }
-
-    /*@Override public Rectangle getBoundingRectangle() {
-        Rectangle rec = super.getBoundingRectangle();
-        //rec.setSize(rec.getWidth(), rec.getHeight());
-        rec.height *= 2;
-        rec.width *= 2;
-        rec.setCenter(getX()+getWidth(), getY()+getHeight());
-        return rec;
-    }*/
 
     @Override public void draw(Batch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
@@ -101,33 +82,7 @@ public class Avatar extends Sprite implements Cloneable {
                 getScaleY(),
                 getRotation()
         );
-        /*super.draw(batch);
-
-        stateTime += Gdx.graphics.getDeltaTime();
-        currentFrame = (TextureRegion) runAnimation.getKeyFrame(stateTime, true);
-
-        Color color = getColor();
-        batch.setColor(color.r, color.g, color.b, color.a);
-        batch.draw(
-                currentFrame,
-                getX(),
-                getY(),
-                getWidth()/2,
-                getHeight()/2,
-                getWidth(),
-                getHeight(),
-                getScaleX(),
-                getScaleY(),
-                getRotation()
-        );*/
-
     }
-
-
-    /*@Override
-    public void draw(Batch batch) {
-        batch.draw(getTexture(), getX(), getY(), getWidth()*scaleFactor, getHeight()*scaleFactor);
-    }*/
 
     public void setAirborn(boolean b) {
         airborn = b;
