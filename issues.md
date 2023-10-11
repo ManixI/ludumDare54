@@ -91,6 +91,10 @@
  - [86] shrink width of player hitbox
  - [87] better player re-spawn position
  - [88] better game over screen
+ - [89] fix game hud crashing game when opened
+ - [90] fix score and lives position
+ - [91] add cheats
+ - [92] fix the memory leak
  
 
  ## Old ##
