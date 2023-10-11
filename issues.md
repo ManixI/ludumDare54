@@ -44,6 +44,7 @@
  - [53] update enemy spawning
  - [54] add double jump
  - [55] platforms shouldn't be pass-though
+ - [57] freeze player animation on jump
  - [60] scale avatar size
  - [62] fix collision issue with player sprite
  - **[63]** improve respawn mechanic
@@ -71,7 +72,6 @@
  - [50] add falling enemy
  - [52] add pits to floor
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
- - [57] freeze player animation on jump
  - [58] spinning sprite on second jump
  - [59] add spikes to bottom of platforms
  - [61] running sfx that scales with speed

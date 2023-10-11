@@ -73,7 +73,7 @@ public class Avatar extends Sprite implements Cloneable {
             currentFrame = (TextureRegion) runAnimation.getKeyFrame(stateTime, true);
         } else {
             // freezes animation on this frame if airborn
-            currentFrame = (TextureRegion) runAnimation.getKeyFrame(0, true);
+            currentFrame = (TextureRegion) runAnimation.getKeyFrame(450, true);
         }
 
         batch.draw(
