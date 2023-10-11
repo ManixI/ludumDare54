@@ -319,10 +319,10 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         // points are combination of the furthest distance traveled and static pickup
-        if (player.getX() > distance) {
+        if (state == SubState.PLAYING) {
             distance = player.getX();
+            points = staticPoints + distance;
         }
-        points = staticPoints + distance;
 
         // check collision on each platform to re-set jump
         for (ArrayList<Platform> l : platformList) {
