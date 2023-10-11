@@ -336,7 +336,7 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         // check collision with enemies
-        if (!invincible)
+        if (!invincible && state == SubState.PLAYING)
         {
             for (int j=0; j< enemies.size()-1; j++) {
                 Enemie e = enemies.get(j);
