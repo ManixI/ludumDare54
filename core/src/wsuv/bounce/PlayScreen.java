@@ -462,7 +462,7 @@ public class PlayScreen extends ScreenAdapter {
                     Enemie.SPIKES_FLIPPED
             ));
         }*/
-        if (missileTimer > 4000) {
+        if (missileTimer > 4000 && state == SubState.PLAYING) {
             missileTimer = 0;
             enemies.add( new Enemie(
                     escapeGame,
