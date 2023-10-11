@@ -59,6 +59,7 @@
  - [81] bounding rectangle draw function
  - [82] change how camera operates
  - [86] jump up though platforms
+ - [88] better game over screen
 
 
 ## Open Issues ##
@@ -90,11 +91,12 @@
  - [85] add varied spawn behavior to different platform paths
  - [86] shrink width of player hitbox
  - [87] better player re-spawn position
- - [88] better game over screen
  - [89] fix game hud crashing game when opened
  - [90] fix score and lives position
  - [91] add cheats
  - [92] fix the memory leak
+ - [93] improve missile-platform interaction
+ - [94] add animation to missile sprite
  
 
  ## Old ##
