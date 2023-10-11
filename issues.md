@@ -44,6 +44,7 @@
  - [53] update enemy spawning
  - [54] add double jump
  - [55] platforms shouldn't be pass-though
+ - [60] scale avatar size
  - [62] fix collision issue with player sprite
  - **[63]** improve respawn mechanic
  - **[64]** re-start button
@@ -52,6 +53,7 @@
  - [67] fix platforms spawning below screen
  - [69] multiple platform paths
  - [70] vertical scrolling
+ - [81] bounding rectangle draw function
  - [86] jump up though platforms
 
 ## Open Issues ##
@@ -72,7 +74,6 @@
  - [57] freeze player animation on jump
  - [58] spinning sprite on second jump
  - [59] add spikes to bottom of platforms
- - [60] scale avatar size
  - [61] running sfx that scales with speed
  - [68] remove ceiling and floor
  - [71] stop spokes from spawning partly off platforms
@@ -84,7 +85,6 @@
  - [78] add background
  - [79] update sprites to reflect target aesthetic
  - [80] portals to different levels/locations
- - [81] bounding rectangle draw function
  - [82] change how camera operates
  - [83] redo spike sprite to fit in grid space and to better reflect side damage
  - [84] camera follows player, instead of current player follows camera
