@@ -141,7 +141,8 @@ public class PlayScreen extends ScreenAdapter {
         b.schedule(new TimerTask() {
             @Override
             public void run() {
-                gameSpeed += 0.08f;
+                // TODO: fix bug where player dosn't accelerate with game speed
+                //gameSpeed += 0.08f;
             }
         },4500, 4500);
 
