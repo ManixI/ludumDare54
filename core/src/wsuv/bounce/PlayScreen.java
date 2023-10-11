@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
@@ -55,6 +57,10 @@ public class PlayScreen extends ScreenAdapter {
     float ceilingSpikeTimer = 0;
     float missileTimer = 0;
     float gameSpeed = 1.0f;
+
+    Sprite testSprite;
+    Texture collisionBox;
+    private boolean drawDbugBox = true;
 
     public PlayScreen(EscapeGame game) {
         escapeGame = game;
@@ -138,6 +144,15 @@ public class PlayScreen extends ScreenAdapter {
             }
         },4500, 4500);
 
+
+        // debug stuff
+        Texture tex = game.am.get(EscapeGame.DBG_BOX, Texture.class);
+        testSprite = new Sprite(tex);
+        collisionBox = game.am.get(EscapeGame.DBG_COLLISION_REC, Texture.class);
+
+        //testSprite.setBounds(testSprite.getX(), testSprite.getY(), testSprite.getWidth()*2, testSprite.getHeight()*2);
+        //testSprite.scale(2);
+        testSprite.setScale(2,2);
 
         //player.setScale(2,2);
         //player.setSize(64,64);
@@ -580,6 +595,8 @@ public class PlayScreen extends ScreenAdapter {
     public void render(float delta) {
         update(delta);
 
+        Rectangle tmp;
+
         ScreenUtils.clear(0, 0, 0, 1);
         escapeGame.batch.setProjectionMatrix(cam.combined);
         escapeGame.batch.begin();
@@ -612,6 +629,9 @@ public class PlayScreen extends ScreenAdapter {
         for (ArrayList<Platform> l : platformList) {
             for (Platform p : l) {
                 p.draw(escapeGame.batch);
+                if (drawDbugBox) {
+
+                }
             }
         }
         for (Powerup p : powerupList) {
@@ -650,6 +670,16 @@ public class PlayScreen extends ScreenAdapter {
 
         } else {
             player.draw(escapeGame.batch);
+            if (drawDbugBox) {
+                tmp = player.getBoundingRectangle();
+                escapeGame.batch.draw(
+                        collisionBox,
+                        tmp.getX(),
+                        tmp.getY(),
+                        tmp.getWidth(),
+                        tmp.getHeight()
+                );
+            }
         }
 
         // this logic could also be pushed into a method on SubState enum
@@ -671,6 +701,26 @@ public class PlayScreen extends ScreenAdapter {
             case PLAYING:
                 break;
         }
+
+        // debug stuff goes over every other sprite
+        testSprite.setY(cam.position.y);
+        testSprite.setX(cam.position.x);
+        testSprite.draw(escapeGame.batch);
+
+        tmp = testSprite.getBoundingRectangle();
+
+        escapeGame.batch.draw(
+                collisionBox,
+                tmp.getX(),
+                tmp.getY(),
+                tmp.getWidth(),
+                tmp.getHeight()
+        );
+
+        if (player.getBoundingRectangle().overlaps(tmp)) {
+
+        }
+
         hud.draw(escapeGame.batch);
         escapeGame.batch.end();
     }

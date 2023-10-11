@@ -96,6 +96,12 @@ public class Avatar extends Sprite implements Cloneable {
 
     }
 
+
+    /*@Override
+    public void draw(Batch batch) {
+        batch.draw(getTexture(), getX(), getY(), getWidth()*scaleFactor, getHeight()*scaleFactor);
+    }*/
+
     public void setAirborn(boolean b) {
         airborn = b;
     }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class Platform extends Sprite {
         leftmost = startX;
         top = height;
     }
+
 
     public static ArrayList<Platform> makeFirstPlat(
             EscapeGame g,
