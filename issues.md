@@ -55,6 +55,7 @@
  - [69] multiple platform paths
  - [70] vertical scrolling
  - [81] bounding rectangle draw function
+ - [82] change how camera operates
  - [86] jump up though platforms
 
 ## Open Issues ##
@@ -85,11 +86,11 @@
  - [78] add background
  - [79] update sprites to reflect target aesthetic
  - [80] portals to different levels/locations
- - [82] change how camera operates
  - [83] redo spike sprite to fit in grid space and to better reflect side damage
  - [84] camera follows player, instead of current player follows camera
  - [85] add varied spawn behavior to different platform paths
  - [86] shrink width of player hitbox
+ - [87] better player re-spawn position
  
  ## Old ##
  - [77] do grid based spawning
