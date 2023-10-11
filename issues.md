@@ -115,7 +115,7 @@ Don't do grid based platforms, use original linked list. Grid severely limits pl
 many objects like spikes, etc will need to be 1x2 at that size
 spikes and platforms handled as background tiles, powerups and other enemies handled as sprites
 
-camera should fix on player location, with player having a fixed speed rather then player following camera, need to modify how missiles work of go this path
-only check collision for enemies if they are on screen
+~~camera should fix on player location, with player having a fixed speed rather then player following camera, need to modify how missiles work of go this path
+only check collision for enemies if they are on screen~~ This feels weird, do the other thing, fixing player position between 1/2 and 1/5 of screen. Arrow controls should do very little
 
 player now clips though corner of platforms when falling down instead of bonking, updated platform sprite needs to reflect this

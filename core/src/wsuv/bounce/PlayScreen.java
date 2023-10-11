@@ -60,6 +60,7 @@ public class PlayScreen extends ScreenAdapter {
 
     Texture collisionBox;
     private boolean drawDbugBox = true;
+    private boolean debugCam = false;
 
     public PlayScreen(EscapeGame game) {
         escapeGame = game;
@@ -268,15 +269,18 @@ public class PlayScreen extends ScreenAdapter {
 
     public void update(float delta) {
 
-        //cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2)*gameSpeed;
-        cam.position.x = player.getX() + 350;
+        if (debugCam) {
+            cam.position.x = player.getX();
+        } else {
+            cam.position.x += Gdx.graphics.getDeltaTime() * (Avatar.MAX_X_VELOCITY/2)*gameSpeed;
+        }
 
         if (player.getY() < 300) {
             // camera floor
             cam.position.y = 300;
-        //} else if (player.getY() > 2000) {
+        } else if (player.getY() > 6000) {
             // camera ceiling
-            //cam.position.y = 2000;
+            cam.position.y = 6000;
         } else {
             // camera track player
             cam.position.y = player.getY();
