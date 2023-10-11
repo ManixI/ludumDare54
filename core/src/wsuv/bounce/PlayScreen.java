@@ -116,7 +116,7 @@ public class PlayScreen extends ScreenAdapter {
         //enemies.add(new Enemie(game, 500, 0, Enemie.SPIKES));
         //enemies.add(platformList.get(3).spawnEnemy());
 
-        player = new Avatar(game, 0, 300);
+        player = new Avatar(game, 0, 3000);
 
         jumpSfx = escapeGame.am.get(EscapeGame.SFX_JUMP);
         deathSfx = escapeGame.am.get(EscapeGame.SFX_HIT);

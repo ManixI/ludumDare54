@@ -65,6 +65,9 @@ public class Avatar extends Sprite implements Cloneable {
         setSize(getWidth()/game.PLAYER_SPRITE_COLS, getHeight()/game.PLAYER_SPRITE_ROWS);
         scale(scaleFactor);
 
+        setX(startX);
+        setY(startY);
+
     }
 
     @Override public void draw(Batch batch) {
