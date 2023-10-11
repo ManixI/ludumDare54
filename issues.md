@@ -54,9 +54,12 @@
  - [67] fix platforms spawning below screen
  - [69] multiple platform paths
  - [70] vertical scrolling
+ - [73] fix bug where score increases after death
+ - [75] increase player size
  - [81] bounding rectangle draw function
  - [82] change how camera operates
  - [86] jump up though platforms
+
 
 ## Open Issues ##
 
@@ -71,7 +74,6 @@
  - [45] spawn enemies as function of spawning platform
  - [46] set minimum height separation between platforms
  - [50] add falling enemy
- - [52] add pits to floor
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
  - [58] spinning sprite on second jump
  - [59] add spikes to bottom of platforms
@@ -79,21 +81,22 @@
  - [68] remove ceiling and floor
  - [71] stop spokes from spawning partly off platforms
  - [72] only check collision for things on screen
- - [73] fix bug where score increases after death
  - [74] slow down game pacing and add speed cap
- - [75] increase player size
  - [76] spike hitboxes are too big
  - [78] add background
  - [79] update sprites to reflect target aesthetic
  - [80] portals to different levels/locations
- - [83] redo spike sprite to fit in grid space and to better reflect side damage
- - [84] camera follows player, instead of current player follows camera
+ - [83] redo spike sprite to better reflect side damage
  - [85] add varied spawn behavior to different platform paths
  - [86] shrink width of player hitbox
  - [87] better player re-spawn position
+ - [88] better game over screen
  
+
  ## Old ##
+ - [52] add pits to floor
  - [77] do grid based spawning
+ - [84] camera follows player, instead of current player follows camera
 
 
 ## general ideas ##
