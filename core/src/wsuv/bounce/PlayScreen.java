@@ -340,6 +340,9 @@ public class PlayScreen extends ScreenAdapter {
                 if (p.checkCollision(player, cam, gameSpeed, camSpeed)) {
                     numJumps = totalJumps;
                     player.setAirborn(false);
+                    if (p.type != Platform.PlatType.SPEED) {
+                        player.isSpeedy = false;
+                    }
                     break;
                 }
             }
@@ -351,6 +354,7 @@ public class PlayScreen extends ScreenAdapter {
             for (int j=0; j< enemies.size()-1; j++) {
                 Enemie e = enemies.get(j);
                 if (e.checkColision(player)) {
+                    player.isSpeedy = false;
                     switch (e.getType()) {
                         case Enemie.MISSILE:
                             enemies.remove(j);

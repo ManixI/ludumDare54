@@ -295,13 +295,29 @@ public class Platform extends Sprite {
         } else {
             distY = game.random.nextFloat()*getY()-(getY()-maxHeight*1.5f)+getY();
         }
+        int t = game.random.nextInt(4);
+        PlatType type;
+        switch (t) {
+            /*case 4:
+            case 3:
+            case 2:
+            case 1:
+                type = PlatType.NORMAL;
+                break;*/
+            case 0:
+                type = PlatType.SPEED;
+                break;
+            default:
+                type = PlatType.NORMAL;
+                break;
+        }
         return makePlat(
             game,
             distX,
             distY,
             game.random.nextInt(3)+2,
             cam,
-            PlatType.SPEED
+            type
         );
     }
 
