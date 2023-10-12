@@ -250,8 +250,17 @@ public class Platform extends Sprite {
             futurePlayer.update(cam, gameSpeed);
             if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
                 if (player.yVelocity <= 0 && passthough == false) {
-                    player.setY(getY() + getHeight() * 2.5f + player.scaleFactor * player.getHeight());
-                    player.yVelocity = 0;
+                    // player standing on plat
+                    switch (type) {
+                        case SPEED:
+                            player.xVelocity = Avatar.MAX_X_VELOCITY;
+                        case NORMAL:
+                            player.setY(getY() + getHeight() * 2.5f + player.scaleFactor * player.getHeight());
+                            player.yVelocity = 0;
+                            break;
+                        default:
+                            break;
+                    }
                     return true;
                 } else {
                     // started below platform, don't warp up if jump falls short
