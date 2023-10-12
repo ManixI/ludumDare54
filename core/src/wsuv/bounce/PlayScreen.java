@@ -263,6 +263,10 @@ public class PlayScreen extends ScreenAdapter {
 
     }
 
+    public float getCamSpeed() {
+        return camSpeed;
+    }
+
     @Override
     public void show() {
         Gdx.app.log("PlayScreen", "show");
@@ -330,7 +334,7 @@ public class PlayScreen extends ScreenAdapter {
         // check collision on each platform to re-set jump
         for (ArrayList<Platform> l : platformList) {
             for (Platform p : l) {
-                if (p.checkCollision(player, cam, gameSpeed)) {
+                if (p.checkCollision(player, cam, gameSpeed, camSpeed)) {
                     numJumps = totalJumps;
                     player.setAirborn(false);
                     break;

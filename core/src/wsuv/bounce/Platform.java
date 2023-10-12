@@ -221,7 +221,7 @@ public class Platform extends Sprite {
         return plats;
     }
 
-    public boolean checkCollision(Avatar player, OrthographicCamera cam, float gameSpeed) {
+    public boolean checkCollision(Avatar player, OrthographicCamera cam, float gameSpeed, float camSpeed) {
         // if ball in line with platform
         //System.out.println(ball.getX()+" "+ball.getY()+" "+ball.yVelocity);
         //System.out.println(leftmost+" "+rightmost+" "+top);
@@ -254,6 +254,7 @@ public class Platform extends Sprite {
                     switch (type) {
                         case SPEED:
                             player.xVelocity = Avatar.MAX_X_VELOCITY;
+                            cam.position.x += (Avatar.MAX_X_VELOCITY - camSpeed) * time;
                         case NORMAL:
                             player.setY(getY() + getHeight() * 2.5f + player.scaleFactor * player.getHeight());
                             player.yVelocity = 0;
