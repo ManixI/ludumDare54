@@ -32,14 +32,26 @@ public class Platform extends Sprite {
 
     public float upperBounds;
     public float lowerBounds;
+    public enum PlatType {NORMAL, SPEED, BOUNCE};
+    PlatType type;
 
 
-    private Platform(EscapeGame g, float startX, float height, String type, OrthographicCamera cam, float upper, float lower) {
-        super(g.am.get(type, Texture.class));
+    private Platform(
+            EscapeGame g,
+            float startX,
+            float height,
+            String tex,
+            OrthographicCamera cam,
+            float upper,
+            float lower,
+            PlatType pType
+    ) {
+        super(g.am.get(tex, Texture.class));
         game = g;
 
         upperBounds = upper;
         lowerBounds = lower;
+        type = pType;
 
         if (height > upper) {
             height = upper;
@@ -98,7 +110,8 @@ public class Platform extends Sprite {
                         EscapeGame.PLATFORM_TILES[0],
                         cam,
                         higherst,
-                        lowest
+                        lowest,
+                        PlatType.NORMAL
                 ));
             } else if (i == length-1) {
                 // rightmost tile
@@ -109,7 +122,8 @@ public class Platform extends Sprite {
                         EscapeGame.PLATFORM_TILES[2],
                         cam,
                         higherst,
-                        lowest
+                        lowest,
+                        PlatType.NORMAL
                 ));
                 plats.get(plats.size()-1).isLast = true;
             } else {
@@ -121,12 +135,17 @@ public class Platform extends Sprite {
                         EscapeGame.PLATFORM_TILES[1],
                         cam,
                         higherst,
-                        lowest
+                        lowest,
+                        PlatType.NORMAL
                 ));
             }
         }
 
         return plats;
+    }
+
+    public ArrayList<Platform> makeSpeedPlat(EscapeGame g, float startX, float startY, OrthographicCamera cam) {
+
     }
 
     public ArrayList<Platform> makePlat(EscapeGame g, float startX, float startY, int length, OrthographicCamera cam) {
@@ -157,7 +176,8 @@ public class Platform extends Sprite {
                         EscapeGame.PLATFORM_TILES[0],
                         cam,
                         this.upperBounds,
-                        this.lowerBounds
+                        this.lowerBounds,
+                        PlatType.NORMAL
                 ));
             } else if (i == length-1) {
                 // rightmost tile
@@ -168,7 +188,8 @@ public class Platform extends Sprite {
                         EscapeGame.PLATFORM_TILES[2],
                         cam,
                         this.upperBounds,
-                        this.lowerBounds
+                        this.lowerBounds,
+                        PlatType.NORMAL
                 ));
                 plats.get(plats.size()-1).isLast = true;
             } else {
@@ -180,7 +201,8 @@ public class Platform extends Sprite {
                         EscapeGame.PLATFORM_TILES[1],
                         cam,
                         this.upperBounds,
-                        this.lowerBounds
+                        this.lowerBounds,
+                        PlatType.NORMAL
                 ));
             }
         }

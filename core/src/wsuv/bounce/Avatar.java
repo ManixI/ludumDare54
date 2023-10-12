@@ -38,7 +38,6 @@ public class Avatar extends Sprite implements Cloneable {
     private Sound stepSfx;
 
 
-
     public Avatar(EscapeGame game, float startX, float startY) {
         super(game.am.get(game.PLAYER_SPRITE_2X2, Texture.class));
 
