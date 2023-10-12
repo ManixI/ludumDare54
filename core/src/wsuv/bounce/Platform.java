@@ -144,11 +144,8 @@ public class Platform extends Sprite {
         return plats;
     }
 
-    public ArrayList<Platform> makeSpeedPlat(EscapeGame g, float startX, float startY, OrthographicCamera cam) {
 
-    }
-
-    public ArrayList<Platform> makePlat(EscapeGame g, float startX, float startY, int length, OrthographicCamera cam) {
+    public ArrayList<Platform> makePlat(EscapeGame g, float startX, float startY, int length, OrthographicCamera cam, PlatType type) {
         ArrayList<Platform> plats = new ArrayList<Platform>();
 
         // needs to be at least 2 tiles wide to look right
@@ -167,44 +164,58 @@ public class Platform extends Sprite {
         }*/
 
         for (int i=0; i<length; i++) {
-            // leftmost tile
-            if (i == 0) {
-                plats.add(new Platform(
-                        g,
-                        startX,
-                        startY,
-                        EscapeGame.PLATFORM_TILES[0],
-                        cam,
-                        this.upperBounds,
-                        this.lowerBounds,
-                        PlatType.NORMAL
-                ));
-            } else if (i == length-1) {
-                // rightmost tile
+            if (type == PlatType.NORMAL) {
+                // leftmost tile
+                if (i == 0) {
+                    plats.add(new Platform(
+                            g,
+                            startX,
+                            startY,
+                            EscapeGame.PLATFORM_TILES[0],
+                            cam,
+                            this.upperBounds,
+                            this.lowerBounds,
+                            PlatType.NORMAL
+                    ));
+                } else if (i == length-1) {
+                    // rightmost tile
+                    plats.add(new Platform(
+                            g,
+                            startX+(cwidth*(i-1))+lwidth,
+                            startY,
+                            EscapeGame.PLATFORM_TILES[2],
+                            cam,
+                            this.upperBounds,
+                            this.lowerBounds,
+                            PlatType.NORMAL
+                    ));
+                    plats.get(plats.size()-1).isLast = true;
+                } else {
+                    // center tiles
+                    plats.add(new Platform(
+                            g,
+                            startX+(cwidth*(i-1))+lwidth,
+                            startY,
+                            EscapeGame.PLATFORM_TILES[1],
+                            cam,
+                            this.upperBounds,
+                            this.lowerBounds,
+                            PlatType.NORMAL
+                    ));
+                }
+            } else if (type == PlatType.SPEED) {
                 plats.add(new Platform(
                         g,
                         startX+(cwidth*(i-1))+lwidth,
                         startY,
-                        EscapeGame.PLATFORM_TILES[2],
+                        EscapeGame.SPEED_PLAT,
                         cam,
                         this.upperBounds,
                         this.lowerBounds,
-                        PlatType.NORMAL
-                ));
-                plats.get(plats.size()-1).isLast = true;
-            } else {
-                // center tiles
-                plats.add(new Platform(
-                        g,
-                        startX+(cwidth*(i-1))+lwidth,
-                        startY,
-                        EscapeGame.PLATFORM_TILES[1],
-                        cam,
-                        this.upperBounds,
-                        this.lowerBounds,
-                        PlatType.NORMAL
+                        type
                 ));
             }
+
         }
 
         return plats;
@@ -279,7 +290,8 @@ public class Platform extends Sprite {
             distX,
             distY,
             game.random.nextInt(3)+2,
-            cam
+            cam,
+            PlatType.SPEED
         );
     }
 
