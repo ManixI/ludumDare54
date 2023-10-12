@@ -517,7 +517,7 @@ public class PlayScreen extends ScreenAdapter {
                     player.xVelocity = Avatar.MIN_X_VELOCITY*gameSpeed;
                 }
             } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                player.xVelocity = Avatar.MAX_X_VELOCITY*gameSpeed;
+                player.xVelocity = Avatar.MAX_X_VELOCITY*gameSpeed - 300;
             } else {
                 player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
             }

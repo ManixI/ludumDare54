@@ -97,6 +97,7 @@
  - [92] fix the memory leak
  - [93] improve missile-platform interaction
  - [94] add animation to missile sprite
+ - [95] speed plats only "wear off" after landing or taking hit
  
 
  ## Old ##

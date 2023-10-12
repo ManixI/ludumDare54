@@ -16,7 +16,7 @@ public class Avatar extends Sprite implements Cloneable {
     public float yVelocity = 0;
 
     public static final float MIN_X_VELOCITY = 300;
-    public static final float MAX_X_VELOCITY = 700;
+    public static final float MAX_X_VELOCITY = 1000;
     public static final float MAX_Y_VELOCITY = 1000;
 
     public float gravity = 25;
