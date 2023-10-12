@@ -529,8 +529,14 @@ public class PlayScreen extends ScreenAdapter {
                 }
             } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
                 player.xVelocity = Avatar.MAX_X_VELOCITY*gameSpeed - 300;
+                /*if (player.isSpeedy) {
+                    player.xVelocity += 600;
+                }*/
             } else {
                 player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                /*if (player.isSpeedy) {
+                    player.xVelocity -= 300;
+                }*/
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released

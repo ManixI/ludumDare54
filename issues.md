@@ -26,6 +26,7 @@
  - [25] add custom avatar sprite
  - [26] add scrolling background
  - [27] add vertical scrolling
+ - [28] add speed pads
  - [29] add multiple platform paths
  - [30] fix speed of player so constantly in motion
  - [31] swap platforms to ArrayList from linked list
@@ -60,13 +61,13 @@
  - [82] change how camera operates
  - [86] jump up though platforms
  - [88] better game over screen
+ - [95] speed plats only "wear off" after landing or taking hit
 
 
 ## Open Issues ##
 
  - [0] general game balance tweeks
  - **[24]** add music
- - [28] add speed pads
  - [37] better points sprite
  - [40] zoom out as speed increases
  - [41] add graphic for death plane
@@ -97,7 +98,7 @@
  - [92] fix the memory leak
  - [93] improve missile-platform interaction
  - [94] add animation to missile sprite
- - [95] speed plats only "wear off" after landing or taking hit
+ - [96] allow lateral control while boosted by speed pad
  
 
  ## Old ##
