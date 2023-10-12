@@ -353,62 +353,68 @@ public class PlayScreen extends ScreenAdapter {
         {
             for (int j=0; j< enemies.size()-1; j++) {
                 Enemie e = enemies.get(j);
-                if (e.checkColision(player)) {
-                    player.isSpeedy = false;
-                    switch (e.getType()) {
-                        case Enemie.MISSILE:
-                            enemies.remove(j);
-                            j--;
-                        case Enemie.SPIKES:
-                        case Enemie.SPIKES_FLIPPED:
-                            lives--;
-                            player.respawn(cam.position.x, cam.position.y + 150);
-                            Timer t = new Timer();
-                            t.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    invincible = false;
-                                }
-                            }, 1500);
-
-                            Timer b = new Timer();
-                            for (int i=0; i<20; i++) {
-                                b.schedule(new TimerTask() {
+                // only check enemy collision if close to on screen
+                if (e.getX() < cam.position.x + 700
+                    && e.getY() > cam.position.y - 700
+                    && e.getY() < cam.position.y + 700) {
+                    if (e.checkColision(player)) {
+                        player.isSpeedy = false;
+                        switch (e.getType()) {
+                            case Enemie.MISSILE:
+                                enemies.remove(j);
+                                j--;
+                            case Enemie.SPIKES:
+                            case Enemie.SPIKES_FLIPPED:
+                                lives--;
+                                player.respawn(cam.position.x, cam.position.y + 150);
+                                Timer t = new Timer();
+                                t.schedule(new TimerTask() {
                                     @Override
                                     public void run() {
-                                        if (drawPlayer) {
-                                            drawPlayer = false;
-                                        } else {
-                                            drawPlayer = true;
-                                        }
+                                        invincible = false;
                                     }
-                                }, (1500/20)*i);
-                            }
-                            invincible = true;
-                            deathSfx.play();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                if (e.getType() == e.MISSILE) {
-                    for (ArrayList<Platform> l : platformList) {
-                        for (Platform p : l) {
-                            if (e.checkColision(p)) {
-                                missileDeathSfx.play();
-                                enemies.remove(j);
+                                }, 1500);
+
+                                Timer b = new Timer();
+                                for (int i=0; i<20; i++) {
+                                    b.schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            if (drawPlayer) {
+                                                drawPlayer = false;
+                                            } else {
+                                                drawPlayer = true;
+                                            }
+                                        }
+                                    }, (1500/20)*i);
+                                }
+                                invincible = true;
+                                deathSfx.play();
                                 break;
-                            }
+                            default:
+                                break;
                         }
                     }
-                    // despawm missile if collides with ceiling
+                    if (e.getType() == e.MISSILE) {
+                        for (ArrayList<Platform> l : platformList) {
+                            for (Platform p : l) {
+                                if (e.checkColision(p)) {
+                                    missileDeathSfx.play();
+                                    enemies.remove(j);
+                                    break;
+                                }
+                            }
+                        }
+                        // despawm missile if collides with ceiling
                     /*if (e.getY() > player.CEILING_HEIGHT-10 || e.getY() < player.FLOOR_HEIGHT+10) {
                         enemies.remove(j);
                         missileDeathSfx.play();
                         break;
                     }*/
+                    }
                 }
-            }
+                }
+
         }
 
         if (player.update(cam, gameSpeed, camSpeed)) {
