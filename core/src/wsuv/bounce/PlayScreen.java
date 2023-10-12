@@ -277,8 +277,11 @@ public class PlayScreen extends ScreenAdapter {
 
         if (debugCam) {
             cam.position.x = player.getX();
+        } else if (player.isSpeedy) {
+            cam.position.x += Avatar.MAX_X_VELOCITY * Gdx.graphics.getDeltaTime() * gameSpeed;
         } else {
             cam.position.x += Gdx.graphics.getDeltaTime() * camSpeed * gameSpeed;
+
         }
 
         if (state == SubState.PLAYING) {
@@ -404,7 +407,7 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
-        if (player.update(cam, gameSpeed)) {
+        if (player.update(cam, gameSpeed, camSpeed)) {
             numJumps = totalJumps;
         }
 

@@ -235,7 +235,7 @@ public class Platform extends Sprite {
         float time = Gdx.graphics.getDeltaTime();
 
         futurePlayer.yVelocity = 0;
-        futurePlayer.update(cam, gameSpeed);
+        futurePlayer.update(cam, gameSpeed, camSpeed);
         if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
             //player.xVelocity = 0;
             if (player.getX() < getX()-player.getWidth()) {
@@ -247,14 +247,14 @@ public class Platform extends Sprite {
         } else {
             futurePlayer.xVelocity = 0;
             futurePlayer.yVelocity = player.yVelocity;
-            futurePlayer.update(cam, gameSpeed);
+            futurePlayer.update(cam, gameSpeed, camSpeed);
             if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
                 if (player.yVelocity <= 0 && passthough == false) {
                     // player standing on plat
                     switch (type) {
                         case SPEED:
-                            player.xVelocity = Avatar.MAX_X_VELOCITY;
-                            cam.position.x += (Avatar.MAX_X_VELOCITY - camSpeed) * time;
+                            player.isSpeedy = true;
+
                         case NORMAL:
                             player.setY(getY() + getHeight() * 2.5f + player.scaleFactor * player.getHeight());
                             player.yVelocity = 0;

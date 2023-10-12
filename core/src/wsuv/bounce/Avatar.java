@@ -36,6 +36,7 @@ public class Avatar extends Sprite implements Cloneable {
 
     private Sound bonkSfx;
     private Sound stepSfx;
+    public boolean isSpeedy = false;
 
 
     public Avatar(EscapeGame game, float startX, float startY) {
@@ -100,13 +101,16 @@ public class Avatar extends Sprite implements Cloneable {
         return super.clone();
     }
 
-    public boolean update(OrthographicCamera cam, float gamespeed) {
+    public boolean update(OrthographicCamera cam, float gamespeed, float camSpeed) {
         float x = getX();
         float y = getY();
         float time = Gdx.graphics.getDeltaTime();
 
         boolean collided = false;
 
+        if (isSpeedy) {
+            xVelocity = Avatar.MAX_X_VELOCITY;
+        }
         setX(x + time * xVelocity*gamespeed);
         setY(y + time * yVelocity);
 
