@@ -55,6 +55,7 @@
  - [67] fix platforms spawning below screen
  - [69] multiple platform paths
  - [70] vertical scrolling
+ - [72] only check collision for things on screen
  - [73] fix bug where score increases after death
  - [75] increase player size
  - [81] bounding rectangle draw function
@@ -82,7 +83,6 @@
  - [61] running sfx that scales with speed
  - [68] remove ceiling and floor
  - [71] stop spokes from spawning partly off platforms
- - [72] only check collision for things on screen
  - [74] slow down game pacing and add speed cap
  - [76] spike hitboxes are too big
  - [78] add background
@@ -99,6 +99,7 @@
  - [93] improve missile-platform interaction
  - [94] add animation to missile sprite
  - [96] allow lateral control while boosted by speed pad
+ - [97] fix camera jump at game start
  
 
  ## Old ##
