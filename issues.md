@@ -100,6 +100,8 @@
  - [94] add animation to missile sprite
  - [96] allow lateral control while boosted by speed pad
  - [97] fix camera jump at game start
+ - [98] fix player lagging behind camera
+ - [99] higher pitch sfx for second jump
  
 
  ## Old ##

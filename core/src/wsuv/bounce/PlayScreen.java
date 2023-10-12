@@ -68,7 +68,7 @@ public class PlayScreen extends ScreenAdapter {
         //ball = new Ball(game);
         explosions = new ArrayList<>(10);
         cam = new OrthographicCamera(1000, 1000);
-        cam.translate(500,300);
+        cam.translate(500,3000);
         cam.update();
         hud = new HUD(escapeGame.am.get(EscapeGame.RSC_MONO_FONT_BIG), cam);
         lives = 5;
