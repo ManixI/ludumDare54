@@ -337,14 +337,19 @@ public class PlayScreen extends ScreenAdapter {
         // check collision on each platform to re-set jump
         for (ArrayList<Platform> l : platformList) {
             for (Platform p : l) {
-                if (p.checkCollision(player, cam, gameSpeed, camSpeed)) {
-                    numJumps = totalJumps;
-                    player.setAirborn(false);
-                    if (p.type != Platform.PlatType.SPEED) {
-                        player.isSpeedy = false;
+                if (p.getX() < cam.position.x + 100
+                    && p.getY() > cam.position.y - 700
+                    && p.getY() < cam.position.y + 700) {
+                    if (p.checkCollision(player, cam, gameSpeed, camSpeed)) {
+                        numJumps = totalJumps;
+                        player.setAirborn(false);
+                        if (p.type != Platform.PlatType.SPEED) {
+                            player.isSpeedy = false;
+                        }
+                        break;
                     }
-                    break;
                 }
+
             }
         }
 
