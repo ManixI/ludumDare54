@@ -294,29 +294,55 @@ public class Platform extends Sprite {
 
     public ArrayList<Platform> generateNext(OrthographicCamera cam) {
         // max height is currently 90? unts
-        float distX = game.random.nextFloat()*(getX()+getWidth()+maxDistance-(getX()+getWidth()))+getX()+getWidth()+50;
-        int direction;
-        // if platform is near bottom, weight generation upwards
-        if (getY() < cam.position.y - 300) {
-            direction = game.random.nextInt(4);
-        } else {
-            direction = game.random.nextInt(2);
-        }
+        float distX;
         float distY;
-        if (direction != 0) {
-            distY = game.random.nextFloat()*maxHeight+getY();
-        } else {
-            distY = game.random.nextFloat()*getY()-(getY()-maxHeight*1.5f)+getY();
-        }
-        int t = game.random.nextInt(4);
+        int direction;
         PlatType type;
-        switch (t) {
-            /*case 4:
-            case 3:
-            case 2:
-            case 1:
-                type = PlatType.NORMAL;
-                break;*/
+        int platTypeInt;
+
+        switch (spawnType) {
+            case SPARSE:
+                float dst = maxDistance * 3;
+                distX = game.random.nextFloat() * (getX() + getWidth() + dst - (getX() + getWidth())) + getX() + getWidth() + 50;
+                // if platform is near bottom, weight generation upwards
+                if (getY() < cam.position.y - 300) {
+                    direction = game.random.nextInt(4);
+                } else {
+                    direction = game.random.nextInt(2);
+                }
+                if (direction != 0) {
+                    distY = game.random.nextFloat() * maxHeight + getY();
+                } else {
+                    distY = game.random.nextFloat() * getY() - (getY() - maxHeight * 1.5f) + getY();
+                }
+                platTypeInt = game.random.nextInt(2);
+                break;
+
+            // default spawn behavior
+            case NORMAL:
+            default:
+                distX = game.random.nextFloat() * (getX() + getWidth() + maxDistance - (getX() + getWidth())) + getX() + getWidth() + 50;
+                // if platform is near bottom, weight generation upwards
+                if (getY() < cam.position.y - 300) {
+                    direction = game.random.nextInt(4);
+                } else {
+                    direction = game.random.nextInt(2);
+                }
+                if (direction != 0) {
+                    distY = game.random.nextFloat() * maxHeight + getY();
+                } else {
+                    distY = game.random.nextFloat() * getY() - (getY() - maxHeight * 1.5f) + getY();
+                }
+                platTypeInt = game.random.nextInt(4);
+                break;
+        }
+        switch (platTypeInt) {
+                /*case 4:
+                case 3:
+                case 2:
+                case 1:
+                    type = PlatType.NORMAL;
+                    break;*/
             case 0:
                 type = PlatType.SPEED;
                 break;
@@ -325,12 +351,12 @@ public class Platform extends Sprite {
                 break;
         }
         return makePlat(
-            game,
-            distX,
-            distY,
-            game.random.nextInt(3)+2,
-            cam,
-            type
+                game,
+                distX,
+                distY,
+                game.random.nextInt(3) + 2,
+                cam,
+                type
         );
     }
 

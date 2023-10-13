@@ -102,6 +102,7 @@
  - [96] allow lateral control while boosted by speed pad
  - [98] fix player lagging behind camera
  - [99] higher pitch sfx for second jump
+ - [100] add graphical "lanes" for platform lists for debug
  
 
  ## Old ##

@@ -84,8 +84,14 @@ public class PlayScreen extends ScreenAdapter {
 
         //platformList = new ArrayList<Platform>();
         platformList = new ArrayList[9];
-        int tmpPlatSpace = 300;
+        int tmpPlatSpace = 500;
+        Platform.SpawnType pType;
         for (int i=0; i<platformList.length; i++) {
+            if (i%2 == 0) {
+                pType = Platform.SpawnType.SPARSE;
+            } else {
+                pType = Platform.SpawnType.NORMAL;
+            }
             platformList[i] = new ArrayList<Platform>();
             platformList[i].addAll(Platform.makeFirstPlat(
                     game,
@@ -95,7 +101,7 @@ public class PlayScreen extends ScreenAdapter {
                     cam,
                     tmpPlatSpace*i,
                     400 + tmpPlatSpace*i,
-                    Platform.SpawnType.NORMAL
+                    pType
             ));
         }
         for (ArrayList<Platform> l : platformList) {
