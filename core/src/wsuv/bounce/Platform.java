@@ -35,6 +35,9 @@ public class Platform extends Sprite {
     public enum PlatType {NORMAL, SPEED, BOUNCE};
     PlatType type;
 
+    public enum SpawnType {NORMAL, SPARSE, DENSE, NOTMAL_UP, NORMAL_DOWN}
+    SpawnType spawnType;
+
 
     private Platform(
             EscapeGame g,
@@ -44,7 +47,8 @@ public class Platform extends Sprite {
             OrthographicCamera cam,
             float upper,
             float lower,
-            PlatType pType
+            PlatType pType,
+            SpawnType sType
     ) {
         super(g.am.get(tex, Texture.class));
         game = g;
@@ -52,6 +56,7 @@ public class Platform extends Sprite {
         upperBounds = upper;
         lowerBounds = lower;
         type = pType;
+        spawnType = sType;
 
         if (height > upper) {
             height = upper;
@@ -80,7 +85,8 @@ public class Platform extends Sprite {
             int length,
             OrthographicCamera cam,
             float higherst,
-            float lowest
+            float lowest,
+            SpawnType sType
     ) {
         // TODO: there's got to be a better way of doing this then copy paste
         ArrayList<Platform> plats = new ArrayList<Platform>();
@@ -111,7 +117,8 @@ public class Platform extends Sprite {
                         cam,
                         higherst,
                         lowest,
-                        PlatType.NORMAL
+                        PlatType.NORMAL,
+                        sType
                 ));
             } else if (i == length-1) {
                 // rightmost tile
@@ -123,7 +130,8 @@ public class Platform extends Sprite {
                         cam,
                         higherst,
                         lowest,
-                        PlatType.NORMAL
+                        PlatType.NORMAL,
+                        sType
                 ));
                 plats.get(plats.size()-1).isLast = true;
             } else {
@@ -136,7 +144,8 @@ public class Platform extends Sprite {
                         cam,
                         higherst,
                         lowest,
-                        PlatType.NORMAL
+                        PlatType.NORMAL,
+                        sType
                 ));
             }
         }
@@ -175,7 +184,8 @@ public class Platform extends Sprite {
                             cam,
                             this.upperBounds,
                             this.lowerBounds,
-                            PlatType.NORMAL
+                            PlatType.NORMAL,
+                            spawnType
                     ));
                 } else if (i == length-1) {
                     // rightmost tile
@@ -187,7 +197,8 @@ public class Platform extends Sprite {
                             cam,
                             this.upperBounds,
                             this.lowerBounds,
-                            PlatType.NORMAL
+                            PlatType.NORMAL,
+                            spawnType
                     ));
                     plats.get(plats.size()-1).isLast = true;
                 } else {
@@ -200,7 +211,8 @@ public class Platform extends Sprite {
                             cam,
                             this.upperBounds,
                             this.lowerBounds,
-                            PlatType.NORMAL
+                            PlatType.NORMAL,
+                            spawnType
                     ));
                 }
             } else if (type == PlatType.SPEED) {
@@ -212,7 +224,8 @@ public class Platform extends Sprite {
                         cam,
                         this.upperBounds,
                         this.lowerBounds,
-                        type
+                        type,
+                        spawnType
                 ));
             }
 

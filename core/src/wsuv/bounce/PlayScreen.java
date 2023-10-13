@@ -94,7 +94,8 @@ public class PlayScreen extends ScreenAdapter {
                     10,
                     cam,
                     tmpPlatSpace*i,
-                    400 + tmpPlatSpace*i
+                    400 + tmpPlatSpace*i,
+                    Platform.SpawnType.NORMAL
             ));
         }
         for (ArrayList<Platform> l : platformList) {
