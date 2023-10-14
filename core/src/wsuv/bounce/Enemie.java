@@ -22,7 +22,8 @@ public class Enemie extends Sprite {
     private float yVelocity = 0;
 
     private float maxVelocity =  800;
-    public int beamState = 0;
+    public enum BeamStates {OFF, WARMUP, ACTIVE, OVER}
+    public BeamStates beamState = BeamStates.OFF;
 
     public Enemie(EscapeGame game, float x, float y, String t) {
         super(game.am.get(t, Texture.class));

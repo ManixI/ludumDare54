@@ -341,6 +341,27 @@ public class PlayScreen extends ScreenAdapter {
 
         for (Enemie e : enemies) {
             e.update(player, gameSpeed);
+            if (e.getType() == Enemie.BEAM_LAUNCHER) {
+                // start beam related timers
+                if (e.getX() <= cam.position.x + 380 && e.beamState == Enemie.BeamStates.OFF) {
+                    e.beamState = Enemie.BeamStates.WARMUP;
+                    // timer to add beam collision
+                    Timer t = new Timer();
+                    t.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            e.beamState = Enemie.BeamStates.ACTIVE;
+                        }
+                    }, 600);
+                    t.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            e.beamState = Enemie.BeamStates.OVER;
+                        }
+                    }, 1680);
+
+                }
+            }
         }
 
         // points are combination of the furthest distance traveled and static pickup
@@ -509,7 +530,7 @@ public class PlayScreen extends ScreenAdapter {
                     Enemie.SPIKES_FLIPPED
             ));
         }*/
-        if (missileTimer > 4000 && state == SubState.PLAYING) {
+        if (missileTimer > 4500 && state == SubState.PLAYING) {
             missileTimer = 0;
             enemies.add( new Enemie(
                     escapeGame,
@@ -519,8 +540,8 @@ public class PlayScreen extends ScreenAdapter {
             ));
             missileLaunchSfx.play();
         }
-        if (missileTimer > 4500 && state == SubState.PLAYING) {
-            missileTimer = 0;
+        if (beamLauncherTimer > 4000 && state == SubState.PLAYING) {
+            beamLauncherTimer = 0;
             enemies.add( new Enemie(
                     escapeGame,
                     escapeGame.random.nextFloat()*100+min,
@@ -720,6 +741,11 @@ public class PlayScreen extends ScreenAdapter {
                 );
             }
         }
+
+        // needed for beam launcher
+        elapsed += Gdx.graphics.getDeltaTime();
+        int beamScale = 3;
+
         for (Enemie e : enemies) {
             e.draw(escapeGame.batch);
             if (drawDbugBox) {
@@ -731,6 +757,22 @@ public class PlayScreen extends ScreenAdapter {
                         tmp.getWidth(),
                         tmp.getHeight()
                 );
+            }
+            if (e.getType() == Enemie.BEAM_LAUNCHER) {
+                if (e.beamState == Enemie.BeamStates.WARMUP
+                || e.beamState == Enemie.BeamStates.ACTIVE) {
+                    float x = e.getX() + e.getWidth()/3;
+                    for (float i=-200; i<e.getY(); i+=(31*beamScale)) {
+                        escapeGame.batch.draw(
+                                // TODO: timers need to be independent started whenever not signle global
+                                // TODO: beam/enemy culled too quickly
+                                (TextureRegion) escapeGame.BEAM_ANIMATION.getKeyFrame(elapsed),
+                                x,
+                                i,
+                                32*beamScale,
+                                32*beamScale);
+                    }
+                }
             }
         }
 
@@ -799,16 +841,6 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         // debug stuff goes over every other sprite
-        elapsed += Gdx.graphics.getDeltaTime();
-        int beamScale = 3;
-        for (float i=-200; i<CAM_CEILING; i+=(31*beamScale)) {
-            escapeGame.batch.draw(
-                    (TextureRegion) escapeGame.BEAM_ANIMATION.getKeyFrame(elapsed),
-                    cam.position.x,
-                    i,
-                    32*beamScale,
-                    32*beamScale);
-        }
 
         hud.draw(escapeGame.batch);
         escapeGame.batch.end();
