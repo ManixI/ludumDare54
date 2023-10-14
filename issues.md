@@ -77,7 +77,7 @@
  - [43] increase sense of speed
  - [45] spawn enemies as function of spawning platform
  - [46] set minimum height separation between platforms
- - [50] add falling enemy
+ - [50] add falling/beam enemy
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
  - [58] spinning sprite on second jump
  - [59] add spikes to bottom of platforms
