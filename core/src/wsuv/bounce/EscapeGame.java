@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -33,9 +34,17 @@ public class EscapeGame extends Game {
     public static final String SPEED_PLAT = "speed-pad.png";
     public static final String ONE_UP = "1up.png";
     public static final String POINTS = "points.png";
+
+
+    // enemies
     public static final String SPIKES = "spikes.png";
     public static final String SPIKES_FLIPPED = "spikes-flipped.png";
     public static final String MISSILE = "missile.png";
+    public static final String BEAM = "beam.gif";
+    public static final String BEAM_LAUNCHER = "beam-launcher.png";
+    public Animation BEAM_ANIMATION;
+
+
     public static final String[] CEILING_TILES = {
             "ceiling-1.png",
     };
@@ -49,6 +58,8 @@ public class EscapeGame extends Game {
     public static final String BACKGROUD = "background.png";
     public static final String BTN_RESTART = "restart.png";
 
+
+    // sfx
     public static final String SFX_JUMP = "jump.wav";
     public static final String SFX_BONK = "bonk2.wav";
     public static final String SFX_STEP = "step.wav";
@@ -120,6 +131,8 @@ public class EscapeGame extends Game {
         am.load(SPIKES, Texture.class);
         am.load(SPIKES_FLIPPED, Texture.class);
         am.load(MISSILE, Texture.class);
+        am.load(BEAM_LAUNCHER, Texture.class);
+        BEAM_ANIMATION = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal(BEAM).read());
 
         // player
         am.load(PLAYER_SPRITE_2X2, Texture.class);
