@@ -59,9 +59,15 @@ public class PlayScreen extends ScreenAdapter {
     float gameSpeed = 1.0f;
     float camSpeed = 500;
 
+    static int CAM_FLOOR = 300;
+    static int CAM_CEILING = 6000;
+
+    // debug stuff
     Texture collisionBox;
     private boolean drawDbugBox = true;
     private boolean debugCam = false;
+
+    float elapsed = 0;
 
     public PlayScreen(EscapeGame game) {
         escapeGame = game;
@@ -292,12 +298,12 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         if (state == SubState.PLAYING) {
-            if (player.getY() < 300) {
+            if (player.getY() < CAM_FLOOR) {
                 // camera floor
-                cam.position.y = 300;
-            } else if (player.getY() > 6000) {
+                cam.position.y = CAM_FLOOR;
+            } else if (player.getY() > CAM_CEILING) {
                 // camera ceiling
-                cam.position.y = 6000;
+                cam.position.y = CAM_CEILING;
             } else {
                 // camera track player
                 cam.position.y = player.getY();
@@ -774,7 +780,16 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         // debug stuff goes over every other sprite
-
+        elapsed += Gdx.graphics.getDeltaTime();
+        int beamScale = 3;
+        for (float i=0; i<CAM_CEILING; i+=(31*beamScale)) {
+            escapeGame.batch.draw(
+                    (TextureRegion) escapeGame.BEAM_ANIMATION.getKeyFrame(elapsed),
+                    cam.position.x,
+                    i,
+                    32*beamScale,
+                    32*beamScale);
+        }
 
         hud.draw(escapeGame.batch);
         escapeGame.batch.end();
