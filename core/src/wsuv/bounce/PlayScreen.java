@@ -782,7 +782,7 @@ public class PlayScreen extends ScreenAdapter {
         // debug stuff goes over every other sprite
         elapsed += Gdx.graphics.getDeltaTime();
         int beamScale = 3;
-        for (float i=0; i<CAM_CEILING; i+=(31*beamScale)) {
+        for (float i=-200; i<CAM_CEILING; i+=(31*beamScale)) {
             escapeGame.batch.draw(
                     (TextureRegion) escapeGame.BEAM_ANIMATION.getKeyFrame(elapsed),
                     cam.position.x,

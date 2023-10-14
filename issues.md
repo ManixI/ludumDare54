@@ -104,6 +104,7 @@
  - [99] higher pitch sfx for second jump
  - [100] add graphical "lanes" for platform lists for debug
  - **[101]** add invincibility powerup
+ - [102] add extra mobility option
  
 
  ## Old ##
