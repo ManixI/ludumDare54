@@ -22,6 +22,7 @@ public class Enemie extends Sprite {
     private float yVelocity = 0;
 
     private float maxVelocity =  800;
+    public int beamState = 0;
 
     public Enemie(EscapeGame game, float x, float y, String t) {
         super(game.am.get(t, Texture.class));
@@ -78,6 +79,8 @@ public class Enemie extends Sprite {
                 setX(getX() + xVelocity * time*gameSpeed);
                 setY(getY() + yVelocity * time);
 
+            case BEAM_LAUNCHER:
+                // shoot beam
             case SPIKES:
             default:
                 break;

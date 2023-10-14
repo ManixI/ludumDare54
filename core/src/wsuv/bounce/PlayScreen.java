@@ -53,9 +53,11 @@ public class PlayScreen extends ScreenAdapter {
 
     private Sprite restartButton;
 
+    // spawn timers for platform independent enemies
     float spikeTimer = 0;
     float ceilingSpikeTimer = 0;
     float missileTimer = 0;
+    float beamLauncherTimer = 0;
     float gameSpeed = 1.0f;
     float camSpeed = 500;
 
@@ -378,6 +380,12 @@ public class PlayScreen extends ScreenAdapter {
                     if (e.checkColision(player)) {
                         player.isSpeedy = false;
                         switch (e.getType()) {
+                            case Enemie.BEAM_LAUNCHER:
+                                enemies.remove(j);
+                                j--;
+                                staticPoints += 2500;
+                                // TODO: sfx here
+                                break;
                             case Enemie.MISSILE:
                                 enemies.remove(j);
                                 j--;
@@ -481,6 +489,7 @@ public class PlayScreen extends ScreenAdapter {
         missileTimer += time;
         spikeTimer += time;
         ceilingSpikeTimer += time;
+        beamLauncherTimer += time;
         float min = cam.position.x + 500;
         if (spikeTimer > 1000) {
             spikeTimer = 0;
@@ -509,6 +518,16 @@ public class PlayScreen extends ScreenAdapter {
                     Enemie.MISSILE
             ));
             missileLaunchSfx.play();
+        }
+        if (missileTimer > 4500 && state == SubState.PLAYING) {
+            missileTimer = 0;
+            enemies.add( new Enemie(
+                    escapeGame,
+                    escapeGame.random.nextFloat()*100+min,
+                    CAM_CEILING - 300,
+                    Enemie.BEAM_LAUNCHER
+            ));
+            // TODO: add beam sfx
         }
 
         // cleanup stuff that leaves the screen
