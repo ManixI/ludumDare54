@@ -60,6 +60,7 @@ public class PlayScreen extends ScreenAdapter {
     float beamLauncherTimer = 0;
     float gameSpeed = 1.0f;
     float camSpeed = 500;
+    static int INVUL_TIME = 1500;
 
     static int CAM_FLOOR = 300;
     static int CAM_CEILING = 6000;
@@ -374,7 +375,7 @@ public class PlayScreen extends ScreenAdapter {
                         player.respawn(cam.position.x, cam.position.y + 150);
                         invincible = true;
                         deathSfx.play();
-                        setInvulTimer(1500);
+                        setInvulTimer(INVUL_TIME);
                     }
                 }
             }
@@ -430,7 +431,7 @@ public class PlayScreen extends ScreenAdapter {
                             case Enemie.SPIKES_FLIPPED:
                                 lives--;
                                 player.respawn(cam.position.x, cam.position.y + 150);
-                                setInvulTimer(1500);
+                                setInvulTimer(INVUL_TIME);
                                 invincible = true;
                                 deathSfx.play();
                                 break;
