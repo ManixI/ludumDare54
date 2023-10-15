@@ -782,8 +782,8 @@ public class PlayScreen extends ScreenAdapter {
             if (e.getType() == Enemie.BEAM_LAUNCHER) {
                 if (e.beamState == Enemie.BeamStates.WARMUP
                 || e.beamState == Enemie.BeamStates.ACTIVE) {
-                    float x = e.getX() + e.getWidth()/3;
-                    for (float i=-200; i<e.getY(); i+=(31*beamScale)) {
+                    float x = e.getX();
+                    for (float i= -200; i<e.getY()-(e.getHeight()*2); i+=(31*beamScale)) {
                         escapeGame.batch.draw(
                                 // TODO: timers need to be independent started whenever not signle global
                                 // TODO: beam/enemy culled too quickly
