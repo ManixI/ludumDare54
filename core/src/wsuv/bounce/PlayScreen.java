@@ -359,7 +359,23 @@ public class PlayScreen extends ScreenAdapter {
                             e.beamState = Enemie.BeamStates.OVER;
                         }
                     }, 1680);
+                }
+                if (e.beamState == Enemie.BeamStates.ACTIVE
+                        && !invincible
+                        && state == SubState.PLAYING) {
+                    float beamLeft = e.getX() + e.getWidth()/3;
+                    float beamRight = beamLeft + e.getWidth()/3;
+                    if ((player.getX() < beamRight
+                            && player.getX() > beamLeft)
+                            || (player.getX() + player.getWidth() > beamRight
+                            && player.getX() + player.getWidth() < beamLeft)) {
 
+                        lives--;
+                        player.respawn(cam.position.x, cam.position.y + 150);
+                        invincible = true;
+                        deathSfx.play();
+                        setInvulTimer(1500);
+                    }
                 }
             }
         }
@@ -414,27 +430,7 @@ public class PlayScreen extends ScreenAdapter {
                             case Enemie.SPIKES_FLIPPED:
                                 lives--;
                                 player.respawn(cam.position.x, cam.position.y + 150);
-                                Timer t = new Timer();
-                                t.schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        invincible = false;
-                                    }
-                                }, 1500);
-
-                                Timer b = new Timer();
-                                for (int i=0; i<20; i++) {
-                                    b.schedule(new TimerTask() {
-                                        @Override
-                                        public void run() {
-                                            if (drawPlayer) {
-                                                drawPlayer = false;
-                                            } else {
-                                                drawPlayer = true;
-                                            }
-                                        }
-                                    }, (1500/20)*i);
-                                }
+                                setInvulTimer(1500);
                                 invincible = true;
                                 deathSfx.play();
                                 break;
@@ -638,6 +634,30 @@ public class PlayScreen extends ScreenAdapter {
                     }
                 }
             }
+        }
+    }
+
+    private void setInvulTimer(int duration) {
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                invincible = false;
+            }
+        }, duration);
+
+        int invluFrames = duration / 75;
+        for (int i=0; i<invluFrames; i++) {
+            t.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (drawPlayer) {
+                        drawPlayer = false;
+                    } else {
+                        drawPlayer = true;
+                    }
+                }
+            }, (duration/invluFrames)*i);
         }
     }
 
