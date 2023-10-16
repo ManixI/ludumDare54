@@ -108,6 +108,7 @@
  - [103] fix game restart
  - [104] add beam sfx
  - [105] fix bug where beam launcher damages player while beam is active
+ - [106] re-add invincibility timer for collision
  
 
  ## Old ##
