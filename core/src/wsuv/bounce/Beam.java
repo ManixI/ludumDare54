@@ -14,6 +14,7 @@ class Beam {
     Animation animation;
     float elapsed = 0;
     static float BEAM_FLOOR = -200;
+    boolean active = false;
 
     public Beam(EscapeGame game, float x, float y, float scale, Animation beamAnimation) {
         this.game = game;
@@ -23,7 +24,16 @@ class Beam {
         animation = beamAnimation;
     }
     public void update() {
-        elapsed += Gdx.graphics.getDeltaTime();
+        if (active) {
+            elapsed += Gdx.graphics.getDeltaTime();
+        }
+    }
+
+    public void setActive() {
+        active = true;
+    }
+    public void setInactive() {
+        active = false;
     }
 
     public float getX() {
@@ -34,14 +44,15 @@ class Beam {
     }
 
     public void draw (Batch batch) {
-        // draw beam from floor to beam-height
-        for (float i= -BEAM_FLOOR; i<y; i+=(32*scale)) {
-            batch.draw((TextureRegion) animation.getKeyFrame(elapsed),
-                    x,
-                    i,
-                    32*scale,
-                    32*scale);
+        if (active) {
+            // draw beam from floor to beam-height
+            for (float i= -BEAM_FLOOR; i<y; i+=(32*scale)) {
+                batch.draw((TextureRegion) animation.getKeyFrame(elapsed),
+                        x,
+                        i,
+                        32*scale,
+                        32*scale);
+            }
         }
-
     }
 }
