@@ -291,6 +291,12 @@ public class PlayScreen extends ScreenAdapter {
 
     public void update(float delta) {
 
+        if (hud.isOpen()) {
+            invincible = true;
+        } else {
+            invincible = false;
+        }
+
         if (debugCam) {
             cam.position.x = player.getX();
         } else if (player.isSpeedy) {
