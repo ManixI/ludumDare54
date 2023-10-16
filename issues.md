@@ -105,6 +105,7 @@
  - [100] add graphical "lanes" for platform lists for debug
  - **[101]** add invincibility powerup
  - **[102]** add extra mobility option to better avoid beam
+ - [103] fix game restart
  
 
  ## Old ##
