@@ -93,7 +93,7 @@
  - [85] add varied spawn behavior to different platform paths
  - [86] shrink width of player hitbox
  - [87] better player re-spawn position
- - [89] fix game hud crashing game when opened
+ - **[89]** fix game hud crashing game when opened
  - [90] fix score and lives position
  - [91] add cheats
  - [92] fix the memory leak

@@ -221,11 +221,11 @@ public class PlayScreen extends ScreenAdapter {
                                 (float) Gdx.input.getX(), (float) Gdx.input.getY());
                     }
         });
-        hud.registerView("Ball @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
+        hud.registerView("Player @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
             @Override
             public String execute(boolean consoleIsOpen) {
                 return String.format("%.0f %.0f [%.0f %.0f] (%d)",
-                        ball.getX(), ball.getY(), ball.xVelocity, ball.yVelocity, explosions.size());
+                        player.getX(), player.getY(), player.xVelocity, player.yVelocity, explosions.size());
             }
         });
 
