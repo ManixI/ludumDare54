@@ -107,6 +107,7 @@
  - **[102]** add extra mobility option to better avoid beam
  - [103] fix game restart
  - [104] add beam sfx
+ - [105] fix bug where beam launcher damages player while beam is active
  
 
  ## Old ##
