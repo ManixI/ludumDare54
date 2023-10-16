@@ -48,7 +48,7 @@ class Beam {
     public void draw (Batch batch) {
         if (active) {
             // draw beam from floor to beam-height
-            for (float i= -BEAM_FLOOR; i<y; i+=(32*scale)) {
+            for (float i= BEAM_FLOOR; i<y; i+=(32*scale)) {
                 batch.draw((TextureRegion) animation.getKeyFrame(elapsed),
                         x,
                         i,

@@ -812,22 +812,6 @@ public class PlayScreen extends ScreenAdapter {
                         tmp.getHeight()
                 );
             }
-            if (e.getType() == Enemie.BEAM_LAUNCHER) {
-                if (e.beamState == Enemie.BeamStates.WARMUP
-                || e.beamState == Enemie.BeamStates.ACTIVE) {
-                    float x = e.getX();
-                    for (float i= -200; i<e.getY()-(e.getHeight()*2); i+=(31*beamScale)) {
-                        escapeGame.batch.draw(
-                                // TODO: timers need to be independent started whenever not signle global
-                                // TODO: beam/enemy culled too quickly
-                                (TextureRegion) escapeGame.BEAM_ANIMATION.getKeyFrame(elapsed),
-                                x,
-                                i,
-                                32*beamScale,
-                                32*beamScale);
-                    }
-                }
-            }
         }
 
         // draw ceiling
