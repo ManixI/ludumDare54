@@ -344,23 +344,8 @@ public class PlayScreen extends ScreenAdapter {
             e.update(player, gameSpeed);
             if (e.getType() == Enemie.BEAM_LAUNCHER) {
                 // start beam related timers
-                if (e.getX() <= cam.position.x + 380 && e.beamState == Enemie.BeamStates.OFF) {
-                    e.beamState = Enemie.BeamStates.WARMUP;
-                    // timer to add beam collision
-                    Timer t = new Timer();
-                    t.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            e.beamState = Enemie.BeamStates.ACTIVE;
-                        }
-                    }, 600);
-                    t.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            e.beamState = Enemie.BeamStates.OVER;
-                        }
-                    }, 1680);
-                }
+                /*if (e.getX() <= cam.position.x + 380 && e.beamState == Enemie.BeamStates.OFF) {
+                }*/
                 if (e.beamState == Enemie.BeamStates.ACTIVE
                         && !invincible
                         && state == SubState.PLAYING) {

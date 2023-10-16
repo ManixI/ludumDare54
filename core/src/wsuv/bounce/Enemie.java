@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Enemie extends Sprite {
     public final static String MISSILE = "missile.png";
@@ -87,7 +89,24 @@ public class Enemie extends Sprite {
                 setY(getY() + yVelocity * time);
 
             case BEAM_LAUNCHER:
-                // shoot beam
+                if (getX() - player.getX() < Beam.BEAM_START_DISTANCE
+                        && beamState == BeamStates.OFF) {
+                    beamState = BeamStates.WARMUP;
+                    // TODO: can I move this logic inside the beam class
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            beamState = BeamStates.ACTIVE;
+                        }
+                    }, 600);
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            beamState = BeamStates.OVER;
+                        }
+                    }, 1680);
+                }
             case SPIKES:
             default:
                 break;
