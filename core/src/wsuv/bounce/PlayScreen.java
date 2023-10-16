@@ -565,21 +565,63 @@ public class PlayScreen extends ScreenAdapter {
             state = SubState.READY;
         }*/
         // ignore key presses when console is open...
-        if (!hud.isOpen() && state == SubState.PLAYING) {
-            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if (hud.isOpen() && state == SubState.PLAYING) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 player.yVelocity = 200;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                 player.yVelocity -= 10;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 // so player can move off left side of screen
                 if (player.getX() <= cam.position.x - 500) {
                     player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
                 } else {
                     player.xVelocity = Avatar.MIN_X_VELOCITY*gameSpeed;
                 }
-            } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                player.xVelocity = Avatar.MAX_X_VELOCITY*gameSpeed - 300;
+                /*if (player.isSpeedy) {
+                    player.xVelocity += 600;
+                }*/
+            } else {
+                player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                /*if (player.isSpeedy) {
+                    player.xVelocity -= 300;
+                }*/
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
+                // TODO: set timer to end jump if it doesn't get released
+                player.jump();
+                numJumps--;
+                // TODO: second jump sfx sould be higher in pitch
+                jumpSfx.play();
+                player.setAirborn(true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                player.gravity = 15;
+            } else {
+                player.gravity = 30;
+            }
+        } else if (!hud.isOpen() && state == SubState.PLAYING) {
+            if (Gdx.input.isKeyPressed(Input.Keys.W)
+                    || Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                player.yVelocity = 200;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.S)
+                    || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                player.yVelocity -= 10;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.A)
+                    || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                // so player can move off left side of screen
+                if (player.getX() <= cam.position.x - 500) {
+                    player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                } else {
+                    player.xVelocity = Avatar.MIN_X_VELOCITY*gameSpeed;
+                }
+            } else if (Gdx.input.isKeyPressed(Input.Keys.D)
+                    || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                 player.xVelocity = Avatar.MAX_X_VELOCITY*gameSpeed - 300;
                 /*if (player.isSpeedy) {
                     player.xVelocity += 600;
