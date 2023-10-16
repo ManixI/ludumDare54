@@ -2,6 +2,7 @@ package wsuv.bounce;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 
@@ -25,11 +26,16 @@ public class Enemie extends Sprite {
     public enum BeamStates {OFF, WARMUP, ACTIVE, OVER}
     public BeamStates beamState = BeamStates.OFF;
 
+    public Beam beam = null;
+
     public Enemie(EscapeGame game, float x, float y, String t) {
         super(game.am.get(t, Texture.class));
 
         if (type != MISSILE) {
             scale(scaleFactor);
+        }
+        if (type == BEAM_LAUNCHER) {
+            beam = new Beam(game, x, y-(getHeight()*2), 3, game.BEAM_ANIMATION);
         }
 
         setX(x);
@@ -113,5 +119,13 @@ public class Enemie extends Sprite {
         setX(p.leftmost + p.getWidth()/2);
         setY(p.top);
         spot = p;*/
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        super.draw(batch);
+        if (beam != null) {
+            beam.draw(batch);
+        }
     }
 }
