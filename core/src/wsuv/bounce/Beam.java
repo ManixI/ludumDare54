@@ -13,6 +13,7 @@ class Beam {
     float scale;
     Animation animation;
     float elapsed = 0;
+    static float BEAM_FLOOR = -200;
 
     public Beam(EscapeGame game, float x, float y, float scale, Animation beamAnimation) {
         this.game = game;
@@ -33,10 +34,14 @@ class Beam {
     }
 
     public void draw (Batch batch) {
-        batch.draw((TextureRegion) animation.getKeyFrame(elapsed),
-                x,
-                y,
-                32*scale,
-                32*scale);
+        // draw beam from floor to beam-height
+        for (float i= -BEAM_FLOOR; i<y; i+=(32*scale)) {
+            batch.draw((TextureRegion) animation.getKeyFrame(elapsed),
+                    x,
+                    i,
+                    32*scale,
+                    32*scale);
+        }
+
     }
 }
