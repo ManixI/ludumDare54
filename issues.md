@@ -95,7 +95,7 @@
  - [87] better player re-spawn position
  - **[89]** fix game hud crashing game when opened
  - [90] fix score and lives position
- - [91] add cheats
+ - **[91]** add cheats
  - [92] fix the memory leak
  - [93] improve missile-platform interaction
  - [94] add animation to missile sprite
@@ -106,6 +106,7 @@
  - **[101]** add invincibility powerup
  - **[102]** add extra mobility option to better avoid beam
  - [103] fix game restart
+ - [104] add beam sfx
  
 
  ## Old ##
