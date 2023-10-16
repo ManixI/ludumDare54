@@ -30,19 +30,17 @@ public class Enemie extends Sprite {
 
     public Beam beam = null;
 
-    public Enemie(EscapeGame game, float x, float y, String t) {
-        super(game.am.get(t, Texture.class));
+    public Enemie(EscapeGame game, float x, float y, String type) {
+        super(game.am.get(type, Texture.class));
+        this.type = type;
 
-        if (type != MISSILE) {
-            scale(scaleFactor);
-        }
         if (type == BEAM_LAUNCHER) {
             beam = new Beam(game, x, y-(getHeight()*2), 3, game.BEAM_ANIMATION);
         }
 
+        scale(scaleFactor);
         setX(x);
         setY(y);
-        type = t;
     }
     // TODO: fix collision with ceiling enemies
     public void update(Avatar player, float gameSpeed) {
@@ -87,26 +85,32 @@ public class Enemie extends Sprite {
 
                 setX(getX() + xVelocity * time*gameSpeed);
                 setY(getY() + yVelocity * time);
-
+                break;
             case BEAM_LAUNCHER:
-                if (getX() - player.getX() < Beam.BEAM_START_DISTANCE
-                        && beamState == BeamStates.OFF) {
-                    beamState = BeamStates.WARMUP;
-                    // TODO: can I move this logic inside the beam class
-                    Timer timer = new Timer();
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            beamState = BeamStates.ACTIVE;
-                        }
-                    }, 600);
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            beamState = BeamStates.OVER;
-                        }
-                    }, 1680);
+                if (beam != null) {
+                    if (getX() - player.getX() < Beam.BEAM_START_DISTANCE
+                            && beamState == BeamStates.OFF) {
+                        beamState = BeamStates.WARMUP;
+                        // TODO: can I move this logic inside the beam class
+                        Timer timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                beamState = BeamStates.ACTIVE;
+                            }
+                        }, 600);
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                beamState = BeamStates.OVER;
+                            }
+                        }, 1680);
+
+                        beam.setActive();
+                    }
+                    beam.update();
                 }
+                break;
             case SPIKES:
             default:
                 break;
