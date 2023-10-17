@@ -414,11 +414,11 @@ public class PlayScreen extends ScreenAdapter {
                         && state == SubState.PLAYING) {
                     float beamLeft = e.getX() + e.getWidth()/3;
                     float beamRight = beamLeft + e.getWidth()/3;
-                    if ((player.getX() < beamRight
+                    if (((player.getX() < beamRight
                             && player.getX() > beamLeft)
                             || (player.getX() + player.getWidth() > beamRight
-                            && player.getX() + player.getWidth() < beamLeft)) {
-
+                            && player.getX() + player.getWidth() < beamLeft))
+                            && player.getY() < e.getY()) {
                         takeHit();
                     }
                 }
