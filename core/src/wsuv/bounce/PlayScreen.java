@@ -418,7 +418,7 @@ public class PlayScreen extends ScreenAdapter {
                             && player.getX() > beamLeft)
                             || (player.getX() + player.getWidth() > beamRight
                             && player.getX() + player.getWidth() < beamLeft))
-                            && player.getY() < e.getY()) {
+                            && player.getY() < e.getY() - e.getHeight()/2) {
                         takeHit();
                     }
                 }
