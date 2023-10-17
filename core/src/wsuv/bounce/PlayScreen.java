@@ -305,6 +305,28 @@ public class PlayScreen extends ScreenAdapter {
                 return "enables forced movement";
             }
         });
+        hud.registerAction("showBoxes", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                drawDbugBox = true;
+                return "drawing hitboxes";
+            }
+
+            public String help(String[] cmd) {
+                return "displays hitboxes";
+            }
+        });
+        hud.registerAction("hideBoxes", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                drawDbugBox = false;
+                return "hiding hitboxes";
+            }
+
+            public String help(String[] cmd) {
+                return "hiding hitboxes";
+            }
+        });
 
 
         // we're adding an input processor AFTER the HUD has been created,
