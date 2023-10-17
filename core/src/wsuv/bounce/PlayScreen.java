@@ -18,8 +18,6 @@ public class PlayScreen extends ScreenAdapter {
     private SubState state;
     private int lives;
 
-    BangAnimationFrames baf;
-
     ArrayList<Platform>[] platformList;
     Avatar player;
     OrthographicCamera cam;
@@ -304,12 +302,9 @@ public class PlayScreen extends ScreenAdapter {
         multiplexer.addProcessor(new InputAdapter() {
             @Override
             public boolean keyTyped(char character) {
-                if (character == '!') {
-                    //Gdx.app.log("Boom!",  "(" + explosions.size() + ")" );
-                    //explosions.add(new Bang(baf, false, ball.getX() + ball.getOriginX(), ball.getY() + ball.getOriginY()));
-                    return true;
-                }
-                return false;
+                //Gdx.app.log("Boom!",  "(" + explosions.size() + ")" );
+                //explosions.add(new Bang(baf, false, ball.getX() + ball.getOriginX(), ball.getY() + ball.getOriginY()));
+                return character == '!';
             }
         });
         Gdx.input.setInputProcessor(multiplexer);
@@ -376,6 +371,7 @@ public class PlayScreen extends ScreenAdapter {
                 }
                 powerupList.remove(i);
                 powerupSfx.play();
+                i--;
             }
         }
 
