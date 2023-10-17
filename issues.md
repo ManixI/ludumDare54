@@ -105,7 +105,7 @@
  - [100] add graphical "lanes" for platform lists for debug
  - **[101]** add invincibility powerup
  - **[102]** add extra mobility option to better avoid beam
- - [103] fix game restart
+ - [103] fix player position on game restart
  - [104] add beam sfx
  - [105] fix bug where beam launcher damages player while beam is active
  - [106] re-add invincibility timer for collision
@@ -141,3 +141,7 @@ spikes and platforms handled as background tiles, powerups and other enemies han
 only check collision for enemies if they are on screen~~ This feels weird, do the other thing, fixing player position between 1/2 and 1/5 of screen. Arrow controls should do very little
 
 player now clips though corner of platforms when falling down instead of bonking, updated platform sprite needs to reflect this
+
+to increase screen size, the viewport needs to be expanded over time
+this will require modifying when things leave memory dynamically
+player left bound will need to be function of viewport size
