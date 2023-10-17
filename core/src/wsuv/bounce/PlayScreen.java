@@ -323,13 +323,14 @@ public class PlayScreen extends ScreenAdapter {
             return;
         }
 
-        if (stopScroll) {
-            cam.position.x = player.getX();
-        } else if (player.isSpeedy) {
-            cam.position.x += Avatar.MAX_X_VELOCITY * Gdx.graphics.getDeltaTime() * gameSpeed;
-        } else {
-            cam.position.x += Gdx.graphics.getDeltaTime() * camSpeed * gameSpeed;
-
+        if (state == SubState.PLAYING) {
+            if (stopScroll) {
+                cam.position.x = player.getX();
+            } else if (player.isSpeedy) {
+                cam.position.x += Avatar.MAX_X_VELOCITY * Gdx.graphics.getDeltaTime() * gameSpeed;
+            } else {
+                cam.position.x += Gdx.graphics.getDeltaTime() * camSpeed * gameSpeed;
+            }
         }
 
         if (state == SubState.PLAYING) {
