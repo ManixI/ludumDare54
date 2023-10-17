@@ -433,7 +433,7 @@ public class PlayScreen extends ScreenAdapter {
                             && player.getX() + player.getWidth() < beamLeft)) {
 
                         lives--;
-                        player.respawn(cam.position.x, cam.position.y + 150);
+                        //player.respawn(cam.position.x, cam.position.y + 150);
                         invincible = true;
                         deathSfx.play();
                         setInvulTimer(INVUL_TIME);
@@ -490,7 +490,7 @@ public class PlayScreen extends ScreenAdapter {
                             case Enemie.SPIKES:
                             case Enemie.SPIKES_FLIPPED:
                                 lives--;
-                                player.respawn(cam.position.x, cam.position.y + 150);
+                                //player.respawn(cam.position.x, cam.position.y + 150);
                                 setInvulTimer(INVUL_TIME);
                                 invincible = true;
                                 deathSfx.play();
