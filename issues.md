@@ -70,7 +70,9 @@
  - **[91]** add cheats
  - [95] speed plats only "wear off" after landing or taking hit
  - [97] fix camera jump at game start
+ - **[101]** add invincibility powerup
  - [103] fix player position on game restart
+ - [106] re-add invincibility timer for collision
 
 
 ## Open Issues ##
@@ -102,11 +104,10 @@
  - [98] fix player lagging behind camera
  - [99] higher pitch sfx for second jump
  - [100] add graphical "lanes" for platform lists for debug
- - **[101]** add invincibility powerup
  - **[102]** add extra mobility option to better avoid beam
  - [104] add beam sfx
  - [105] fix bug where beam launcher damages player while beam is active
- - [106] re-add invincibility timer for collision
+ - [107] add invulnerable music
  
 
  ## Old ##
