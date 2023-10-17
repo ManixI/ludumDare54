@@ -319,6 +319,7 @@ public class Platform extends Sprite {
                 break;
 
             // default spawn behavior
+            // TODO: spawn seems to be broken, spawns sit on ceiling of lane
             case NORMAL:
             default:
                 distX = game.random.nextFloat() * (getX() + getWidth() + maxDistance - (getX() + getWidth())) + getX() + getWidth() + 50;

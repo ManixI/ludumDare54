@@ -814,7 +814,9 @@ public class PlayScreen extends ScreenAdapter {
                     escapeGame.batch.draw(
                             laneLine,
                             cam.position.x - 500 + j,
-                            i * PLAT_LANE_SPACE
+                            i * PLAT_LANE_SPACE,
+                            laneLine.getWidth(),
+                            laneLine.getHeight()*3
                     );
                 }
             }
