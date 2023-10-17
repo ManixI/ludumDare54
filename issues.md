@@ -73,22 +73,20 @@
 
 ## Open Issues ##
 
- - [0] general game balance tweeks
+ - [0] general game balance tweaks
  - **[24]** add music
  - [37] better points sprite
  - [40] zoom out as speed increases
  - [41] add graphic for death plane
  - **[42]** different platform paths lean towards different directions
  - [43] increase sense of speed
- - [45] spawn enemies as function of spawning platform
  - [46] set minimum height separation between platforms
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
  - [58] spinning sprite on second jump
  - [59] add spikes to bottom of platforms
  - [61] running sfx that scales with speed
- - [71] stop spokes from spawning partly off platforms
+ - [71] stop spikes from spawning partly off platforms
  - [74] slow down game pacing and add speed cap
- - [76] spike hitboxes are too big
  - [78] add background
  - [79] update sprites to reflect target aesthetic
  - [80] portals to different levels/locations
@@ -112,7 +110,9 @@
  
 
  ## Old ##
+ - [45] spawn enemies as function of spawning platform
  - [52] add pits to floor
+ - [76] spike hitboxes are too big
  - [77] do grid based spawning
  - [84] camera follows player, instead of current player follows camera
 
