@@ -811,47 +811,19 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
-        // draw ceiling
-        /*Texture ceilingTex = escapeGame.am.get(escapeGame.CEILING_TILES[0], Texture.class);
-        Texture floorTex = escapeGame.am.get(escapeGame.FLOOR_TILES[0], Texture.class);
-        start = (cam.position.y - 600) / ceilingTex.getWidth();
-        start = Math.floor(start);
-        for (int i=0; i< 3000; i++) {
-            escapeGame.batch.draw(
-                    ceilingTex,
-                    (float) start+(i* ceilingTex.getWidth()*3),
-                    Avatar.CEILING_HEIGHT+ ceilingTex.getHeight(),
-                    ceilingTex.getWidth()*3,
-                    ceilingTex.getHeight()*3
-            );
-            escapeGame.batch.draw(
-                    floorTex,
-                    (float) start+(i*floorTex.getWidth()*3),
-                    Avatar.FLOOR_HEIGHT-floorTex.getHeight()*3,
-                    floorTex.getWidth()*3,
-                    floorTex.getHeight()*3
-            );
-        }*/
-
-
-        //bounceGame.batch.draw(bounceGame.am.get(bounceGame.CEILING_TILES[0], Texture.class), 200, 200);
-
-        if (invincible && !drawPlayer) {
-
-        } else if (state != SubState.PLAYING) {
-            // don't draw player if not playing
-            // TODO: clean up this
-        } else {
-            player.draw(escapeGame.batch);
-            if (drawDbugBox) {
-                tmp = player.getBoundingRectangle();
-                escapeGame.batch.draw(
-                        collisionBox,
-                        tmp.getX(),
-                        tmp.getY(),
-                        tmp.getWidth(),
-                        tmp.getHeight()
-                );
+        if (!(invincible && !drawPlayer)) {
+            if (state == SubState.PLAYING) {
+                player.draw(escapeGame.batch);
+                if (drawDbugBox) {
+                    tmp = player.getBoundingRectangle();
+                    escapeGame.batch.draw(
+                            collisionBox,
+                            tmp.getX(),
+                            tmp.getY(),
+                            tmp.getWidth(),
+                            tmp.getHeight()
+                    );
+                }
             }
         }
 
