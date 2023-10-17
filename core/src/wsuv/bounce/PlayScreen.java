@@ -130,7 +130,7 @@ public class PlayScreen extends ScreenAdapter {
         //enemies.add(new Enemie(game, 500, 0, Enemie.SPIKES));
         //enemies.add(platformList.get(3).spawnEnemy());
 
-        player = new Avatar(game, 0, 3000);
+        player = new Avatar(game, 100, 3000);
 
         jumpSfx = escapeGame.am.get(EscapeGame.SFX_JUMP);
         deathSfx = escapeGame.am.get(EscapeGame.SFX_HIT);
@@ -586,25 +586,10 @@ public class PlayScreen extends ScreenAdapter {
         cleanupPowerups(powerupList);
 
         // always update the ball, but ignore bounces unless we're in PLAY state
-        /*if (ball.update() && state == SubState.PLAYING) {
-            bounces++;
-            // fast explosions off walls
-            explosions.add(new Bang(baf, true, ball.getX() + ball.getOriginX(), ball.getY() + ball.getOriginY()));
-            boomSfx.play();
-
-            if (bounces == 5) {
-                bounceGame.music.setVolume(bounceGame.music.getVolume() * 2);
-                state = SubState.GAME_OVER;
-                timer = 0; // restart the timer.
-            }
-        }*/
         if (state == SubState.READY && Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             state = SubState.PLAYING;
             //escapeGame.music.setVolume(escapeGame.music.getVolume() / 2);
         }
-        /*if (state == SubState.GAME_OVER && timer > 3.0f) {
-            state = SubState.READY;
-        }*/
         // ignore key presses when console is open...
         if (hud.isOpen() && state == SubState.PLAYING) {
             if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
@@ -718,7 +703,9 @@ public class PlayScreen extends ScreenAdapter {
                         player.airborn = true;
                         restartSfx.play();
                         escapeGame.getScreen().dispose();
-                        escapeGame.setScreen(new PlayScreen(escapeGame));
+                        PlayScreen next = new PlayScreen(escapeGame);
+                        escapeGame.setScreen(next);
+                        next.state = SubState.PLAYING;
                     }
                 }
             }
