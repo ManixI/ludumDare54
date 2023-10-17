@@ -54,8 +54,6 @@ public class PlayScreen extends ScreenAdapter {
     private Sprite restartButton;
 
     // spawn timers for platform independent enemies
-    float spikeTimer = 0;
-    float ceilingSpikeTimer = 0;
     float missileTimer = 0;
     float beamLauncherTimer = 0;
     float gameSpeed = 1.0f;
@@ -530,7 +528,6 @@ public class PlayScreen extends ScreenAdapter {
         // death plane
         if (player.getY() <= cam.position.y - 650) {
             lives = 0;
-            //player.respawn(cam.position.x, cam.position.y);
         }
 
         // for if player gets pushed off the screen
@@ -567,28 +564,9 @@ public class PlayScreen extends ScreenAdapter {
         time *= 1000;
 
         missileTimer += time;
-        spikeTimer += time;
-        ceilingSpikeTimer += time;
         beamLauncherTimer += time;
         float min = cam.position.x + 500;
-        if (spikeTimer > 1000) {
-            spikeTimer = 0;
-            enemies.add(new Enemie(
-                    escapeGame,
-                    escapeGame.random.nextFloat()*150+min,
-                    Avatar.FLOOR_HEIGHT + 14,
-                    Enemie.SPIKES
-            ));
-        }
-        /*if (ceilingSpikeTimer > 250) {
-            ceilingSpikeTimer = 0;
-            enemies.add(new Enemie(
-                    escapeGame,
-                    escapeGame.random.nextFloat()*100+min,
-                    Avatar.CEILING_HEIGHT + 30,
-                    Enemie.SPIKES_FLIPPED
-            ));
-        }*/
+
         if (missileTimer > 4500 && state == SubState.PLAYING) {
             missileTimer = 0;
             enemies.add( new Enemie(
