@@ -229,7 +229,7 @@ public class HUD {
 
         // draw based on the open/closed status
         if (open) {
-            batch.draw(background, rColumn, ((font.getLineHeight()) * linesbuffered) - yMargin);
+            batch.draw(background, xMargin-50, yMargin - ((font.getLineHeight()) * (linesbuffered-3)));
             console = String.join("\n", consoleLines);
             if (console.equals("")) {
                 console = PROMPT + currentLine.toString();
