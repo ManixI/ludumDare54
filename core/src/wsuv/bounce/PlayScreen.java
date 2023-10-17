@@ -61,6 +61,7 @@ public class PlayScreen extends ScreenAdapter {
 
     float elapsed = 0;
     boolean stopScroll = false;
+    boolean drawDbugLanes = true;
 
     public PlayScreen(EscapeGame game) {
         escapeGame = game;
@@ -288,6 +289,28 @@ public class PlayScreen extends ScreenAdapter {
 
             public String help(String[] cmd) {
                 return "hiding hitboxes";
+            }
+        });
+        hud.registerAction("showLanes", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                drawDbugLanes = true;
+                return "showing lanes";
+            }
+
+            public String help(String[] cmd) {
+                return "show platform lanes";
+            }
+        });
+        hud.registerAction("hideLanes", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                drawDbugLanes = false;
+                return "hiding lanes";
+            }
+
+            public String help(String[] cmd) {
+                return "hide platform lanes";
             }
         });
 
@@ -784,6 +807,11 @@ public class PlayScreen extends ScreenAdapter {
                 }
             }
         }
+        if (drawDbugLanes) {
+
+        }
+
+
         for (Powerup p : powerupList) {
             p.draw(escapeGame.batch);
             if (drawDbugBox) {
