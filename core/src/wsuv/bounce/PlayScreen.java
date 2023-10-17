@@ -14,12 +14,10 @@ import java.util.*;
 public class PlayScreen extends ScreenAdapter {
     private enum SubState {READY, GAME_OVER, PLAYING}
     private final EscapeGame escapeGame;
-    private Ball ball;
     private final HUD hud;
     private SubState state;
     private int lives;
 
-    private final ArrayList<Bang> explosions;
     BangAnimationFrames baf;
 
     ArrayList<Platform>[] platformList;
@@ -69,7 +67,6 @@ public class PlayScreen extends ScreenAdapter {
     public PlayScreen(EscapeGame game) {
         escapeGame = game;
         //ball = new Ball(game);
-        explosions = new ArrayList<>(10);
         cam = new OrthographicCamera(1000, 1000);
         cam.translate(500,3000);
         cam.update();
@@ -170,29 +167,6 @@ public class PlayScreen extends ScreenAdapter {
         hud.setDataVisibility(HUDViewCommand.Visibility.WHEN_OPEN);
 
         // HUD Console Commands
-        hud.registerAction("ball", new HUDActionCommand() {
-            static final String help = "Usage: ball <x> <y> <vx> <vy> | ball ";
-
-            @Override
-            public String execute(String[] cmd) {
-                try {
-                    float x = Float.parseFloat(cmd[1]);
-                    float y = Float.parseFloat(cmd[2]);
-                    float vx = Float.parseFloat(cmd[3]);
-                    float vy = Float.parseFloat(cmd[4]);
-                    ball.xVelocity = vx;
-                    ball.yVelocity = vy;
-                    ball.setCenter(x, y);
-                    return "ok!";
-                } catch (Exception e) {
-                    return help;
-                }
-            }
-
-            public String help(String[] cmd) {
-                return help;
-            }
-        });
 
         // HUD Data
         hud.registerView("Points:", new HUDViewCommand(HUDViewCommand.Visibility.ALWAYS) {
@@ -216,8 +190,8 @@ public class PlayScreen extends ScreenAdapter {
         hud.registerView("Player @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
             @Override
             public String execute(boolean consoleIsOpen) {
-                return String.format("%.0f %.0f [%.0f %.0f] (%d)",
-                        player.getX(), player.getY(), player.xVelocity, player.yVelocity, explosions.size());
+                return String.format("%.0f %.0f [%.0f %.0f]",
+                        player.getX(), player.getY(), player.xVelocity, player.yVelocity);
             }
         });
 
@@ -331,8 +305,8 @@ public class PlayScreen extends ScreenAdapter {
             @Override
             public boolean keyTyped(char character) {
                 if (character == '!') {
-                    Gdx.app.log("Boom!",  "(" + explosions.size() + ")" );
-                    explosions.add(new Bang(baf, false, ball.getX() + ball.getOriginX(), ball.getY() + ball.getOriginY()));
+                    //Gdx.app.log("Boom!",  "(" + explosions.size() + ")" );
+                    //explosions.add(new Bang(baf, false, ball.getX() + ball.getOriginX(), ball.getY() + ball.getOriginY()));
                     return true;
                 }
                 return false;
@@ -351,7 +325,6 @@ public class PlayScreen extends ScreenAdapter {
     public void update(float delta) {
 
         if (hud.isOpen()) {
-            invincible = true;
             return;
         }
 
@@ -796,12 +769,6 @@ public class PlayScreen extends ScreenAdapter {
 
         }*/
 
-        for(Iterator<Bang> bi = explosions.iterator(); bi.hasNext(); ) {
-            Bang b = bi.next();
-            if (b.completed()) { bi.remove(); }
-            else { b.draw(escapeGame.batch); }
-        }
-        //ball.draw(bounceGame.batch);
         for (ArrayList<Platform> l : platformList) {
             for (Platform p : l) {
                 p.draw(escapeGame.batch);
