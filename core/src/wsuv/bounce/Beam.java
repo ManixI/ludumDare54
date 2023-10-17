@@ -15,7 +15,7 @@ class Beam {
     float elapsed = 0;
     static float BEAM_FLOOR = -200;
     // TODO: balance beam start distance
-    public static float BEAM_START_DISTANCE = 500;
+    public static float BEAM_START_DISTANCE = 450;
     boolean active = false;
 
     public Beam(EscapeGame game, float x, float y, float scale, Animation beamAnimation) {

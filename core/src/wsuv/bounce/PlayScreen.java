@@ -79,7 +79,7 @@ public class PlayScreen extends ScreenAdapter {
         cam = new OrthographicCamera(1000, 1000);
         cam.translate(500,3000);
         cam.update();
-        hud = new HUD(escapeGame.am.get(EscapeGame.RSC_MONO_FONT_BIG), cam);
+        hud = new HUD(escapeGame.am.get(EscapeGame.RSC_MONO_FONT_BIG));
         lives = 5;
         numJumps = 1;
         totalJumps = 2;
@@ -321,8 +321,7 @@ public class PlayScreen extends ScreenAdapter {
 
 
         cam.update();
-        hud.updateCam(cam);
-        hud.updatePosCam();
+        hud.updatePosCam(cam);
 
         // lock player in back half of screen
         if (player.getX()+player.getWidth() >= cam.position.x) {
@@ -393,7 +392,6 @@ public class PlayScreen extends ScreenAdapter {
                         break;
                     }
                 }
-
             }
         }
 

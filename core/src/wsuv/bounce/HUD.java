@@ -69,14 +69,13 @@ public class HUD {
     private long lastDataRefresh;
     private StringBuilder hudDataBuffer;
 
-    OrthographicCamera cam;
 
 
     /**
      * Make a HUD with sane defaults.
      */
-    public HUD(BitmapFont fnt, OrthographicCamera camera) {
-        this(10, 13, 10, 500, fnt, camera);
+    public HUD(BitmapFont fnt) {
+        this(10, 13, 10, 500, fnt);
     }
 
     /**
@@ -89,12 +88,11 @@ public class HUD {
      *                   hud data is shown when the console is open.
      * @param fnt        - the font to use for display
      */
-    public HUD(int linesbuffd, int xmargin, int ymargin, int rcol, BitmapFont fnt, OrthographicCamera camera) {
+    public HUD(int linesbuffd, int xmargin, int ymargin, int rcol, BitmapFont fnt) {
         linesbuffered = linesbuffd;
         xMargin = xmargin;
         yMargin = ymargin;
         rColumn = rcol;
-        cam = camera;
         currentLine = new StringBuilder(60);
         consoleLines = new ArrayDeque<>();
         knownCommands = new HashMap<>(10);
@@ -198,14 +196,10 @@ public class HUD {
         }
     }
 
-    public void updatePosCam() {
+    public void updatePosCam(OrthographicCamera cam) {
         rColumn = (int) (cam.position.x + 250);
-        yMargin = (int) cam.position.y - (480);
+        yMargin = (int) cam.position.y + (480);
         xMargin = (int) cam.position.x - (450);
-    }
-
-    public void updateCam(OrthographicCamera camera) {
-        cam = camera;
     }
 
     /**
@@ -235,7 +229,7 @@ public class HUD {
 
         // draw based on the open/closed status
         if (open) {
-            batch.draw(background, cam.position.x - 500, cam.position.y + 250 - ((font.getLineHeight()) * linesbuffered) - yMargin);
+            batch.draw(background, rColumn, ((font.getLineHeight()) * linesbuffered) - yMargin);
             console = String.join("\n", consoleLines);
             if (console.equals("")) {
                 console = PROMPT + currentLine.toString();
@@ -243,7 +237,7 @@ public class HUD {
             } else {
                 console = console + '\n' + PROMPT + currentLine.toString();
             }
-            font.draw(batch, console, xMargin, cam.position.y + 500 - yMargin);
+            font.draw(batch, console, xMargin, yMargin);
         }
         // refresh HUD Data every second....
         if (TimeUtils.millis() - lastDataRefresh > DATA_REFRESH_INTERVAL) {
@@ -261,7 +255,7 @@ public class HUD {
             }
         }
         // draw HUD Data every frame...
-        font.draw(batch, hudDataBuffer.toString(), xlocation, cam.position.y + 250 - yMargin);
+        font.draw(batch, hudDataBuffer.toString(), xlocation, yMargin);
     }
 
     /**
