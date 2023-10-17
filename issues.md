@@ -54,6 +54,7 @@
  - **[65]** fix rounding error preventing enemies from spawning
  - [66] add button sfx
  - [67] fix platforms spawning below screen
+ - [68] remove ceiling and floor
  - [69] multiple platform paths
  - [70] vertical scrolling
  - [72] only check collision for things on screen
@@ -85,7 +86,6 @@
  - [58] spinning sprite on second jump
  - [59] add spikes to bottom of platforms
  - [61] running sfx that scales with speed
- - [68] remove ceiling and floor
  - [71] stop spokes from spawning partly off platforms
  - [74] slow down game pacing and add speed cap
  - [76] spike hitboxes are too big
