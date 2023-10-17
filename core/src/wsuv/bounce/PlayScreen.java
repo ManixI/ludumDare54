@@ -68,7 +68,6 @@ public class PlayScreen extends ScreenAdapter {
     // debug stuff
     Texture collisionBox;
     private boolean drawDbugBox = true;
-    private boolean debugCam = false;
 
     float elapsed = 0;
     boolean stopScroll = false;
@@ -261,18 +260,18 @@ public class PlayScreen extends ScreenAdapter {
                 return "gain 100 lives";
             }
         });
-        hud.registerAction("godModeOn", new HUDActionCommand() {
+        hud.registerAction("godMode", new HUDActionCommand() {
             @Override
             public String execute(String[] cmd) {
                 invincible = true;
-                return "Just play with the HUD open";
+                return "congrats on the promotion";
             }
 
             public String help(String[] cmd) {
-                return "doesn't actually do anything";
+                return "become invincible";
             }
         });
-        hud.registerAction("god mode off", new HUDActionCommand() {
+        hud.registerAction("godModeOff", new HUDActionCommand() {
             @Override
             public String execute(String[] cmd) {
                 invincible = false;
@@ -365,8 +364,7 @@ public class PlayScreen extends ScreenAdapter {
 
         if (hud.isOpen()) {
             invincible = true;
-        } else {
-            invincible = false;
+            return;
         }
 
         if (stopScroll) {
