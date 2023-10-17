@@ -9,21 +9,17 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class PlayScreen extends ScreenAdapter {
     private enum SubState {READY, GAME_OVER, PLAYING}
-    private EscapeGame escapeGame;
+    private final EscapeGame escapeGame;
     private Ball ball;
-    private HUD hud;
+    private final HUD hud;
     private SubState state;
     private int lives;
 
-    private ArrayList<Bang> explosions;
+    private final ArrayList<Bang> explosions;
     BangAnimationFrames baf;
 
     ArrayList<Platform>[] platformList;
@@ -39,19 +35,19 @@ public class PlayScreen extends ScreenAdapter {
     private float staticPoints;
     private float distance;
 
-    private Sound jumpSfx;
-    private Sound deathSfx;
-    private Sound stepSfx;
-    private Sound powerupSfx;
-    private Sound missileDeathSfx;
-    private Sound missileLaunchSfx;
-    private Sound restartSfx;
+    private final Sound jumpSfx;
+    private final Sound deathSfx;
+    private final Sound stepSfx;
+    private final Sound powerupSfx;
+    private final Sound missileDeathSfx;
+    private final Sound missileLaunchSfx;
+    private final Sound restartSfx;
 
     private boolean invincible;
 
     private boolean drawPlayer;
 
-    private Sprite restartButton;
+    private final Sprite restartButton;
 
     // spawn timers for platform independent enemies
     float missileTimer = 0;
@@ -87,7 +83,7 @@ public class PlayScreen extends ScreenAdapter {
         drawPlayer = true;
 
         restartButton = new Sprite();
-        restartButton.setTexture(escapeGame.am.get(escapeGame.BTN_RESTART));
+        restartButton.setTexture(escapeGame.am.get(EscapeGame.BTN_RESTART));
 
         //platformList = new ArrayList<Platform>();
         platformList = new ArrayList[9];
@@ -99,7 +95,7 @@ public class PlayScreen extends ScreenAdapter {
             } else {
                 pType = Platform.SpawnType.NORMAL;
             }
-            platformList[i] = new ArrayList<Platform>();
+            platformList[i] = new ArrayList<>();
             platformList[i].addAll(Platform.makeFirstPlat(
                     game,
                     100,
@@ -122,13 +118,11 @@ public class PlayScreen extends ScreenAdapter {
         }
         //platformList.add(new Platform(game, 100, 200, 10, cam));
 
-        powerupList = new ArrayList<Powerup>();
+        powerupList = new ArrayList<>();
         powerupList.add(new Powerup(game, cam.position.x, cam.position.y, Powerup.ONE_UP));
         powerupList.add(new Powerup(game, cam.position.x + 500, cam.position.y + 100, Powerup.POINTS));
 
-        enemies = new ArrayList<Enemie>();
-        //enemies.add(new Enemie(game, 500, 0, Enemie.SPIKES));
-        //enemies.add(platformList.get(3).spawnEnemy());
+        enemies = new ArrayList<>();
 
         player = new Avatar(game, 100, 3000);
 
@@ -348,10 +342,6 @@ public class PlayScreen extends ScreenAdapter {
 
     }
 
-    public float getCamSpeed() {
-        return camSpeed;
-    }
-
     @Override
     public void show() {
         Gdx.app.log("PlayScreen", "show");
@@ -418,7 +408,7 @@ public class PlayScreen extends ScreenAdapter {
 
         for (Enemie e : enemies) {
             e.update(player, gameSpeed);
-            if (e.getType() == Enemie.BEAM_LAUNCHER) {
+            if (Objects.equals(e.getType(), Enemie.BEAM_LAUNCHER)) {
                 // start beam related timers
                 /*if (e.getX() <= cam.position.x + 380 && e.beamState == Enemie.BeamStates.OFF) {
                 }*/
@@ -491,7 +481,7 @@ public class PlayScreen extends ScreenAdapter {
                                 break;
                         }
                     }
-                    if (e.getType() == e.MISSILE) {
+                    if (Objects.equals(e.getType(), Enemie.MISSILE)) {
                         for (ArrayList<Platform> l : platformList) {
                             for (Platform p : l) {
                                 if (e.checkColision(p)) {
@@ -564,7 +554,7 @@ public class PlayScreen extends ScreenAdapter {
             enemies.add( new Enemie(
                     escapeGame,
                     escapeGame.random.nextFloat()*100+min,
-                    escapeGame.random.nextFloat( )*(cam.position.y + 300 -(cam.position.y +300))+cam.position.y + 300,
+                    escapeGame.random.nextFloat()*(0.0f)+cam.position.y + 300,
                     Enemie.MISSILE
             ));
             missileLaunchSfx.play();
@@ -734,13 +724,9 @@ public class PlayScreen extends ScreenAdapter {
             t.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (drawPlayer) {
-                        drawPlayer = false;
-                    } else {
-                        drawPlayer = true;
-                    }
+                    drawPlayer = !drawPlayer;
                 }
-            }, (duration/invluFrames)*i);
+            }, (long) (duration / invluFrames) *i);
         }
     }
 
@@ -847,7 +833,6 @@ public class PlayScreen extends ScreenAdapter {
 
         // needed for beam launcher
         elapsed += Gdx.graphics.getDeltaTime();
-        int beamScale = 3;
 
         for (Enemie e : enemies) {
             e.draw(escapeGame.batch);
