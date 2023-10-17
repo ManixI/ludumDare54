@@ -367,6 +367,9 @@ public class PlayScreen extends ScreenAdapter {
                     case Powerup.POINTS:
                         staticPoints += 1000;
                         break;
+                    case Powerup.STAR:
+                        setInvulTimer(5000);
+                        // TODO: add invincible music here
                     default:
                 }
                 powerupList.remove(i);
@@ -674,12 +677,12 @@ public class PlayScreen extends ScreenAdapter {
     void takeHit() {
         lives--;
         //player.respawn(cam.position.x, cam.position.y + 150);
-        invincible = true;
         deathSfx.play();
         setInvulTimer(INVUL_TIME);
     }
 
     private void setInvulTimer(int duration) {
+        invincible = true;
         Timer t = new Timer();
         t.schedule(new TimerTask() {
             @Override

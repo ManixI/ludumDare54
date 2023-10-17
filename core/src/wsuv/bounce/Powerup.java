@@ -8,6 +8,7 @@ public class Powerup extends Sprite {
     final static String MOON_JUMP = "moon_jump.png";
     final static String DOUBLE_JUMP = "double_jump.png";
     final static String POINTS = "points.png";
+    final static String STAR = "star.png";
 
     String type;
     float scaleFactor = 1.2f;
