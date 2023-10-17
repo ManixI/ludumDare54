@@ -71,6 +71,7 @@ public class PlayScreen extends ScreenAdapter {
     private boolean debugCam = false;
 
     float elapsed = 0;
+    boolean stopScroll = false;
 
     public PlayScreen(EscapeGame game) {
         escapeGame = game;
@@ -260,6 +261,51 @@ public class PlayScreen extends ScreenAdapter {
                 return "gain 100 lives";
             }
         });
+        hud.registerAction("godModeOn", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                invincible = true;
+                return "Just play with the HUD open";
+            }
+
+            public String help(String[] cmd) {
+                return "doesn't actually do anything";
+            }
+        });
+        hud.registerAction("god mode off", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                invincible = false;
+                return "no longer god";
+            }
+
+            public String help(String[] cmd) {
+                return "turns off perma-invincibility";
+            }
+        });
+        hud.registerAction("stopScroll", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                stopScroll = true;
+                return "game speed off";
+            }
+
+            public String help(String[] cmd) {
+                return "disables forced movement";
+            }
+        });
+        hud.registerAction("startScroll", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                stopScroll = false;
+                return "game speed on";
+            }
+
+            public String help(String[] cmd) {
+                return "enables forced movement";
+            }
+        });
+
 
         // we're adding an input processor AFTER the HUD has been created,
         // so we need to be a bit careful here and make sure not to clobber
@@ -301,7 +347,7 @@ public class PlayScreen extends ScreenAdapter {
             invincible = false;
         }
 
-        if (debugCam) {
+        if (stopScroll) {
             cam.position.x = player.getX();
         } else if (player.isSpeedy) {
             cam.position.x += Avatar.MAX_X_VELOCITY * Gdx.graphics.getDeltaTime() * gameSpeed;
@@ -328,9 +374,12 @@ public class PlayScreen extends ScreenAdapter {
         hud.updatePosCam(cam);
 
         // lock player in back half of screen
-        if (player.getX()+player.getWidth() >= cam.position.x) {
-            player.setX(cam.position.x - player.getWidth());
+        if (!stopScroll) {
+            if (player.getX()+player.getWidth() >= cam.position.x) {
+                player.setX(cam.position.x - player.getWidth());
+            }
         }
+
 
         // check powerup collision
         for (int i = 0; i<powerupList.size(); i++) {
@@ -576,10 +625,14 @@ public class PlayScreen extends ScreenAdapter {
             }
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 // so player can move off left side of screen
-                if (player.getX() <= cam.position.x - 500) {
-                    player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                if (stopScroll) {
+                    player.xVelocity = -Avatar.MIN_X_VELOCITY*gameSpeed;
                 } else {
-                    player.xVelocity = Avatar.MIN_X_VELOCITY*gameSpeed;
+                    if (player.getX() <= cam.position.x - 500) {
+                        player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                    } else {
+                        player.xVelocity = Avatar.MIN_X_VELOCITY*gameSpeed;
+                    }
                 }
             } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                 player.xVelocity = Avatar.MAX_X_VELOCITY*gameSpeed - 300;
@@ -587,10 +640,11 @@ public class PlayScreen extends ScreenAdapter {
                     player.xVelocity += 600;
                 }*/
             } else {
-                player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
-                /*if (player.isSpeedy) {
-                    player.xVelocity -= 300;
-                }*/
+                if (stopScroll) {
+                    player.xVelocity = 0;
+                } else {
+                    player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                }
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released
@@ -617,10 +671,14 @@ public class PlayScreen extends ScreenAdapter {
             if (Gdx.input.isKeyPressed(Input.Keys.A)
                     || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 // so player can move off left side of screen
-                if (player.getX() <= cam.position.x - 500) {
-                    player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                if (stopScroll) {
+                    player.xVelocity = -Avatar.MIN_X_VELOCITY*gameSpeed;
                 } else {
-                    player.xVelocity = Avatar.MIN_X_VELOCITY*gameSpeed;
+                    if (player.getX() <= cam.position.x - 500) {
+                        player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                    } else {
+                        player.xVelocity = Avatar.MIN_X_VELOCITY*gameSpeed;
+                    }
                 }
             } else if (Gdx.input.isKeyPressed(Input.Keys.D)
                     || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -629,7 +687,11 @@ public class PlayScreen extends ScreenAdapter {
                     player.xVelocity += 600;
                 }*/
             } else {
-                player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                if (stopScroll) {
+                    player.xVelocity = 0;
+                } else {
+                    player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
+                }
                 /*if (player.isSpeedy) {
                     player.xVelocity -= 300;
                 }*/
