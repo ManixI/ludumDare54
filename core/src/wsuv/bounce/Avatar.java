@@ -101,7 +101,7 @@ public class Avatar extends Sprite implements Cloneable {
         return super.clone();
     }
 
-    public boolean update(OrthographicCamera cam, float gamespeed, float camSpeed) {
+    public boolean update(OrthographicCamera cam, float gamespeed) {
         float x = getX();
         float y = getY();
         float time = Gdx.graphics.getDeltaTime();
@@ -113,18 +113,6 @@ public class Avatar extends Sprite implements Cloneable {
         }
         setX(x + time * xVelocity*gamespeed);
         setY(y + time * yVelocity);
-
-        /*if (getY() > CEILING_HEIGHT+20) {
-            setY(CEILING_HEIGHT+20);
-            yVelocity = 0;
-            bonkSfx.play();
-        } else*/ if (getY() < FLOOR_HEIGHT + getHeight()*2) {
-            setY(FLOOR_HEIGHT+getHeight()*2);
-            yVelocity = 0;
-            collided = true;
-            airborn = false;
-        }
-
 
         // set speed caps
         if (xVelocity > MAX_X_VELOCITY*gamespeed) {

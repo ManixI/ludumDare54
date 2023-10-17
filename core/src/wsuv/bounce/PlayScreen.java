@@ -523,14 +523,14 @@ public class PlayScreen extends ScreenAdapter {
 
         }
 
-        if (player.update(cam, gameSpeed, camSpeed)) {
+        if (player.update(cam, gameSpeed)) {
             numJumps = totalJumps;
         }
 
         // death plane
         if (player.getY() <= cam.position.y - 650) {
-            lives--;
-            player.respawn(cam.position.x, cam.position.y);
+            lives = 0;
+            //player.respawn(cam.position.x, cam.position.y);
         }
 
         // for if player gets pushed off the screen
