@@ -54,9 +54,11 @@ public class PlayScreen extends ScreenAdapter {
 
     static int CAM_FLOOR = 300;
     static int CAM_CEILING = 6000;
+    static int PLAT_LANE_SPACE = 500;
 
     // debug stuff
     Texture collisionBox;
+    Texture laneLine;
     private boolean drawDbugBox = true;
 
     float elapsed = 0;
@@ -81,9 +83,7 @@ public class PlayScreen extends ScreenAdapter {
         restartButton = new Sprite();
         restartButton.setTexture(escapeGame.am.get(EscapeGame.BTN_RESTART));
 
-        //platformList = new ArrayList<Platform>();
         platformList = new ArrayList[9];
-        int tmpPlatSpace = 500;
         Platform.SpawnType pType;
         for (int i=0; i<platformList.length; i++) {
             if (i%2 == 0) {
@@ -95,11 +95,11 @@ public class PlayScreen extends ScreenAdapter {
             platformList[i].addAll(Platform.makeFirstPlat(
                     game,
                     100,
-                    200+(tmpPlatSpace*i),
+                    200+(PLAT_LANE_SPACE*i),
                     10,
                     cam,
-                    tmpPlatSpace*i,
-                    400 + tmpPlatSpace*i,
+                    PLAT_LANE_SPACE*i,
+                    400 + PLAT_LANE_SPACE*i,
                     pType
             ));
         }
@@ -153,6 +153,7 @@ public class PlayScreen extends ScreenAdapter {
 
         // debug stuff
         collisionBox = game.am.get(EscapeGame.DBG_COLLISION_REC, Texture.class);
+        laneLine = game.am.get(EscapeGame.DBG_LINE, Texture.class);
 
 
         // we've loaded textures, but the explosion texture isn't quite ready to go--
@@ -808,7 +809,15 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
         if (drawDbugLanes) {
-
+            for (int i=0; i<platformList.length; i++) {
+                for (int j=-100; j<1100; j+=laneLine.getWidth()) {
+                    escapeGame.batch.draw(
+                            laneLine,
+                            cam.position.x - 500 + j,
+                            i * PLAT_LANE_SPACE
+                    );
+                }
+            }
         }
 
 
