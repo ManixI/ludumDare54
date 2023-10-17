@@ -237,13 +237,6 @@ public class PlayScreen extends ScreenAdapter {
             }
         });*/
 
-        hud.registerView("player @:", new HUDViewCommand(HUDViewCommand.Visibility.WHEN_OPEN) {
-            @Override
-            public String execute(boolean consoleIsOpen) {
-                return String.format("%.0f %.0f [%.0f %.0f]",
-                        player.getX(), player.getY(), player.xVelocity, player.yVelocity);
-            }
-        });
         hud.registerAction("die", new HUDActionCommand() {
             @Override
             public String execute(String[] cmd) {
@@ -254,6 +247,17 @@ public class PlayScreen extends ScreenAdapter {
 
             public String help(String[] cmd) {
                 return "kills the player";
+            }
+        });
+        hud.registerAction("lives", new HUDActionCommand() {
+            @Override
+            public String execute(String[] cmd) {
+                lives += 100;
+                return "100up";
+            }
+
+            public String help(String[] cmd) {
+                return "gain 100 lives";
             }
         });
 
