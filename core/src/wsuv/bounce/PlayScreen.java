@@ -432,11 +432,7 @@ public class PlayScreen extends ScreenAdapter {
                             || (player.getX() + player.getWidth() > beamRight
                             && player.getX() + player.getWidth() < beamLeft)) {
 
-                        lives--;
-                        //player.respawn(cam.position.x, cam.position.y + 150);
-                        invincible = true;
-                        deathSfx.play();
-                        setInvulTimer(INVUL_TIME);
+                        takeHit();
                     }
                 }
             }
@@ -489,11 +485,7 @@ public class PlayScreen extends ScreenAdapter {
                                 j--;
                             case Enemie.SPIKES:
                             case Enemie.SPIKES_FLIPPED:
-                                lives--;
-                                //player.respawn(cam.position.x, cam.position.y + 150);
-                                setInvulTimer(INVUL_TIME);
-                                invincible = true;
-                                deathSfx.play();
+                                takeHit();
                                 break;
                             default:
                                 break;
@@ -731,6 +723,14 @@ public class PlayScreen extends ScreenAdapter {
                 }
             }
         }
+    }
+
+    void takeHit() {
+        lives--;
+        //player.respawn(cam.position.x, cam.position.y + 150);
+        invincible = true;
+        deathSfx.play();
+        setInvulTimer(INVUL_TIME);
     }
 
     private void setInvulTimer(int duration) {
