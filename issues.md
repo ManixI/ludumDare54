@@ -117,6 +117,31 @@
  - [76] spike hitboxes are too big
  - [77] do grid based spawning
  - [84] camera follows player, instead of current player follows camera
+ 
+ ## Assets ##
+ ### Art ###
+  - [x] Player sprite
+  - [x] Missile Sprite
+  - [ ] Missile Animation
+  - [x] Spikes Sprite
+  - [ ] Normal Platforms
+  - [ ] Speed Platforms
+  - [x] Beam Animation
+  - [x] Beam Launcher Animation
+  - [ ] Background
+  - [ ] Death Plane
+ 
+ ### Sound ###
+  - [ ] bgm
+  - [x] Bonk sfx
+  - [x] step sfx
+  - [x] missile launch sfx
+  - [ ] beam sfx
+  - [ ] beam launcher death sfx
+  - [x] death sfx
+  - [x] hit sfx
+  - [x] powerup sfx
+  - [ ] invincible music
 
 
 ## general ideas ##
