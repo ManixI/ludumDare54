@@ -54,7 +54,7 @@ public class PlayScreen extends ScreenAdapter {
 
     static int CAM_FLOOR = 300;
     static int CAM_CEILING = 6000;
-    static int PLAT_LANE_SPACE = 500;
+    static int NUM_LANES = 9;
 
     // debug stuff
     Texture collisionBox;
@@ -83,7 +83,8 @@ public class PlayScreen extends ScreenAdapter {
         restartButton = new Sprite();
         restartButton.setTexture(escapeGame.am.get(EscapeGame.BTN_RESTART));
 
-        platformList = new ArrayList[9];
+        platformList = new ArrayList[NUM_LANES];
+        int platLaneSpace = CAM_CEILING / NUM_LANES;
         Platform.SpawnType pType;
         for (int i=0; i<platformList.length; i++) {
             if (i%2 == 0) {
@@ -95,11 +96,11 @@ public class PlayScreen extends ScreenAdapter {
             platformList[i].addAll(Platform.makeFirstPlat(
                     game,
                     100,
-                    200+(PLAT_LANE_SPACE*i),
+                    200+(platLaneSpace*i),
                     10,
                     cam,
-                    PLAT_LANE_SPACE*i,
-                    400 + PLAT_LANE_SPACE*i,
+                    platLaneSpace*(i+1),
+                    platLaneSpace*i,
                     pType
             ));
         }
@@ -814,7 +815,7 @@ public class PlayScreen extends ScreenAdapter {
                     escapeGame.batch.draw(
                             laneLine,
                             cam.position.x - 500 + j,
-                            i * PLAT_LANE_SPACE,
+                            i * (CAM_CEILING / NUM_LANES),
                             laneLine.getWidth(),
                             laneLine.getHeight()*3
                     );
