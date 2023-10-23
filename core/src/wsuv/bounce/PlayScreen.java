@@ -578,7 +578,7 @@ public class PlayScreen extends ScreenAdapter {
         }
         // ignore key presses when console is open...
         if (hud.isOpen() && state == SubState.PLAYING) {
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
                 player.yVelocity = 200;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -607,7 +607,9 @@ public class PlayScreen extends ScreenAdapter {
                     player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
                 }
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
+            if ((Gdx.input.isKeyJustPressed(Input.Keys.W)
+                    || Gdx.input.isKeyPressed(Input.Keys.UP))
+                    && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 numJumps--;
@@ -615,14 +617,14 @@ public class PlayScreen extends ScreenAdapter {
                 jumpSfx.play();
                 player.setAirborne(true);
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.W)
+                    || Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 player.gravity = 15;
             } else {
                 player.gravity = 30;
             }
         } else if (!hud.isOpen() && state == SubState.PLAYING) {
-            if (Gdx.input.isKeyPressed(Input.Keys.W)
-                    || Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
                 player.yVelocity = 200;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S)
@@ -657,7 +659,7 @@ public class PlayScreen extends ScreenAdapter {
                     player.xVelocity -= 300;
                 }*/
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 numJumps--;
@@ -665,7 +667,7 @@ public class PlayScreen extends ScreenAdapter {
                 jumpSfx.play();
                 player.setAirborne(true);
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 player.gravity = 15;
             } else {
                 player.gravity = 30;
