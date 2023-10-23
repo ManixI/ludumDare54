@@ -350,10 +350,14 @@ public class PlayScreen extends ScreenAdapter {
         if (state == SubState.PLAYING) {
             if (stopScroll) {
                 cam.position.x = player.getX();
+            } else if (player.isDashing) {
+                cam.position.x += Avatar.DASH_SPEED * delta * gameSpeed;
+                player.rotate90(true);
+                // TODO: add sfx and graphic here
             } else if (player.isSpeedy) {
-                cam.position.x += Avatar.MAX_X_VELOCITY * Gdx.graphics.getDeltaTime() * gameSpeed;
+                cam.position.x += Avatar.MAX_X_VELOCITY * delta * gameSpeed;
             } else {
-                cam.position.x += Gdx.graphics.getDeltaTime() * camSpeed * gameSpeed;
+                cam.position.x += delta * camSpeed * gameSpeed;
             }
         }
 
