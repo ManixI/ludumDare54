@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.util.*;
+
 public class Avatar extends Sprite implements Cloneable {
 
     public float xVelocity = MAX_X_VELOCITY/2;
@@ -20,6 +22,7 @@ public class Avatar extends Sprite implements Cloneable {
 
     public float gravity = 25;
     public static final float JUMP_VELOCITY = 800;
+    public static final float DASH_SPEED = 2000;
 
     public static final float CEILING_HEIGHT = 680;
     public static final float FLOOR_HEIGHT = -130;
@@ -32,6 +35,8 @@ public class Avatar extends Sprite implements Cloneable {
     static float stateTime;
 
     public boolean airborne = true;
+    public boolean canDash = true;
+    public boolean isDashing = false;
 
     private final Sound bonkSfx;
     private final Sound stepSfx;
@@ -110,15 +115,18 @@ public class Avatar extends Sprite implements Cloneable {
         if (isSpeedy) {
             xVelocity = Avatar.MAX_X_VELOCITY;
         }
-        setX(x + time * xVelocity*gamespeed);
-        setY(y + time * yVelocity);
+
 
         // set speed caps
-        if (xVelocity > MAX_X_VELOCITY*gamespeed) {
-            xVelocity = MAX_X_VELOCITY*gamespeed;
-        }
-        if (xVelocity < MIN_X_VELOCITY*gamespeed) {
-            xVelocity = MIN_X_VELOCITY*gamespeed;
+        if (isDashing) {
+            xVelocity = DASH_SPEED;
+        } else {
+            if (xVelocity > MAX_X_VELOCITY * gamespeed) {
+                xVelocity = MAX_X_VELOCITY * gamespeed;
+            }
+            if (xVelocity < MIN_X_VELOCITY * gamespeed) {
+                xVelocity = MIN_X_VELOCITY * gamespeed;
+            }
         }
         if (yVelocity > MAX_Y_VELOCITY) {
             yVelocity = MAX_Y_VELOCITY;
@@ -126,6 +134,10 @@ public class Avatar extends Sprite implements Cloneable {
         if (yVelocity < -MAX_Y_VELOCITY) {
             yVelocity = -MAX_Y_VELOCITY;
         }
+
+        setX(x + time * xVelocity*gamespeed);
+        setY(y + time * yVelocity);
+
 
         if (yVelocity < 0) {
             airborne = true;
@@ -149,5 +161,23 @@ public class Avatar extends Sprite implements Cloneable {
 
     public void jump() {
         yVelocity = JUMP_VELOCITY;
+    }
+
+    public void dash(OrthographicCamera cam) {
+        // TODO: dash cooldown or dash once per jump?
+        if (canDash) {
+            //canDash = false;
+            isDashing = true;
+            // TODO: this dosen't actual rotate the sprite
+            rotate90(true);
+            Timer t = new Timer();
+            t.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    isDashing = false;
+                    rotate90(false);
+                }
+            }, 500);
+        }
     }
 }

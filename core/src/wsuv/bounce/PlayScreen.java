@@ -608,7 +608,7 @@ public class PlayScreen extends ScreenAdapter {
                 }
             }
             if ((Gdx.input.isKeyJustPressed(Input.Keys.W)
-                    || Gdx.input.isKeyPressed(Input.Keys.UP))
+                    || Gdx.input.isKeyJustPressed(Input.Keys.UP))
                     && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
@@ -659,7 +659,9 @@ public class PlayScreen extends ScreenAdapter {
                     player.xVelocity -= 300;
                 }*/
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && numJumps > 0) {
+            if ((Gdx.input.isKeyJustPressed(Input.Keys.UP)
+                    || Gdx.input.isKeyJustPressed(Input.Keys.W))
+                    && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 numJumps--;
@@ -667,7 +669,11 @@ public class PlayScreen extends ScreenAdapter {
                 jumpSfx.play();
                 player.setAirborne(true);
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                player.dash(cam);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)
+                    || Gdx.input.isKeyPressed(Input.Keys.W)) {
                 player.gravity = 15;
             } else {
                 player.gravity = 30;
