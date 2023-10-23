@@ -445,6 +445,7 @@ public class PlayScreen extends ScreenAdapter {
                     if (p.checkCollision(player, cam, gameSpeed, camSpeed)) {
                         numJumps = totalJumps;
                         player.setAirborne(false);
+                        player.canDash = true;
                         if (p.type != Platform.PlatType.SPEED) {
                             player.isSpeedy = false;
                         }
@@ -505,7 +506,7 @@ public class PlayScreen extends ScreenAdapter {
                                 }
                             }
                         }
-                        // despawm missile if collides with ceiling
+                        // despawn missile if collides with ceiling
                     /*if (e.getY() > player.CEILING_HEIGHT-10 || e.getY() < player.FLOOR_HEIGHT+10) {
                         enemies.remove(j);
                         missileDeathSfx.play();

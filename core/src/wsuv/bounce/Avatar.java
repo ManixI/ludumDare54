@@ -166,7 +166,7 @@ public class Avatar extends Sprite implements Cloneable {
     public void dash(OrthographicCamera cam) {
         // TODO: dash cooldown or dash once per jump?
         if (canDash) {
-            //canDash = false;
+            canDash = false;
             isDashing = true;
             // TODO: this dosen't actual rotate the sprite
             rotate90(true);
