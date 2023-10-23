@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,15 +17,15 @@ public class Enemie extends Sprite {
     public final static String SPIKES_FLIPPED = "spikes-flipped.png";
     public final static String BEAM_LAUNCHER = "beam-launcher.png";
 
-    private String type;
+    private final String type;
     private Platform spot;
     float scaleFactor = 1.2f;
 
-    private float missileSpeed = 25;
+    private final float missileSpeed = 25;
     private float xVelocity = 0;
     private float yVelocity = 0;
 
-    private float maxVelocity =  800;
+    private final float maxVelocity =  800;
     public enum BeamStates {OFF, WARMUP, ACTIVE, OVER}
     public BeamStates beamState = BeamStates.OFF;
 
@@ -34,7 +35,7 @@ public class Enemie extends Sprite {
         super(game.am.get(type, Texture.class));
         this.type = type;
 
-        if (type == BEAM_LAUNCHER) {
+        if (Objects.equals(type, BEAM_LAUNCHER)) {
             beam = new Beam(game, x, y-(getHeight()*2), 3, game.BEAM_ANIMATION);
         }
 
@@ -118,10 +119,7 @@ public class Enemie extends Sprite {
     }
 
     public boolean checkColision(Sprite sprite) {
-        if (getBoundingRectangle().overlaps(sprite.getBoundingRectangle())) {
-            return true;
-        }
-        return false;
+        return getBoundingRectangle().overlaps(sprite.getBoundingRectangle());
     }
 
     public String getType() {

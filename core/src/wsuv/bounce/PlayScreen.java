@@ -135,7 +135,7 @@ public class PlayScreen extends ScreenAdapter {
         t.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (!player.airborn) {
+                if (!player.airborne) {
                     stepSfx.play();
                 }
             }
@@ -146,7 +146,7 @@ public class PlayScreen extends ScreenAdapter {
         b.schedule(new TimerTask() {
             @Override
             public void run() {
-                // TODO: fix bug where player dosn't accelerate with game speed
+                // TODO: fix bug where player doesn't accelerate with game speed
                 //gameSpeed += 0.08f;
             }
         },4500, 4500);
@@ -333,7 +333,6 @@ public class PlayScreen extends ScreenAdapter {
             }
         });
         Gdx.input.setInputProcessor(multiplexer);
-
     }
 
     @Override
@@ -408,7 +407,7 @@ public class PlayScreen extends ScreenAdapter {
             e.update(player, gameSpeed);
             if (Objects.equals(e.getType(), Enemie.BEAM_LAUNCHER)) {
                 // start beam related timers
-                /*if (e.getX() <= cam.position.x + 380 && e.beamState == Enemie.BeamStates.OFF) {
+                /*if (e.getX() <= cam.position.x + 380 && e.beamState == Enemies.BeamStates.OFF) {
                 }*/
                 if (e.beamState == Enemie.BeamStates.ACTIVE
                         && !invincible
@@ -440,7 +439,7 @@ public class PlayScreen extends ScreenAdapter {
                     && p.getY() < cam.position.y + 700) {
                     if (p.checkCollision(player, cam, gameSpeed, camSpeed)) {
                         numJumps = totalJumps;
-                        player.setAirborn(false);
+                        player.setAirborne(false);
                         if (p.type != Platform.PlatType.SPEED) {
                             player.isSpeedy = false;
                         }
@@ -497,8 +496,7 @@ public class PlayScreen extends ScreenAdapter {
                     }*/
                     }
                 }
-                }
-
+            }
         }
 
         if (player.update(cam, gameSpeed)) {
@@ -613,9 +611,9 @@ public class PlayScreen extends ScreenAdapter {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 numJumps--;
-                // TODO: second jump sfx sould be higher in pitch
+                // TODO: second jump sfx should be higher in pitch
                 jumpSfx.play();
-                player.setAirborn(true);
+                player.setAirborne(true);
             }
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 player.gravity = 15;
@@ -663,9 +661,9 @@ public class PlayScreen extends ScreenAdapter {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 numJumps--;
-                // TODO: second jump sfx sould be higher in pitch
+                // TODO: second jump sfx should be higher in pitch
                 jumpSfx.play();
-                player.setAirborn(true);
+                player.setAirborne(true);
             }
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 player.gravity = 15;
@@ -688,7 +686,7 @@ public class PlayScreen extends ScreenAdapter {
                 if (x > 320 && x < 420) {
                     float y = Gdx.input.getY();
                     if (y > 365 && y < 440) {
-                        player.airborn = true;
+                        player.airborne = true;
                         restartSfx.play();
                         escapeGame.getScreen().dispose();
                         PlayScreen next = new PlayScreen(escapeGame);
@@ -751,7 +749,6 @@ public class PlayScreen extends ScreenAdapter {
                 }
             }
         }
-
     }
 
     private void cleanupPowerups(ArrayList<Powerup> sprites) {
@@ -791,7 +788,6 @@ public class PlayScreen extends ScreenAdapter {
                         background.getHeight()*7
                 );
             }
-
         }*/
 
         for (ArrayList<Platform> l : platformList) {

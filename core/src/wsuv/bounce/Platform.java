@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.util.ArrayList;
@@ -25,17 +24,18 @@ public class Platform extends Sprite {
     static float maxHeight = 115;
 
     public boolean isLast = false;
-    private Sound bonkSfx;
+    private final Sound bonkSfx;
 
     public static final float CEILING_HEIGHT = 680;
     public static final float FLOOR_HEIGHT = -150;
 
     public float upperBounds;
     public float lowerBounds;
-    public enum PlatType {NORMAL, SPEED, BOUNCE};
+    public enum PlatType {NORMAL, SPEED, BOUNCE}
+
     PlatType type;
 
-    public enum SpawnType {NORMAL, SPARSE, DENSE, NOTMAL_UP, NORMAL_DOWN}
+    public enum SpawnType {NORMAL, SPARSE, DENSE, NORMAL_UP, NORMAL_DOWN}
     SpawnType spawnType;
 
 
@@ -65,7 +65,7 @@ public class Platform extends Sprite {
         }
 
 
-        bonkSfx = game.am.get(game.SFX_BONK);
+        bonkSfx = game.am.get(EscapeGame.SFX_BONK);
 
         //setSize(length, 10);
         scale(3);
@@ -84,12 +84,12 @@ public class Platform extends Sprite {
             float startY,
             int length,
             OrthographicCamera cam,
-            float higherst,
+            float highest,
             float lowest,
             SpawnType sType
     ) {
         // TODO: there's got to be a better way of doing this then copy paste
-        ArrayList<Platform> plats = new ArrayList<Platform>();
+        ArrayList<Platform> plats = new ArrayList<>();
 
         // needs to be at least 2 tiles wide to look right
         // TODO: add single tile platform texture
@@ -115,7 +115,7 @@ public class Platform extends Sprite {
                         startY,
                         EscapeGame.PLATFORM_TILES[0],
                         cam,
-                        higherst,
+                        highest,
                         lowest,
                         PlatType.NORMAL,
                         sType
@@ -128,7 +128,7 @@ public class Platform extends Sprite {
                         startY,
                         EscapeGame.PLATFORM_TILES[2],
                         cam,
-                        higherst,
+                        highest,
                         lowest,
                         PlatType.NORMAL,
                         sType
@@ -142,7 +142,7 @@ public class Platform extends Sprite {
                         startY,
                         EscapeGame.PLATFORM_TILES[1],
                         cam,
-                        higherst,
+                        highest,
                         lowest,
                         PlatType.NORMAL,
                         sType
@@ -155,7 +155,7 @@ public class Platform extends Sprite {
 
 
     public ArrayList<Platform> makePlat(EscapeGame g, float startX, float startY, int length, OrthographicCamera cam, PlatType type) {
-        ArrayList<Platform> plats = new ArrayList<Platform>();
+        ArrayList<Platform> plats = new ArrayList<>();
 
         // needs to be at least 2 tiles wide to look right
         // TODO: add single tile platform texture
@@ -262,7 +262,7 @@ public class Platform extends Sprite {
             futurePlayer.yVelocity = player.yVelocity;
             futurePlayer.update(cam, gameSpeed);
             if (getBoundingRectangle().overlaps(futurePlayer.getBoundingRectangle())) {
-                if (player.yVelocity <= 0 && passthough == false) {
+                if (player.yVelocity <= 0 && !passthough) {
                     // player standing on plat
                     switch (type) {
                         case SPEED:
@@ -293,7 +293,7 @@ public class Platform extends Sprite {
 
 
     public ArrayList<Platform> generateNext(OrthographicCamera cam) {
-        // max height is currently 90? unts
+        // max height is currently 90? units
         float distX;
         float distY;
         int direction;
@@ -404,11 +404,11 @@ public class Platform extends Sprite {
     private Powerup placePowerup(String type) {
         float powerupMargin = 200;
         float heightFloor = getY() + getHeight()*2 + 50;
-        float heightCealing = heightFloor + maxHeight;
+        float heightCeiling = heightFloor + maxHeight;
         return new Powerup(
                 game,
                 game.random.nextFloat()*(this.getX()+this.getWidth()+powerupMargin-(this.getX()-powerupMargin))+this.getX()+this.getWidth()+powerupMargin,
-                game.random.nextFloat()*(heightCealing-heightFloor)+heightCealing,
+                game.random.nextFloat()*(heightCeiling-heightFloor)+heightCeiling,
                 type
 
         );

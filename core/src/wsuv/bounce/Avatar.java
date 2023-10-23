@@ -2,7 +2,6 @@ package wsuv.bounce;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -32,26 +31,26 @@ public class Avatar extends Sprite implements Cloneable {
     static TextureRegion currentFrame;
     static float stateTime;
 
-    public boolean airborn = true;
+    public boolean airborne = true;
 
-    private Sound bonkSfx;
-    private Sound stepSfx;
+    private final Sound bonkSfx;
+    private final Sound stepSfx;
     public boolean isSpeedy = false;
 
 
     public Avatar(EscapeGame game, float startX, float startY) {
-        super(game.am.get(game.PLAYER_SPRITE_2X2, Texture.class));
+        super(game.am.get(EscapeGame.PLAYER_SPRITE_2X2, Texture.class));
 
         //ref: https://www.catalinmunteanu.com/libgdx-2d-animations-from-sprites/
         TextureRegion[][] tmp = TextureRegion.split(
                 getTexture(),
-                (int) (getWidth()/game.PLAYER_SPRITE_COLS),
-                (int) (getHeight()/game.PLAYER_SPRITE_ROWS)
+                (int) (getWidth()/ EscapeGame.PLAYER_SPRITE_COLS),
+                (int) (getHeight()/ EscapeGame.PLAYER_SPRITE_ROWS)
         );
-        runFrames = new TextureRegion[game.PLAYER_SPRITE_ROWS * game.PLAYER_SPRITE_COLS];
+        runFrames = new TextureRegion[EscapeGame.PLAYER_SPRITE_ROWS * EscapeGame.PLAYER_SPRITE_COLS];
         int index = 0;
-        for (int y=0; y < game.PLAYER_SPRITE_ROWS; y++) {
-            for (int x=0; x<game.PLAYER_SPRITE_COLS; x++) {
+        for (int y = 0; y < EscapeGame.PLAYER_SPRITE_ROWS; y++) {
+            for (int x = 0; x< EscapeGame.PLAYER_SPRITE_COLS; x++) {
                 runFrames[index++] = tmp[y][x];
             }
         }
@@ -59,10 +58,10 @@ public class Avatar extends Sprite implements Cloneable {
         stateTime = 0;
         currentFrame = (TextureRegion) runAnimation.getKeyFrame(stateTime, true);
 
-        bonkSfx = game.am.get(game.SFX_BONK);
-        stepSfx = game.am.get(game.SFX_STEP);
+        bonkSfx = game.am.get(EscapeGame.SFX_BONK);
+        stepSfx = game.am.get(EscapeGame.SFX_STEP);
 
-        setSize(getWidth()/game.PLAYER_SPRITE_COLS, getHeight()/game.PLAYER_SPRITE_ROWS);
+        setSize(getWidth()/ EscapeGame.PLAYER_SPRITE_COLS, getHeight()/ EscapeGame.PLAYER_SPRITE_ROWS);
         scale(scaleFactor);
 
         setX(startX);
@@ -71,11 +70,11 @@ public class Avatar extends Sprite implements Cloneable {
     }
 
     @Override public void draw(Batch batch) {
-        if (!airborn) {
+        if (!airborne) {
             stateTime += Gdx.graphics.getDeltaTime();
             currentFrame = (TextureRegion) runAnimation.getKeyFrame(stateTime, true);
         } else {
-            // freezes animation on this frame if airborn
+            // freezes animation on this frame if airborne
             currentFrame = (TextureRegion) runAnimation.getKeyFrame(450, true);
         }
 
@@ -93,8 +92,8 @@ public class Avatar extends Sprite implements Cloneable {
         );
     }
 
-    public void setAirborn(boolean b) {
-        airborn = b;
+    public void setAirborne(boolean b) {
+        airborne = b;
     }
 
     public Object clone() throws CloneNotSupportedException {
@@ -129,7 +128,7 @@ public class Avatar extends Sprite implements Cloneable {
         }
 
         if (yVelocity < 0) {
-            airborn = true;
+            airborne = true;
         }
 
         if (getX() < cam.position.x - 500 + 10) {
