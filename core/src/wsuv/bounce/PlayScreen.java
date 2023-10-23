@@ -673,7 +673,6 @@ public class PlayScreen extends ScreenAdapter {
         }
 
 
-
         if (state == SubState.GAME_OVER) {
             restartButton.setY(cam.position.y - 230);
             restartButton.setX(cam.position.x - 200);

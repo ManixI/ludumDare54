@@ -174,3 +174,9 @@ player now clips though corner of platforms when falling down instead of bonking
 to increase screen size, the viewport needs to be expanded over time
 this will require modifying when things leave memory dynamically
 player left bound will need to be function of viewport size
+
+need dash/hover that gets player past beams
+add i-frames?
+needs to move cam as well as player so can boundary doesn't prevent dash
+hover would avoid cam issue but doesn't help with dodging beams
+rotate sprite 90 degrees to show dashing (will look bad but is a necessary placeholder)
