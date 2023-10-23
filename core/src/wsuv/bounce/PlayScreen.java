@@ -422,7 +422,8 @@ public class PlayScreen extends ScreenAdapter {
                             && player.getX() > beamLeft)
                             || (player.getX() + player.getWidth() > beamRight
                             && player.getX() + player.getWidth() < beamLeft))
-                            && player.getY() < e.getY() - e.getHeight()/2) {
+                            && player.getY() < e.getY() - e.getHeight()/2
+                            && !player.isDashing) {
                         takeHit();
                     }
                 }
@@ -463,23 +464,35 @@ public class PlayScreen extends ScreenAdapter {
                     && e.getY() > cam.position.y - 700
                     && e.getY() < cam.position.y + 700) {
                     if (e.checkColision(player)) {
-                        player.isSpeedy = false;
-                        switch (e.getType()) {
-                            case Enemie.BEAM_LAUNCHER:
-                                enemies.remove(j);
-                                j--;
-                                staticPoints += 2500;
-                                // TODO: sfx here
-                                break;
-                            case Enemie.MISSILE:
-                                enemies.remove(j);
-                                j--;
-                            case Enemie.SPIKES:
-                            case Enemie.SPIKES_FLIPPED:
-                                takeHit();
-                                break;
-                            default:
-                                break;
+                        if (player.isDashing) {
+                            switch (e.getType()) {
+                                case Enemie.BEAM_LAUNCHER:
+                                case Enemie.MISSILE:
+                                    enemies.remove(j);
+                                    j--;
+                                case Enemie.SPIKES:
+                                case Enemie.SPIKES_FLIPPED:
+                                default:
+                            }
+                        } else {
+                            player.isSpeedy = false;
+                            switch (e.getType()) {
+                                case Enemie.BEAM_LAUNCHER:
+                                    enemies.remove(j);
+                                    j--;
+                                    staticPoints += 2500;
+                                    // TODO: sfx here
+                                    break;
+                                case Enemie.MISSILE:
+                                    enemies.remove(j);
+                                    j--;
+                                case Enemie.SPIKES:
+                                case Enemie.SPIKES_FLIPPED:
+                                    takeHit();
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                     if (Objects.equals(e.getType(), Enemie.MISSILE)) {

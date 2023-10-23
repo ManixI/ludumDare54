@@ -177,7 +177,7 @@ public class Avatar extends Sprite implements Cloneable {
                     isDashing = false;
                     rotate90(false);
                 }
-            }, 500);
+            }, 250);
         }
     }
 }
