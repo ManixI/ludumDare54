@@ -109,6 +109,8 @@
  - [104] add beam sfx
  - [107] add invulnerable music
  - [108] adjust beam launcher height and beam timing so easier to avoid
+ - [109] role on landing animation
+ - [110] let player kill beam launchers while in i-frames
  
 
  ## Old ##
