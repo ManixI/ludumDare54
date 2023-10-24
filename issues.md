@@ -83,40 +83,42 @@
  - **[24]** add music
  - [37] better points sprite
  - [40] zoom out as speed increases
- - [41] add graphic for death plane
+ - **[41]** add graphic for death plane
  - **[42]** different platform paths lean towards different directions
  - [43] increase sense of speed
- - [46] set minimum height separation between platforms
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
  - [58] spinning sprite on second jump
- - [59] add spikes to bottom of platforms
+ - *[59]* add spikes to bottom of platforms
  - [61] running sfx that scales with speed
  - [71] stop spikes from spawning partly off platforms
  - [74] slow down game pacing and add speed cap
- - [78] add background
- - [79] update sprites to reflect target aesthetic
+ - **[78]** add background
+ - *[79]* update sprites to reflect target aesthetic
  - [80] portals to different levels/locations
  - [83] redo spike sprite to better reflect side damage
- - [85] add varied spawn behavior to different platform paths
  - [86] shrink width of player hitbox
  - [92] fix the memory leak
  - [93] improve missile-platform interaction
  - [94] add animation to missile sprite
- - [96] allow lateral control while boosted by speed pad
+ - *[96]* allow lateral control while boosted by speed pad
  - [98] fix player lagging behind camera
  - [99] higher pitch sfx for second jump
  - **[102]** add extra mobility option to better avoid beam
- - [104] add beam sfx
- - [107] add invulnerable music
+ - **[104]** add beam sfx
+ - *[107]* add invulnerable music
  - [108] adjust beam launcher height and beam timing so easier to avoid
+ - [109] role on landing animation
+ - *[110]* let player kill beam launchers while in i-frames
  
 
  ## Old ##
  - [45] spawn enemies as function of spawning platform
+ - [46] set minimum height separation between platforms
  - [52] add pits to floor
  - [76] spike hitboxes are too big
  - [77] do grid based spawning
  - [84] camera follows player, instead of current player follows camera
+ - [85] ~~add varied spawn behavior to different platform paths~~ same as issue42
  
  ## Assets ##
  ### Art ###
@@ -172,3 +174,9 @@ player now clips though corner of platforms when falling down instead of bonking
 to increase screen size, the viewport needs to be expanded over time
 this will require modifying when things leave memory dynamically
 player left bound will need to be function of viewport size
+
+need dash/hover that gets player past beams
+add i-frames?
+needs to move cam as well as player so can boundary doesn't prevent dash
+hover would avoid cam issue but doesn't help with dodging beams
+rotate sprite 90 degrees to show dashing (will look bad but is a necessary placeholder)

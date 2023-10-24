@@ -54,7 +54,7 @@ public class PlayScreen extends ScreenAdapter {
 
     static int CAM_FLOOR = 300;
     static int CAM_CEILING = 6000;
-    static int PLAT_LANE_SPACE = 500;
+    static int NUM_LANES = 9;
 
     // debug stuff
     Texture collisionBox;
@@ -83,7 +83,8 @@ public class PlayScreen extends ScreenAdapter {
         restartButton = new Sprite();
         restartButton.setTexture(escapeGame.am.get(EscapeGame.BTN_RESTART));
 
-        platformList = new ArrayList[9];
+        platformList = new ArrayList[NUM_LANES];
+        int platLaneSpace = CAM_CEILING / NUM_LANES;
         Platform.SpawnType pType;
         for (int i=0; i<platformList.length; i++) {
             if (i%2 == 0) {
@@ -95,11 +96,11 @@ public class PlayScreen extends ScreenAdapter {
             platformList[i].addAll(Platform.makeFirstPlat(
                     game,
                     100,
-                    200+(PLAT_LANE_SPACE*i),
+                    200+(platLaneSpace*i),
                     10,
                     cam,
-                    PLAT_LANE_SPACE*i,
-                    400 + PLAT_LANE_SPACE*i,
+                    platLaneSpace*(i+1),
+                    platLaneSpace*i,
                     pType
             ));
         }
@@ -134,7 +135,7 @@ public class PlayScreen extends ScreenAdapter {
         t.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (!player.airborn) {
+                if (!player.airborne) {
                     stepSfx.play();
                 }
             }
@@ -145,7 +146,7 @@ public class PlayScreen extends ScreenAdapter {
         b.schedule(new TimerTask() {
             @Override
             public void run() {
-                // TODO: fix bug where player dosn't accelerate with game speed
+                // TODO: fix bug where player doesn't accelerate with game speed
                 //gameSpeed += 0.08f;
             }
         },4500, 4500);
@@ -332,7 +333,6 @@ public class PlayScreen extends ScreenAdapter {
             }
         });
         Gdx.input.setInputProcessor(multiplexer);
-
     }
 
     @Override
@@ -350,10 +350,14 @@ public class PlayScreen extends ScreenAdapter {
         if (state == SubState.PLAYING) {
             if (stopScroll) {
                 cam.position.x = player.getX();
+            } else if (player.isDashing) {
+                cam.position.x += Avatar.DASH_SPEED * delta * gameSpeed;
+                player.rotate90(true);
+                // TODO: add sfx and graphic here
             } else if (player.isSpeedy) {
-                cam.position.x += Avatar.MAX_X_VELOCITY * Gdx.graphics.getDeltaTime() * gameSpeed;
+                cam.position.x += Avatar.MAX_X_VELOCITY * delta * gameSpeed;
             } else {
-                cam.position.x += Gdx.graphics.getDeltaTime() * camSpeed * gameSpeed;
+                cam.position.x += delta * camSpeed * gameSpeed;
             }
         }
 
@@ -407,7 +411,7 @@ public class PlayScreen extends ScreenAdapter {
             e.update(player, gameSpeed);
             if (Objects.equals(e.getType(), Enemie.BEAM_LAUNCHER)) {
                 // start beam related timers
-                /*if (e.getX() <= cam.position.x + 380 && e.beamState == Enemie.BeamStates.OFF) {
+                /*if (e.getX() <= cam.position.x + 380 && e.beamState == Enemies.BeamStates.OFF) {
                 }*/
                 if (e.beamState == Enemie.BeamStates.ACTIVE
                         && !invincible
@@ -418,7 +422,8 @@ public class PlayScreen extends ScreenAdapter {
                             && player.getX() > beamLeft)
                             || (player.getX() + player.getWidth() > beamRight
                             && player.getX() + player.getWidth() < beamLeft))
-                            && player.getY() < e.getY() - e.getHeight()/2) {
+                            && player.getY() < e.getY() - e.getHeight()/2
+                            && !player.isDashing) {
                         takeHit();
                     }
                 }
@@ -439,7 +444,8 @@ public class PlayScreen extends ScreenAdapter {
                     && p.getY() < cam.position.y + 700) {
                     if (p.checkCollision(player, cam, gameSpeed, camSpeed)) {
                         numJumps = totalJumps;
-                        player.setAirborn(false);
+                        player.setAirborne(false);
+                        player.canDash = true;
                         if (p.type != Platform.PlatType.SPEED) {
                             player.isSpeedy = false;
                         }
@@ -459,23 +465,35 @@ public class PlayScreen extends ScreenAdapter {
                     && e.getY() > cam.position.y - 700
                     && e.getY() < cam.position.y + 700) {
                     if (e.checkColision(player)) {
-                        player.isSpeedy = false;
-                        switch (e.getType()) {
-                            case Enemie.BEAM_LAUNCHER:
-                                enemies.remove(j);
-                                j--;
-                                staticPoints += 2500;
-                                // TODO: sfx here
-                                break;
-                            case Enemie.MISSILE:
-                                enemies.remove(j);
-                                j--;
-                            case Enemie.SPIKES:
-                            case Enemie.SPIKES_FLIPPED:
-                                takeHit();
-                                break;
-                            default:
-                                break;
+                        if (player.isDashing) {
+                            switch (e.getType()) {
+                                case Enemie.BEAM_LAUNCHER:
+                                case Enemie.MISSILE:
+                                    enemies.remove(j);
+                                    j--;
+                                case Enemie.SPIKES:
+                                case Enemie.SPIKES_FLIPPED:
+                                default:
+                            }
+                        } else {
+                            player.isSpeedy = false;
+                            switch (e.getType()) {
+                                case Enemie.BEAM_LAUNCHER:
+                                    enemies.remove(j);
+                                    j--;
+                                    staticPoints += 2500;
+                                    // TODO: sfx here
+                                    break;
+                                case Enemie.MISSILE:
+                                    enemies.remove(j);
+                                    j--;
+                                case Enemie.SPIKES:
+                                case Enemie.SPIKES_FLIPPED:
+                                    takeHit();
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                     if (Objects.equals(e.getType(), Enemie.MISSILE)) {
@@ -488,7 +506,7 @@ public class PlayScreen extends ScreenAdapter {
                                 }
                             }
                         }
-                        // despawm missile if collides with ceiling
+                        // despawn missile if collides with ceiling
                     /*if (e.getY() > player.CEILING_HEIGHT-10 || e.getY() < player.FLOOR_HEIGHT+10) {
                         enemies.remove(j);
                         missileDeathSfx.play();
@@ -496,8 +514,7 @@ public class PlayScreen extends ScreenAdapter {
                     }*/
                     }
                 }
-                }
-
+            }
         }
 
         if (player.update(cam, gameSpeed)) {
@@ -579,7 +596,7 @@ public class PlayScreen extends ScreenAdapter {
         }
         // ignore key presses when console is open...
         if (hud.isOpen() && state == SubState.PLAYING) {
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
                 player.yVelocity = 200;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -608,22 +625,24 @@ public class PlayScreen extends ScreenAdapter {
                     player.xVelocity = Avatar.MAX_X_VELOCITY/2*gameSpeed;
                 }
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
+            if ((Gdx.input.isKeyJustPressed(Input.Keys.W)
+                    || Gdx.input.isKeyJustPressed(Input.Keys.UP))
+                    && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 numJumps--;
-                // TODO: second jump sfx sould be higher in pitch
+                // TODO: second jump sfx should be higher in pitch
                 jumpSfx.play();
-                player.setAirborn(true);
+                player.setAirborne(true);
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.W)
+                    || Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 player.gravity = 15;
             } else {
                 player.gravity = 30;
             }
         } else if (!hud.isOpen() && state == SubState.PLAYING) {
-            if (Gdx.input.isKeyPressed(Input.Keys.W)
-                    || Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
                 player.yVelocity = 200;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S)
@@ -658,21 +677,26 @@ public class PlayScreen extends ScreenAdapter {
                     player.xVelocity -= 300;
                 }*/
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && numJumps > 0) {
+            if ((Gdx.input.isKeyJustPressed(Input.Keys.UP)
+                    || Gdx.input.isKeyJustPressed(Input.Keys.W))
+                    && numJumps > 0) {
                 // TODO: set timer to end jump if it doesn't get released
                 player.jump();
                 numJumps--;
-                // TODO: second jump sfx sould be higher in pitch
+                // TODO: second jump sfx should be higher in pitch
                 jumpSfx.play();
-                player.setAirborn(true);
+                player.setAirborne(true);
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                player.dash(cam);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)
+                    || Gdx.input.isKeyPressed(Input.Keys.W)) {
                 player.gravity = 15;
             } else {
                 player.gravity = 30;
             }
         }
-
 
 
         if (state == SubState.GAME_OVER) {
@@ -687,7 +711,7 @@ public class PlayScreen extends ScreenAdapter {
                 if (x > 320 && x < 420) {
                     float y = Gdx.input.getY();
                     if (y > 365 && y < 440) {
-                        player.airborn = true;
+                        player.airborne = true;
                         restartSfx.play();
                         escapeGame.getScreen().dispose();
                         PlayScreen next = new PlayScreen(escapeGame);
@@ -750,7 +774,6 @@ public class PlayScreen extends ScreenAdapter {
                 }
             }
         }
-
     }
 
     private void cleanupPowerups(ArrayList<Powerup> sprites) {
@@ -790,7 +813,6 @@ public class PlayScreen extends ScreenAdapter {
                         background.getHeight()*7
                 );
             }
-
         }*/
 
         for (ArrayList<Platform> l : platformList) {
@@ -814,7 +836,7 @@ public class PlayScreen extends ScreenAdapter {
                     escapeGame.batch.draw(
                             laneLine,
                             cam.position.x - 500 + j,
-                            i * PLAT_LANE_SPACE,
+                            i * (CAM_CEILING / NUM_LANES),
                             laneLine.getWidth(),
                             laneLine.getHeight()*3
                     );
