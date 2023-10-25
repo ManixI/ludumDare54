@@ -143,7 +143,7 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         surface_background = new ArrayList<>();
-        for (String s : EscapeGame.CAVE_BACKGROUND) {
+        for (String s : EscapeGame.SURFACE_BACKGROUND) {
             Sprite tmp = new Sprite(game.am.get(s, Texture.class));
             tmp.scale(10);
             surface_background.add(tmp);
@@ -833,21 +833,37 @@ public class PlayScreen extends ScreenAdapter {
             }
         }*/
 
-        double start = cam.position.y - 1000;
+        double start = cam.position.y - 13000;
         start = Math.floor(start);
         float width = cave_background.get(0).getWidth();
         float height = cave_background.get(0).getHeight();
         int caveBackgroundScale = 10;
-        // TODO: wierd movement of background
+        // TODO: wierd movement of background when falling
         for (int i=0; i<1000; i++) {
             // draw back to front
-            for (int j=5; j>0; j--) {
+            for (int j=7; j>0; j--) {
                 escapeGame.batch.draw(
                         cave_background.get(j),
                         (float) start+(i*width*caveBackgroundScale),
                         -100,
                         width*caveBackgroundScale,
                         height*caveBackgroundScale
+                );
+            }
+        }
+
+        width = cave_background.get(0).getWidth();
+        int surfaceBackgroundScale = 10;
+        // TODO: wierd movement of background
+        for (int i=0; i<1000; i++) {
+            // draw back to front
+            for (int j=5; j>-1; j--) {
+                escapeGame.batch.draw(
+                        surface_background.get(j),
+                        (float) start+(i*width*surfaceBackgroundScale),
+                        height*caveBackgroundScale - 100,
+                        width*surfaceBackgroundScale,
+                        height*surfaceBackgroundScale
                 );
             }
         }

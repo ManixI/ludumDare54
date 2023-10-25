@@ -114,6 +114,7 @@
  - **[113]** replace placeholder speed plat asset
  - [114] dashing should still take damage from spikes
  - [115] dashing into beam launcher should give points
+ - *[116]* transition layer between backgrounds
  
 
  ## Old ##
