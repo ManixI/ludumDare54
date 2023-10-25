@@ -218,7 +218,7 @@ public class Platform extends Sprite {
             } else if (type == PlatType.SPEED) {
                 plats.add(new Platform(
                         g,
-                        startX+(cwidth*(i-1))+lwidth,
+                        startX+(lwidth*(i-1))+lwidth,
                         startY,
                         EscapeGame.SPEED_PLAT,
                         cam,
