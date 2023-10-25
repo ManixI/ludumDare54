@@ -38,6 +38,7 @@
  - [36] fix warping up when colliding with side of platform, should stop movement instead
  - [38] variable jump height, hold space to reduce gravity
  - **[39]** increase speed over time
+ - **[41]** add graphic for death plane
  - [44] define play area with camera instead of gdx.graphics
  - [47] revert issues 27 and 29
  - [48] add ceiling
@@ -88,7 +89,6 @@
  - [0] general game balance tweaks
  - [37] better points sprite
  - [40] zoom out as speed increases
- - **[41]** add graphic for death plane
  - **[42]** different platform paths lean towards different directions
  - [43] increase sense of speed
  - [56] add spawn groups to spawn pattern of objects instead of just within a random range
@@ -143,7 +143,7 @@
       + [x] caves
       + [x] surface
       + [x] sky 
-  - [ ] Death Plane
+  - [x] Death Plane
  
  ### Sound ###
   - [x] bgm
