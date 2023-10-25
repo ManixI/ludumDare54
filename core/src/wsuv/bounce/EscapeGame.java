@@ -61,6 +61,26 @@ public class EscapeGame extends Game {
     public static final String BACKGROUD = "background.png";
     public static final String BTN_RESTART = "restart.png";
 
+    // background assets
+    public static final String[] CAVE_BACKGROUND = {
+            "parallax-cave/0.png",
+            "parallax-cave/1.png",
+            "parallax-cave/2.png",
+            "parallax-cave/3.png",
+            "parallax-cave/4.png",
+            "parallax-cave/5.png",
+            "parallax-cave/6.png",
+            "parallax-cave/7.png",
+    };
+    public static final String[] SURFACE_BACKGROUND = {
+            "parallax-scyfi/0.png",
+            "parallax-scyfi/1.png",
+            "parallax-scyfi/2.png",
+            "parallax-scyfi/3.png",
+            "parallax-scyfi/4.png",
+            "parallax-scyfi/5.png",
+    };
+
 
     // sfx
     public static final String SFX_JUMP = "jump.wav";
@@ -121,6 +141,14 @@ public class EscapeGame extends Game {
 
         // floor tiles
         for (String s : FLOOR_TILES) {
+            am.load(s, Texture.class);
+        }
+
+        // background
+        for (String s : SURFACE_BACKGROUND) {
+            am.load(s, Texture.class);
+        }
+        for (String s : CAVE_BACKGROUND) {
             am.load(s, Texture.class);
         }
 
