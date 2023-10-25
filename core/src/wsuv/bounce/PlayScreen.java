@@ -848,7 +848,7 @@ public class PlayScreen extends ScreenAdapter {
                 escapeGame.batch.draw(
                         cave_background.get(j),
                         (start + i-1) * width,
-                        -100,
+                        -200,
                         width,
                         height
                 );
@@ -875,7 +875,7 @@ public class PlayScreen extends ScreenAdapter {
                     escapeGame.batch.draw(
                             surface_background.get(j),
                             (start+i-1)*width,//*((-t)/((6-j)*5)),
-                            height - 100,
+                            height - 200,
                             width,
                             surface_background.get(0).getHeight() * surfaceBackgroundScale
                     );
@@ -896,7 +896,7 @@ public class PlayScreen extends ScreenAdapter {
                 escapeGame.batch.draw(
                         skyFrame,
                         (start+i-1)*width,
-                        height - 100 + (frameHeight*j),
+                        height - 200 + (frameHeight*j),
                         width,
                         frameHeight
                 );
@@ -909,7 +909,7 @@ public class PlayScreen extends ScreenAdapter {
             escapeGame.batch.draw(
                     lavaGlow,
                     (start+i-1) * width,
-                    -100,
+                    -200,
                     width,
                     lavaGlow.getHeight() * lavaGlowScale
             );
