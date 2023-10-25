@@ -1,6 +1,7 @@
 package wsuv.bounce;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -59,6 +60,8 @@ public class PlayScreen extends ScreenAdapter {
     static int CAM_FLOOR = 300;
     static int CAM_CEILING = 6000;
     static int NUM_LANES = 9;
+
+    final Music bgm;
 
     // debug stuff
     Texture collisionBox;
@@ -134,6 +137,11 @@ public class PlayScreen extends ScreenAdapter {
         missileDeathSfx = escapeGame.am.get(EscapeGame.SFX_MISSILE_DEATH);
         missileLaunchSfx = escapeGame.am.get(EscapeGame.SFX_MISSILE_LAUNCH);
         restartSfx = escapeGame.am.get(EscapeGame.SFX_RESTART);
+
+        bgm = escapeGame.am.get(EscapeGame.BGM);
+        bgm.setVolume(0.5f);
+        bgm.setLooping(true);
+        bgm.play();
 
         cave_background = new ArrayList<>();
         for (String s : EscapeGame.CAVE_BACKGROUND) {
@@ -551,6 +559,10 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         if (lives <= 0) {
+            if (state == SubState.PLAYING) {
+                bgm.setVolume(0.125f);
+                // TODO: should be new song instead of quieter normal song
+            }
             state = SubState.GAME_OVER;
         }
 
@@ -731,6 +743,7 @@ public class PlayScreen extends ScreenAdapter {
                     if (y > 365 && y < 440) {
                         player.airborne = true;
                         restartSfx.play();
+                        bgm.stop();
                         escapeGame.getScreen().dispose();
                         PlayScreen next = new PlayScreen(escapeGame);
                         escapeGame.setScreen(next);
