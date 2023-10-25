@@ -110,6 +110,10 @@
  - [109] role on landing animation
  - *[110]* let player kill beam launchers while in i-frames
  - *[111]* Dash animation and sfx
+ - *[112]* RNG Background platforms
+ - **[113]** replace placeholder speed plat asset
+ - [114] dashing should still take damage from spikes
+ - [115] dashing into beam launcher should give points
  
 
  ## Old ##
