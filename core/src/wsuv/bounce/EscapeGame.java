@@ -95,6 +95,7 @@ public class EscapeGame extends Game {
     public static final String SFX_RESTART = "restart.wav";
     public static final String SFX_BEAM_WARMUP = "beam-warmup.wav";
     public static final String SFX_BEAM_EXPLO = "beam-explo.wav";
+    public static final String SFX_DASH = "dash.wav";
 
     // music
     public static final String BGM = "polo-house.mp3";
@@ -196,6 +197,7 @@ public class EscapeGame extends Game {
         am.load(SFX_RESTART, Sound.class);
         am.load(SFX_BEAM_WARMUP, Sound.class);
         am.load(SFX_BEAM_EXPLO, Sound.class);
+        am.load(SFX_DASH, Sound.class);
 
         am.load(BGM, Music.class);
 
