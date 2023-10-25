@@ -150,8 +150,8 @@
   - [x] Bonk sfx
   - [x] step sfx
   - [x] missile launch sfx
-  - [ ] beam sfx
-  - [ ] beam launcher death sfx
+  - [x] beam sfx
+  - [x] beam launcher death sfx
   - [x] death sfx
   - [x] hit sfx
   - [x] powerup sfx
