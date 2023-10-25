@@ -40,6 +40,7 @@ public class Avatar extends Sprite implements Cloneable {
 
     private final Sound bonkSfx;
     private final Sound stepSfx;
+    private final Sound dashSfx;
     public boolean isSpeedy = false;
 
 
@@ -65,6 +66,7 @@ public class Avatar extends Sprite implements Cloneable {
 
         bonkSfx = game.am.get(EscapeGame.SFX_BONK);
         stepSfx = game.am.get(EscapeGame.SFX_STEP);
+        dashSfx = game.am.get(EscapeGame.SFX_DASH);
 
         setSize(getWidth()/ EscapeGame.PLAYER_SPRITE_COLS, getHeight()/ EscapeGame.PLAYER_SPRITE_ROWS);
         scale(scaleFactor);
@@ -169,6 +171,7 @@ public class Avatar extends Sprite implements Cloneable {
         if (canDash) {
             canDash = false;
             isDashing = true;
+            dashSfx.play();
             // TODO: this dosen't actual rotate the sprite
             //rotate90(true);
             Timer t = new Timer();
