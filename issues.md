@@ -80,6 +80,7 @@
  - [105] fix bug where beam launcher damages player while beam is active
  - [106] re-add invincibility timer for collision
  - **[107]** Zoom out camera a bit
+ - **[113]** replace placeholder speed plat asset
 
 
 ## Open Issues ##
@@ -112,7 +113,6 @@
  - *[110]* let player kill beam launchers while in i-frames
  - *[111]* Dash animation and sfx
  - *[112]* RNG Background platforms
- - **[113]** replace placeholder speed plat asset
  - [114] dashing should still take damage from spikes
  - [115] dashing into beam launcher should give points
  - *[116]* transition layer between backgrounds
@@ -136,7 +136,7 @@
   - [ ] Missile Animation
   - [x] Spikes Sprite
   - [ ] Normal Platforms
-  - [ ] Speed Platforms
+  - [x] Speed Platforms
   - [x] Beam Animation
   - [x] Beam Launcher Animation
   - [x] Background
