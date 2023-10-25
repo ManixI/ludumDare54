@@ -93,6 +93,8 @@ public class EscapeGame extends Game {
     public static final String SFX_MISSILE_LAUNCH = "missileLaunch.wav";
     public static final String SFX_MISSILE_DEATH = "missileDeath.wav";
     public static final String SFX_RESTART = "restart.wav";
+    public static final String SFX_BEAM_WARMUP = "beam-warmup.wav";
+    public static final String SFC_BEAM_EXPLO = "beam-explo.wav";
 
     // music
     public static final String BGM = "polo-house.mp3";
@@ -192,6 +194,8 @@ public class EscapeGame extends Game {
         am.load(SFX_MISSILE_LAUNCH, Sound.class);
         am.load(SFX_MISSILE_DEATH, Sound.class);
         am.load(SFX_RESTART, Sound.class);
+        am.load(SFX_BEAM_WARMUP, Sound.class);
+        am.load(SFC_BEAM_EXPLO, Sound.class);
 
         am.load(BGM, Music.class);
 
