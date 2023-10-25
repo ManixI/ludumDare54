@@ -23,6 +23,7 @@
  - [21] add spike enemy
  - **[22]** add missile enemy
  - **[23]** add sfx
+ - **[24]** add music
  - [25] add custom avatar sprite
  - [26] add scrolling background
  - [27] add vertical scrolling
@@ -82,7 +83,6 @@
 ## Open Issues ##
 
  - [0] general game balance tweaks
- - **[24]** add music
  - [37] better points sprite
  - [40] zoom out as speed increases
  - **[41]** add graphic for death plane
@@ -144,7 +144,7 @@
   - [ ] Death Plane
  
  ### Sound ###
-  - [ ] bgm
+  - [x] bgm
   - [x] Bonk sfx
   - [x] step sfx
   - [x] missile launch sfx
