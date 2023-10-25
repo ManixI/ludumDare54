@@ -82,6 +82,7 @@ public class EscapeGame extends Game {
     };
     public static final String SKY_BACKGROUND = "sky/GIF_4FPS/space4_4-frames.gif";
     public Animation SKY_BACKGROUND_ANIMATION;
+    public static final String LAVA_GLOW = "lava-glow.png";
 
 
     // sfx
@@ -160,7 +161,7 @@ public class EscapeGame extends Game {
             am.load(s, Texture.class);
         }
         SKY_BACKGROUND_ANIMATION = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal(SKY_BACKGROUND).read());
-
+        am.load(LAVA_GLOW, Texture.class);
 
         am.load(BACKGROUD, Texture.class);
         am.load(BTN_RESTART, Texture.class);
