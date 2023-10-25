@@ -60,6 +60,7 @@
  - [72] only check collision for things on screen
  - [73] fix bug where score increases after death
  - [75] increase player size
+ - **[78]** add background
  - [81] bounding rectangle draw function
  - [82] change how camera operates
  - [86] jump up though platforms
@@ -93,7 +94,6 @@
  - [61] running sfx that scales with speed
  - [71] stop spikes from spawning partly off platforms
  - [74] slow down game pacing and add speed cap
- - **[78]** add background
  - *[79]* update sprites to reflect target aesthetic
  - [80] portals to different levels/locations
  - [83] redo spike sprite to better reflect side damage
@@ -115,6 +115,7 @@
  - [114] dashing should still take damage from spikes
  - [115] dashing into beam launcher should give points
  - *[116]* transition layer between backgrounds
+ - *[117]* Parallax scrolling 
  
 
  ## Old ##

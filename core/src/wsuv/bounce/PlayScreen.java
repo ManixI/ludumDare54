@@ -842,18 +842,29 @@ public class PlayScreen extends ScreenAdapter {
 
         int surfaceBackgroundScale = 10;
         width = surface_background.get(0).getWidth() * surfaceBackgroundScale;
-        start = cam.position.x / width;
+        start = (cam.position.x-500) / width;
         start = (float) Math.floor(start);
+        float t = ((cam.position.x - 500)/ width) - start;
         for (int i=0; i<5; i++) {
             // draw back to front
             for (int j=5; j>-1; j--) {
-                escapeGame.batch.draw(
-                        surface_background.get(j),
-                        start+(i*width),
-                        height - 100,
-                        width,
-                        surface_background.get(0).getHeight() * surfaceBackgroundScale
-                );
+                /*if (j < 2) {
+                    escapeGame.batch.draw(
+                            surface_background.get(j),
+                            cam.position.x - 500,
+                            height - 100,
+                            width,
+                            surface_background.get(0).getHeight() * surfaceBackgroundScale
+                    );
+                } else {*/
+                    escapeGame.batch.draw(
+                            surface_background.get(j),
+                            start+(i*width),//*((-t)/((6-j)*5)),
+                            height - 100,
+                            width,
+                            surface_background.get(0).getHeight() * surfaceBackgroundScale
+                    );
+                //}
             }
         }
         float sHeight = surface_background.get(0).getHeight() * surfaceBackgroundScale;
