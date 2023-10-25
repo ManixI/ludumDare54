@@ -45,6 +45,10 @@ public class PlayScreen extends ScreenAdapter {
 
     private final Sprite restartButton;
 
+    private final ArrayList<Sprite> cave_background;
+    private final ArrayList<Sprite> surface_background;
+
+
     // spawn timers for platform independent enemies
     float missileTimer = 0;
     float beamLauncherTimer = 0;
@@ -130,6 +134,20 @@ public class PlayScreen extends ScreenAdapter {
         missileDeathSfx = escapeGame.am.get(EscapeGame.SFX_MISSILE_DEATH);
         missileLaunchSfx = escapeGame.am.get(EscapeGame.SFX_MISSILE_LAUNCH);
         restartSfx = escapeGame.am.get(EscapeGame.SFX_RESTART);
+
+        cave_background = new ArrayList<>();
+        for (String s : EscapeGame.CAVE_BACKGROUND) {
+            Sprite tmp = new Sprite(game.am.get(s, Texture.class));
+            tmp.scale(10);
+            cave_background.add(tmp);
+        }
+
+        surface_background = new ArrayList<>();
+        for (String s : EscapeGame.CAVE_BACKGROUND) {
+            Sprite tmp = new Sprite(game.am.get(s, Texture.class));
+            tmp.scale(10);
+            surface_background.add(tmp);
+        }
 
         Timer t = new Timer();
         t.schedule(new TimerTask() {
@@ -814,6 +832,26 @@ public class PlayScreen extends ScreenAdapter {
                 );
             }
         }*/
+
+        double start = cam.position.y - 1000;
+        start = Math.floor(start);
+        float width = cave_background.get(0).getWidth();
+        float height = cave_background.get(0).getHeight();
+        int caveBackgroundScale = 10;
+        // TODO: wierd movement of background
+        for (int i=0; i<1000; i++) {
+            // draw back to front
+            for (int j=5; j>0; j--) {
+                escapeGame.batch.draw(
+                        cave_background.get(j),
+                        (float) start+(i*width*caveBackgroundScale),
+                        -100,
+                        width*caveBackgroundScale,
+                        height*caveBackgroundScale
+                );
+            }
+        }
+
 
         for (ArrayList<Platform> l : platformList) {
             for (Platform p : l) {
