@@ -832,7 +832,7 @@ public class PlayScreen extends ScreenAdapter {
             for (int j=7; j>0; j--) {
                 escapeGame.batch.draw(
                         cave_background.get(j),
-                        start + (i * width),
+                        (start + i) * width,
                         -100,
                         width,
                         height
@@ -859,7 +859,7 @@ public class PlayScreen extends ScreenAdapter {
                 } else {*/
                     escapeGame.batch.draw(
                             surface_background.get(j),
-                            start+(i*width),//*((-t)/((6-j)*5)),
+                            (start+i)*width,//*((-t)/((6-j)*5)),
                             height - 100,
                             width,
                             surface_background.get(0).getHeight() * surfaceBackgroundScale

@@ -94,6 +94,9 @@ public class EscapeGame extends Game {
     public static final String SFX_MISSILE_DEATH = "missileDeath.wav";
     public static final String SFX_RESTART = "restart.wav";
 
+    // music
+    public static final String BGM = "polo-house.mp3";
+
     // debug stuff
     public static final String DBG_COLLISION_REC = "debug-collision-image.png";
     public static final String DBG_BOX = "debug-box.png";
@@ -189,6 +192,8 @@ public class EscapeGame extends Game {
         am.load(SFX_MISSILE_LAUNCH, Sound.class);
         am.load(SFX_MISSILE_DEATH, Sound.class);
         am.load(SFX_RESTART, Sound.class);
+
+        am.load(BGM, Music.class);
 
         batch = new SpriteBatch();
         setScreen(new LoadScreen(this));
