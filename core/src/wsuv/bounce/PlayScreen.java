@@ -833,37 +833,39 @@ public class PlayScreen extends ScreenAdapter {
             }
         }*/
 
-        double start = cam.position.x - 1000;
-        start = Math.floor(start);
-        float width = cave_background.get(0).getWidth();
-        float height = cave_background.get(0).getHeight();
+        //start = Math.floor(start);
         int caveBackgroundScale = 10;
+        float width = cave_background.get(0).getWidth() * caveBackgroundScale;
+        float height = cave_background.get(0).getHeight() * caveBackgroundScale;
+        float start = cam.position.x / width;
+        //int startI = (int) start;
         // TODO: wierd movement of background when falling
-        for (int i=0; i<1000; i++) {
+        for (int i=0; i<5; i++) {
             // draw back to front
             for (int j=7; j>0; j--) {
                 escapeGame.batch.draw(
                         cave_background.get(j),
-                        (float) start+(i*width*caveBackgroundScale),
+                        start + (i * width),
                         -100,
-                        width*caveBackgroundScale,
-                        height*caveBackgroundScale
+                        width,
+                        height
                 );
             }
         }
 
-        width = cave_background.get(0).getWidth();
         int surfaceBackgroundScale = 10;
+        width = cave_background.get(0).getWidth() * surfaceBackgroundScale;
+        start = cam.position.x / width;
         // TODO: wierd movement of background
         for (int i=0; i<1000; i++) {
             // draw back to front
             for (int j=5; j>-1; j--) {
                 escapeGame.batch.draw(
                         surface_background.get(j),
-                        (float) start+(i*width*surfaceBackgroundScale),
-                        height*caveBackgroundScale - 100,
-                        width*surfaceBackgroundScale,
-                        height*surfaceBackgroundScale
+                        start+(i*width),
+                        height - 100,
+                        width,
+                        height
                 );
             }
         }
