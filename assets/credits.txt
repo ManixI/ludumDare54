@@ -7,5 +7,16 @@
   https://www.jetbrains.com/lp/mono/
   free/opensource no credit required
 
+  Surface Background
+  parallax-scyfi/*
+  https://kayillustrations.itch.io/parallax-terrestrial-planet
+  kayillustrations
+
+  Cave Background
+  parallax-cave/*
+  https://admurin.itch.io/parallax-backgrounds-caves
+  Admurin
+  See their other work here: https://admurin.itch.io/
+
   Everything Else:
   Me!
