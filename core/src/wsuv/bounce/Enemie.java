@@ -1,6 +1,7 @@
 package wsuv.bounce;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -30,9 +31,11 @@ public class Enemie extends Sprite {
     public BeamStates beamState = BeamStates.OFF;
 
     public Beam beam = null;
+    EscapeGame game;
 
     public Enemie(EscapeGame game, float x, float y, String type) {
         super(game.am.get(type, Texture.class));
+        this.game = game;
         this.type = type;
 
         if (Objects.equals(type, BEAM_LAUNCHER)) {
@@ -92,12 +95,16 @@ public class Enemie extends Sprite {
                     if (getX() - player.getX() < Beam.BEAM_START_DISTANCE
                             && beamState == BeamStates.OFF) {
                         beamState = BeamStates.WARMUP;
+                        Sound s = game.am.get(EscapeGame.SFX_BEAM_WARMUP);
+                        s.play();
                         // TODO: can I move this logic inside the beam class
                         Timer timer = new Timer();
                         timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 beamState = BeamStates.ACTIVE;
+                                Sound s = game.am.get(EscapeGame.SFX_BEAM_EXPLO);
+                                s.play();
                             }
                         }, 600);
                         timer.schedule(new TimerTask() {
