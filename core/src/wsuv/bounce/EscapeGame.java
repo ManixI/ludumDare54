@@ -80,6 +80,8 @@ public class EscapeGame extends Game {
             "parallax-scyfi/4.png",
             "parallax-scyfi/5.png",
     };
+    public static final String SKY_BACKGROUND = "sky/GIF_4FPS/space4_4-frames.gif";
+    public Animation SKY_BACKGROUND_ANIMATION;
 
 
     // sfx
@@ -151,6 +153,8 @@ public class EscapeGame extends Game {
         for (String s : CAVE_BACKGROUND) {
             am.load(s, Texture.class);
         }
+        SKY_BACKGROUND_ANIMATION = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal(SKY_BACKGROUND).read());
+
 
         am.load(BACKGROUD, Texture.class);
         am.load(BTN_RESTART, Texture.class);

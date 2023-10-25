@@ -809,6 +809,9 @@ public class PlayScreen extends ScreenAdapter {
     public void render(float delta) {
         update(delta);
 
+        // needed for beam launcher
+        elapsed += Gdx.graphics.getDeltaTime();
+
         Rectangle tmp;
 
         ScreenUtils.clear(0, 0, 0, 1);
@@ -823,7 +826,7 @@ public class PlayScreen extends ScreenAdapter {
         float width = cave_background.get(0).getWidth() * caveBackgroundScale;
         float height = cave_background.get(0).getHeight() * caveBackgroundScale;
         float start = cam.position.x / width;
-        // TODO: wierd movement of background when falling
+        start = (float) Math.floor(start);
         for (int i=0; i<5; i++) {
             // draw back to front
             for (int j=7; j>0; j--) {
@@ -838,10 +841,10 @@ public class PlayScreen extends ScreenAdapter {
         }
 
         int surfaceBackgroundScale = 10;
-        width = cave_background.get(0).getWidth() * surfaceBackgroundScale;
+        width = surface_background.get(0).getWidth() * surfaceBackgroundScale;
         start = cam.position.x / width;
-        // TODO: wierd movement of background
-        for (int i=0; i<1000; i++) {
+        start = (float) Math.floor(start);
+        for (int i=0; i<5; i++) {
             // draw back to front
             for (int j=5; j>-1; j--) {
                 escapeGame.batch.draw(
@@ -849,7 +852,27 @@ public class PlayScreen extends ScreenAdapter {
                         start+(i*width),
                         height - 100,
                         width,
-                        height
+                        surface_background.get(0).getHeight() * surfaceBackgroundScale
+                );
+            }
+        }
+        float sHeight = surface_background.get(0).getHeight() * surfaceBackgroundScale;
+        height = height + sHeight;
+
+        int skyBackgroundScale = 3;
+        TextureRegion skyFrame = (TextureRegion) escapeGame.SKY_BACKGROUND_ANIMATION.getKeyFrame(elapsed);
+        width = skyFrame.getRegionWidth() * skyBackgroundScale;
+        start = (cam.position.x-500) / width;
+        start = (float) Math.floor(start);
+        float frameHeight = skyFrame.getRegionHeight() * skyBackgroundScale;
+        for (int i=0; i<5; i++) {
+            for (int j=0; j<3; j++) {
+                escapeGame.batch.draw(
+                        skyFrame,
+                        (start+i)*width,
+                        height - 100 + (frameHeight*j),
+                        width,
+                        frameHeight
                 );
             }
         }
@@ -900,8 +923,7 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
-        // needed for beam launcher
-        elapsed += Gdx.graphics.getDeltaTime();
+
 
         for (Enemie e : enemies) {
             e.draw(escapeGame.batch);
