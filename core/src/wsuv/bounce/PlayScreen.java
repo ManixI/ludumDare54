@@ -48,6 +48,7 @@ public class PlayScreen extends ScreenAdapter {
 
     private final ArrayList<Sprite> cave_background;
     private final ArrayList<Sprite> surface_background;
+    private final Texture lavaGlow;
 
 
     // spawn timers for platform independent enemies
@@ -156,6 +157,7 @@ public class PlayScreen extends ScreenAdapter {
             tmp.scale(10);
             surface_background.add(tmp);
         }
+        lavaGlow = escapeGame.am.get(EscapeGame.LAVA_GLOW, Texture.class);
 
         Timer t = new Timer();
         t.schedule(new TimerTask() {
@@ -900,6 +902,19 @@ public class PlayScreen extends ScreenAdapter {
                 );
             }
         }
+
+        int lavaGlowScale = 3;
+        width = lavaGlow.getWidth() * lavaGlowScale;
+        for (int i=0; i<20; i++) {
+            escapeGame.batch.draw(
+                    lavaGlow,
+                    (start+i-1) * width,
+                    -100,
+                    width,
+                    lavaGlow.getHeight() * lavaGlowScale
+            );
+        }
+
 
 
         // draw sprites
