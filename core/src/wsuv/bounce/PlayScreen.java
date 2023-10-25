@@ -370,7 +370,7 @@ public class PlayScreen extends ScreenAdapter {
                 cam.position.x = player.getX();
             } else if (player.isDashing) {
                 cam.position.x += Avatar.DASH_SPEED * delta * gameSpeed;
-                player.rotate90(true);
+                //player.rotate90(true);
                 // TODO: add sfx and graphic here
             } else if (player.isSpeedy) {
                 cam.position.x += Avatar.MAX_X_VELOCITY * delta * gameSpeed;
@@ -833,7 +833,7 @@ public class PlayScreen extends ScreenAdapter {
             }
         }*/
 
-        double start = cam.position.y - 13000;
+        double start = cam.position.x - 1000;
         start = Math.floor(start);
         float width = cave_background.get(0).getWidth();
         float height = cave_background.get(0).getHeight();
