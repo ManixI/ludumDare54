@@ -156,7 +156,7 @@
   - [x] hit sfx
   - [x] powerup sfx
   - [ ] invincible music
-  - [ ] dash sfx
+  - [x] dash sfx
 
 
 ## general ideas ##
