@@ -78,6 +78,7 @@
  - [103] fix player position on game restart
  - [105] fix bug where beam launcher damages player while beam is active
  - [106] re-add invincibility timer for collision
+ - **[107]** Zoom out camera a bit
 
 
 ## Open Issues ##
