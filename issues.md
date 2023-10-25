@@ -137,6 +137,9 @@
   - [x] Beam Animation
   - [x] Beam Launcher Animation
   - [ ] Background
+      + [x] caves
+      + [x] surface
+      + [ ] sky 
   - [ ] Death Plane
  
  ### Sound ###

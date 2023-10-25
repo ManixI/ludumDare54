@@ -818,27 +818,11 @@ public class PlayScreen extends ScreenAdapter {
 
 
         // draw background
-        /*Texture background = escapeGame.am.get(escapeGame.BACKGROUD, Texture.class);
-        double start = (cam.position.y - 1300);
-        start = Math.floor(start);
-        for (int i=1; i<1000; i++) {
-            for (int j=0; j<3; j++) {
-                escapeGame.batch.draw(
-                        background,
-                        (float) start+(i*background.getWidth()*7),
-                        Avatar.CEILING_HEIGHT-background.getHeight()*j*7-830,
-                        background.getWidth()*7,
-                        background.getHeight()*7
-                );
-            }
-        }*/
-
-        //start = Math.floor(start);
+        // TODO: merge both backgrounds into one loop so background plats can be drawn at same distance
         int caveBackgroundScale = 10;
         float width = cave_background.get(0).getWidth() * caveBackgroundScale;
         float height = cave_background.get(0).getHeight() * caveBackgroundScale;
         float start = cam.position.x / width;
-        //int startI = (int) start;
         // TODO: wierd movement of background when falling
         for (int i=0; i<5; i++) {
             // draw back to front
@@ -871,6 +855,7 @@ public class PlayScreen extends ScreenAdapter {
         }
 
 
+        // draw sprites
         for (ArrayList<Platform> l : platformList) {
             for (Platform p : l) {
                 p.draw(escapeGame.batch);
