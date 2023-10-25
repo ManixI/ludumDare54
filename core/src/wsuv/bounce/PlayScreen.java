@@ -67,11 +67,11 @@ public class PlayScreen extends ScreenAdapter {
     // debug stuff
     Texture collisionBox;
     Texture laneLine;
-    private boolean drawDbugBox = true;
+    private boolean drawDbugBox = false;
 
     float elapsed = 0;
     boolean stopScroll = false;
-    boolean drawDbugLanes = true;
+    boolean drawDbugLanes = false;
 
     public PlayScreen(EscapeGame game) {
         escapeGame = game;
