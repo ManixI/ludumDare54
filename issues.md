@@ -76,6 +76,7 @@
  - **[101]** add invincibility powerup
  - **[102]** add extra mobility option to better avoid beam
  - [103] fix player position on game restart
+ - **[104]** add beam sfx
  - [105] fix bug where beam launcher damages player while beam is active
  - [106] re-add invincibility timer for collision
  - **[107]** Zoom out camera a bit
@@ -105,7 +106,6 @@
  - *[96]* allow lateral control while boosted by speed pad
  - [98] fix player lagging behind camera
  - [99] higher pitch sfx for second jump
- - **[104]** add beam sfx
  - *[107]* add invulnerable music
  - [108] adjust beam launcher height and beam timing so easier to avoid
  - [109] role on landing animation
@@ -117,6 +117,7 @@
  - [115] dashing into beam launcher should give points
  - *[116]* transition layer between backgrounds
  - *[117]* Parallax scrolling 
+ - [118] better beam warmup sfx
  
 
  ## Old ##
