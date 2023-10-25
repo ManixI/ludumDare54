@@ -137,10 +137,10 @@
   - [ ] Speed Platforms
   - [x] Beam Animation
   - [x] Beam Launcher Animation
-  - [ ] Background
+  - [x] Background
       + [x] caves
       + [x] surface
-      + [ ] sky 
+      + [x] sky 
   - [ ] Death Plane
  
  ### Sound ###
@@ -154,6 +154,7 @@
   - [x] hit sfx
   - [x] powerup sfx
   - [ ] invincible music
+  - [ ] dash sfx
 
 
 ## general ideas ##
