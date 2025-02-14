@@ -1,11 +1,13 @@
-# Controls
+# Ruins Runner
+This was my entry into LudumDate 54.
 
+## Controls
  - A/D, Left/Right - move left and right
  - W, Up, - Jump
  - Space - Dash
  - Q - fly (dbug only)
 
-# Cheats
+## Cheats
  - `lives` + 100 lives
  - `die` kills player
  - `godMode` makes you invincible
@@ -15,7 +17,10 @@
  - `showBoxes` display hitboxes
  - `hideBoxes` hides hitboxes
 
-# Goals
+## Goals
+These are goals I had for my entry, in their varying levels of compleation and 
+what I estimated their difficulty as.
+\\
 | Goal                        | Type  | Status     | 
 | --------------------------- | ----- | ---------- |
 | Jump Physics                | Low   | Complete   |
@@ -36,7 +41,7 @@
 | Reactive BGM                | High  | Incomplete | 
 | Dash Mechanic               | Extra | Complete   |
 
-# Credits
+## Credits
   Sfx
   Generated with
   https://sfxr.me/
